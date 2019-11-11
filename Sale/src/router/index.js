@@ -12,7 +12,7 @@ import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 import deptRouter from "@/router/modules/dept";
-
+import main from "@/views/main/main";
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -40,6 +40,17 @@ import deptRouter from "@/router/modules/dept";
  * all roles can be accessed
  */
 export const constantRoutes = [
+  {
+    path: '/',
+    component: () => import('@/views/main/main'),
+    hidden: true,
+    // children: [
+    //   {
+    //     path: '/index',
+    //     component: () => import('@/views/main/main')
+    //   }
+    // ]
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -70,19 +81,6 @@ export const constantRoutes = [
     path: '/401',
     component: () => import('@/views/error-page/401'),
     hidden: true
-  },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
   },
   {
     path: '/documentation',
