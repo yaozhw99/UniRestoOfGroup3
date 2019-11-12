@@ -14,6 +14,7 @@ import nestedRouter from './modules/nested'
 import deptRouter from "@/router/modules/dept";
 import main from "@/views/main/main";
 import reportRouter from './modules/report';
+import rtableRouter from './modules/report-table';
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -143,6 +144,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   reportRouter,
+  rtableRouter,
   deptRouter,
   {
     path: '/permission',
@@ -209,6 +211,8 @@ export const asyncRoutes = [
       }
     ]
   },
+
+
 
   {
     path: '/icon',
