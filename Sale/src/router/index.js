@@ -15,6 +15,7 @@ import deptRouter from "@/router/modules/dept";
 import main from "@/views/main/main";
 import reportRouter from './modules/report';
 import rtableRouter from './modules/report-table';
+import orderRouter from "@/router/modules/order";
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -42,6 +43,7 @@ import rtableRouter from './modules/report-table';
  * all roles can be accessed
  */
 export const constantRoutes = [
+  orderRouter,
   {
     path: '/',
     component: Layout,
