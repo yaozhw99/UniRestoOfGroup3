@@ -1,16 +1,30 @@
 <template>
-  <div class="chart-container">
-    <chart height="100%" width="100%" />
+  <div>
 
+  <div class="chart-container">
+    <Chart height="100%" width="100%"></Chart>
+  </div>
+
+      <div class="class-container">
+        <pie  height="50%" width="50%"></pie>
+
+      </div>
+
+
+    <div class="chart-container" >
+      <map height="50%" width="50%"></map>
+    </div>
   </div>
 </template>
 
 <script>
   import Chart from './Barchart.vue'
+  import Pie from './Pie.vue'
+  import Map from './Map.vue'
 
   export default {
-    name: 'Barchart',
-    components: { Chart }
+    name: 'chart',
+    components: { Chart , Pie, Map}
   }
 </script>
 
