@@ -7,6 +7,7 @@ import article from './article'
 import search from './remote-search'
 import news from './news'
 
+
 const mocks = [
   ...user,
   ...role,
