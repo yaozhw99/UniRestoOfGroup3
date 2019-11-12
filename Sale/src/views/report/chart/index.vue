@@ -6,13 +6,13 @@
   </div>
 
       <div class="class-container">
-        <pie  height="50%" width="50%"></pie>
+        <pie  height="100%" width="100%"></pie>
 
       </div>
 
 
     <div class="chart-container" >
-      <map height="50%" width="50%"></map>
+      <Map></Map>
     </div>
   </div>
 </template>
