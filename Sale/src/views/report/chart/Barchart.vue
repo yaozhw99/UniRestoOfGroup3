@@ -19,11 +19,11 @@
       },
       width: {
         type: String,
-        default: '200px'
+        default: '100%'
       },
       height: {
         type: String,
-        default: '200px'
+        default: '500px'
       }
     },
     data() {
@@ -50,10 +50,10 @@
           return data
         }())
         this.chart.setOption({
-          backgroundColor: '#344b58',
+          backgroundColor: '#044161',
           title: {
             text: '全省本月产品销售情况',
-            x: '20',
+            x: 'center',
             top: '10',
             textStyle: {
               color: '#fff',
@@ -76,14 +76,15 @@
             left: '5%',
             right: '5%',
             borderWidth: 0,
-            top: 150,
+            top: 20,
             bottom: 95,
+            containLabel: true,
             textStyle: {
               color: '#fff'
             }
           },
           legend: {
-            x: '5%',
+            x: '70%',
             top: '10%',
             textStyle: {
               color: '#90979c'
@@ -143,7 +144,7 @@
             start: 10,
             end: 80,
             handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-            handleSize: '110%',
+            handleSize: '100%',
             handleStyle: {
               color: '#d3dee5'
 
@@ -205,13 +206,13 @@
             },
             {
               name: '低消',
-              type: 'line',
+              type: 'bar',
               stack: 'total',
               symbolSize: 10,
               symbol: 'circle',
               itemStyle: {
                 normal: {
-                  color: 'rgba(252,230,48,1)',
+                  color: '#5AB1EF',
                   barBorderRadius: 0,
                   label: {
                     show: true,
@@ -226,13 +227,13 @@
             },
             {
               name: '流量王',
-              type: 'line',
+              type: 'bar',
               stack: 'total',
               symbolSize: 10,
               symbol: 'circle',
               itemStyle: {
                 normal: {
-                  color: 'rgba(0,255,48,1)',
+                  color: '#F4CA98',
                   barBorderRadius: 0,
                   label: {
                     show: true,
@@ -251,3 +252,11 @@
     }
   }
 </script>
+<style >
+  .chart{
+    /*position: relative;*/
+    width: 80%;
+    /*height: calc(100vh - 84px);*/
+    height: 200px;
+  }
+</style>

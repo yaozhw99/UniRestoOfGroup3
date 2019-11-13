@@ -7,12 +7,15 @@ import article from './article'
 import search from './remote-search'
 import news from './news'
 import numpool from "./numpool";
+import bforder from './bforder'
 
 const mocks = [
   ...user,
   ...role,
   ...article,
   ...search,
+  ...news,
+  ...bforder,
   ...news,
   ...numpool
   // ...dept
