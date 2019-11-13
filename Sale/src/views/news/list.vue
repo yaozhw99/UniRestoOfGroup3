@@ -156,7 +156,7 @@ const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
   { key: 'US', display_name: 'USA' },
   { key: 'JP', display_name: 'Japan' },
-  { key: 'EU', display_name: 'Eurozone' }
+  { key: 'EU', display_name: 'Europe' }
 ]
 
 // arr to obj, such as { CN : "China", US : "USA" }

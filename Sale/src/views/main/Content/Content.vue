@@ -1,4 +1,4 @@
-<template>   
+<template xmlns="http://www.w3.org/1999/html">   
   <div>
     <div class="shift">
         <el-carousel :interval="5000" arrow="always">
@@ -18,32 +18,56 @@
     <div class="middle">
       <div class="card">
         <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>{{HOT}}<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
-        <div  v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
+        <div  @click="dialogVisible = true" v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
           <img :src="item.src">
         </div>
       </div>
-      <div class="num">
-        <div class="numtitle" >靓号任选 <span @click="changeNum()">换一批<i class="el-icon-refresh"></i></span> </div>
-        <div class="numpool">
-          <el-row>
-            <el-col :span="12" v-for="(item,idx) in num"  :key="idx">{{item.phonenum.replace(/(.{3})(.{4})(.{4})/g, "$1 $2 $3")}}</el-col>
-          </el-row>
-        </div>
-      </div>
+       <NumPool :ifshow="true"></NumPool>
     </div>
+
+    <el-dialog
+      title="选择号卡"
+      :visible="dialogVisible"
+      width="50%"
+      :before-close="handleClose">
+      <div class="selectcard">请选择你的卡类型：
+      <el-select v-model="value" placeholder="请选择卡品" size="medium" >
+        <el-option
+          v-for="(item,idx) in card"
+          :key="item.idx"
+          :label="item.name"
+          :value="item.value">
+          <span style="text-align: center; color: #8492a6; font-size: 13px">{{ item.name }}</span>
+        </el-option>
+      </el-select>
+  </div>
+      <div class="selectcard">请选择你的号码：
+      <NumPool></NumPool>
+      </div>
+
+
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="danger" @click="dialogVisible = false">提交订单</el-button>
+  </span>
+    </el-dialog>
+
   </div>
 </template>
 
 
 <script>
-import {Numpool} from '../../../api/numpool';
+
+import NumPool from './numpool'
 
     export default {
 
         data() {
 
             return {
+                value:"",
                 HOT:"热销卡品",
+                dialogVisible:false,
                 shift: [
                     {
                         id: 0,
@@ -80,33 +104,41 @@ import {Numpool} from '../../../api/numpool';
                     }],
                 card:[{ifhot:1,
                     name:"腾讯王卡",
+                    value:"txwk",
                     src:require("../../../icons/MainPageImg/card_txwk.png")
                 },{name:"阿里宝卡",
+                    value:"albk",
                     src:require("../../../icons/MainPageImg/card_ali.jpg")
                 },{name:"冰淇淋卡",
+                    value:"bqlk",
                     src:require("../../../icons/MainPageImg/card_bql.png")
-                }],
+                },
+                ],
                 num:[]
             }
 
         },
         methods:{
-            changeNum() {
-                Numpool().then(res => {
-                    this.num = res.data.num;
-                    console.log(this.num);
-                }).catch(err => console.log(err));
+            a(id){
+                console.log(id);
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(()=> {
+                        this.dialogVisible=false;
+                    })
+                    .catch(()=> {});
             }
             },
-        created() {
-            this.changeNum()
+        components:{
+            NumPool
         }
     }
 
 </script>
 
 
-<style>
+<style scope>
 
   .el-carousel img {
     width: 100%;
@@ -187,49 +219,14 @@ import {Numpool} from '../../../api/numpool';
   display: flex;
   justify-content: space-around;
 }
-.middle .num{
-  border: orange solid 1px;
-  width: 400px;
-  height: 389px;
-  margin-top: 20px;
-  padding: 0;
-}
-.middle .num .numtitle{
-  padding: 10px 40px;
-  text-align: center;
-  background-color: orange;
-  color: white;
-  font-weight: 300;
-  line-height: 30px;
-  font-size: 30px;
-  position: relative;
-}
-.middle .num .numtitle span{
-  font-size: 13px;
-  position: absolute;
-  right: 10px;
-  bottom: 5px;
-}
-  .middle .num .numtitle span:hover{
-    cursor: pointer;
+
+  #app .el-dialog__body input{
+    text-align: center;
+    width: 120px;
   }
-  .numpool .el-row{
-    margin:  0  !important;
-    padding: 0;
-  }
-  .numpool .el-row .el-col:nth-child(2n+1){
-    border-right: 1px solid gray;
-  }
-  .numpool .el-row .el-col:nth-child(4n),  .numpool .el-row .el-col:nth-child(4n-1){
-    background-color: #e5e9f2;
-  }
-.numpool .el-row .el-col{
-  font-size: 22px;
-  letter-spacing: 1px;
-  line-height: 22px;
-}
-  .el-col:hover{
-    cursor: pointer;
-    color: #ff6600;
+
+  #app .el-dialog__body span i{
+    position: relative;
+    margin-top: 5px;
   }
 </style>
