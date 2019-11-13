@@ -212,7 +212,7 @@
               symbol: 'circle',
               itemStyle: {
                 normal: {
-                  color: 'rgba(252,230,48,1)',
+                  color: '#5AB1EF',
                   barBorderRadius: 0,
                   label: {
                     show: true,
@@ -233,7 +233,7 @@
               symbol: 'circle',
               itemStyle: {
                 normal: {
-                  color: 'rgba(0,255,48,1)',
+                  color: '#F4CA98',
                   barBorderRadius: 0,
                   label: {
                     show: true,

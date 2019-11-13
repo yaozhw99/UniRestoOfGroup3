@@ -39,7 +39,7 @@
         {name: '佛山', value: 440},
         {name: '江门', value: 450},
         {name: '肇庆', value: 460},
-        {name: '茂名', value: 200},
+        {name: '茂名', value: 500},
         {name: '阳江', value: 270}
       ];
 
@@ -76,7 +76,7 @@
             });
           }
         }
-        console.log(res)
+//        console.log(res)
         return res;
       };
 

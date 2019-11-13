@@ -58,13 +58,13 @@
           items_city.push(this.pdata[i].city);
           for (let j=0;j<this.pdata[i].sale.length;j++)
           {
-            if(i==1)
+            if(i==0)
             items_value1.push(this.pdata[i].sale[j].value);
-            if(i==2)
+            if(i==1)
               items_value2.push(this.pdata[i].sale[j].value);
-            if(i==3)
+            if(i==2)
               items_value3.push(this.pdata[i].sale[j].value);
-            if(i==4)
+            if(i==3)
               items_value4.push(this.pdata[i].sale[j].value);
           }
         }

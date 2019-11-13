@@ -1,5 +1,9 @@
 <template>
   <div style="background: #344b58">
+    <div>
+      <e-map></e-map>
+    </div>
+
     <div class="class-container pie-container" style="height: 300px;width: 100%">
       <pie :pdata="data1"  height="300px"></pie>
       <pie :pdata="data2"  height="300px"></pie>
@@ -21,10 +25,11 @@
   import Pie from './Pie.vue'
   import Map from './Map.vue'
   import SmallBar from './SmallBar.vue'
+  import EMap from './EMap.vue'
 
   export default {
     name: 'chart',
-    components: { Chart , Pie, Map,SmallBar},
+    components: { Chart , Pie, Map,SmallBar,EMap},
     data() {
       return {
         title1:"各类产品销售情况",
