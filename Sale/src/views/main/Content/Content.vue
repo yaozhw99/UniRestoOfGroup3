@@ -7,16 +7,17 @@
           </el-carousel-item>
         </el-carousel>
     </div>
+    <div class="upper">
     <el-row :gutter="50">
       <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'">{{item.name}}
         <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>
       </el-col>
       <el-col :span="3">登陆后台管理</el-col>
     </el-row>
-
+    </div>
     <div class="middle">
       <div class="card">
-        <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>HOT<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
+        <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>{{HOT}}<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
         <div  v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
           <img :src="item.src">
         </div>
@@ -25,7 +26,7 @@
         <div class="numtitle" >靓号任选 <span @click="changeNum()">换一批<i class="el-icon-refresh"></i></span> </div>
         <div class="numpool">
           <el-row>
-            <el-col :span="12" v-for="(item,idx) in num"  :key="idx">{{item.phonenum}}</el-col>
+            <el-col :span="12" v-for="(item,idx) in num"  :key="idx">{{item.phonenum.replace(/(.{3})(.{4})(.{4})/g, "$1 $2 $3")}}</el-col>
           </el-row>
         </div>
       </div>
@@ -42,6 +43,7 @@ import {Numpool} from '../../../api/numpool';
         data() {
 
             return {
+                HOT:"热销卡品",
                 shift: [
                     {
                         id: 0,
@@ -73,8 +75,8 @@ import {Numpool} from '../../../api/numpool';
                     },
                     {
                         name: '火爆卡品',
-                        property: 1,
-                        subMenu: [{name: "腾讯王卡"}, {name: "冰淇淋卡"}, {name: "流量王卡"}]
+                        // property: 1,
+                        // subMenu: [{name: "腾讯王卡"}, {name: "冰淇淋卡"}, {name: "流量王卡"}]
                     }],
                 card:[{ifhot:1,
                     name:"腾讯王卡",
@@ -110,8 +112,8 @@ import {Numpool} from '../../../api/numpool';
     width: 100%;
   }
 
-  .el-row {
-    border: orange !important;
+  .upper .el-row {
+    border-bottom:1px solid orange !important;
     margin: 0 100px !important;
     line-height: 14px;
     color: #333333;
@@ -140,13 +142,14 @@ import {Numpool} from '../../../api/numpool';
   .middle{
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+    justify-content:center;
   }
 .middle .card {
   margin-top: 10px;
+  margin-right: 60px;
   position: relative;
   width: 580px;
-  height: 580px;
+  height: 390px;
 }
 .middle .card .hot{
   margin-top: 40px;
@@ -185,10 +188,11 @@ import {Numpool} from '../../../api/numpool';
   justify-content: space-around;
 }
 .middle .num{
-  border: chocolate solid 1px;
+  border: orange solid 1px;
   width: 400px;
-  height: 400px;
+  height: 389px;
   margin-top: 20px;
+  padding: 0;
 }
 .middle .num .numtitle{
   padding: 10px 40px;
@@ -210,19 +214,22 @@ import {Numpool} from '../../../api/numpool';
     cursor: pointer;
   }
   .numpool .el-row{
-    margin: 10px 0  !important;
+    margin:  0  !important;
     padding: 0;
   }
   .numpool .el-row .el-col:nth-child(2n+1){
     border-right: 1px solid gray;
+  }
+  .numpool .el-row .el-col:nth-child(4n),  .numpool .el-row .el-col:nth-child(4n-1){
+    background-color: #e5e9f2;
   }
 .numpool .el-row .el-col{
   font-size: 22px;
   letter-spacing: 1px;
   line-height: 22px;
 }
-  /*.el-col:hover{*/
-  /*  background-color: orange;*/
-  /*  color:white;*/
-  /*}*/
+  .el-col:hover{
+    cursor: pointer;
+    color: #ff6600;
+  }
 </style>
