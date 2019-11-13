@@ -4,7 +4,7 @@ import Mock from "mockjs";
 export default [{
   url: '/numpool/list',
   method: 'get',
-  response: _ => {
+  response: ()=> {
     return {
       code: 20000,
       data: Mock.mock({
