@@ -22,9 +22,9 @@
         </div>
       </div>
       <div class="num">
-        <div class="numtitle">靓号任选</div>
+        <div class="numtitle" >靓号任选 <span @click="changeNum()">换一批<i class="el-icon-refresh"></i></span> </div>
         <div class="numpool">
-          <el-row :gutter="20">
+          <el-row>
             <el-col :span="12" v-for="(item,idx) in num"  :key="idx">{{item.phonenum}}</el-col>
           </el-row>
         </div>
@@ -35,6 +35,7 @@
 
 
 <script>
+import {Numpool} from '../../../api/numpool';
 
     export default {
 
@@ -83,11 +84,21 @@
                 },{name:"冰淇淋卡",
                     src:require("../../../icons/MainPageImg/card_bql.png")
                 }],
-                num:[{phonenum:123214},{phonenum:123214},{phonenum:123214}]
+                num:[]
             }
 
+        },
+        methods:{
+            changeNum() {
+                Numpool().then(res => {
+                    this.num = res.data.num;
+                    console.log(this.num);
+                }).catch(err => console.log(err));
+            }
+            },
+        created() {
+            this.changeNum()
         }
-
     }
 
 </script>
@@ -132,12 +143,13 @@
     justify-content: space-around;
   }
 .middle .card {
+  margin-top: 10px;
   position: relative;
   width: 580px;
   height: 580px;
 }
 .middle .card .hot{
-  margin-top: 50px;
+  margin-top: 40px;
   float: left;
   width: 360px;
   height: 360px;
@@ -148,6 +160,12 @@
   width: 200px;
   height:200px;
 }
+.middle .card .hot:hover,.middle .card .normal:hover{
+  transform: translateY(-1px);
+  transition-duration: 1s;
+  box-shadow: 2px 2px 3px 1px #aaaaaa;
+  overflow: hidden;
+}
 .middle .card div img{
   width: 100%;
 }
@@ -155,7 +173,7 @@
   width: 360px;
   padding: 5px;
   position: absolute;
-  margin-top: 30px;
+  margin-top: 10px;
   text-align: center;
   letter-spacing: 5px;
   height: 30px;
@@ -170,16 +188,38 @@
   border: chocolate solid 1px;
   width: 400px;
   height: 400px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .middle .num .numtitle{
-  padding: 10px;
+  padding: 10px 40px;
   text-align: center;
   background-color: orange;
   color: white;
   font-weight: 300;
   line-height: 30px;
   font-size: 30px;
+  position: relative;
+}
+.middle .num .numtitle span{
+  font-size: 13px;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}
+  .middle .num .numtitle span:hover{
+    cursor: pointer;
+  }
+  .numpool .el-row{
+    margin: 10px 0  !important;
+    padding: 0;
+  }
+  .numpool .el-row .el-col:nth-child(2n+1){
+    border-right: 1px solid gray;
+  }
+.numpool .el-row .el-col{
+  font-size: 22px;
+  letter-spacing: 1px;
+  line-height: 22px;
 }
   /*.el-col:hover{*/
   /*  background-color: orange;*/
