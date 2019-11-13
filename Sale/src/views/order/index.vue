@@ -24,8 +24,9 @@
           <li><a href="#">终端专区</a></li>
         </ul>
         <div class="banner-right">
-          <el-input placeholder="大王卡" class="input-with-select">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-input
+            placeholder="请输入内容" style="width:200px">
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
         </div>
       </div>
@@ -47,10 +48,10 @@
         </div>
         <div class="ccmain">
           <div class="title">填写开户资料</div>
-          <table>
+          <table id="table1">
             <tr>
               <td>价格：</td>
-              <td>￥50.00</td>
+              <td><span id="price">￥50.00</span></td>
             </tr>
             <tr>
               <td>商品评价：</td>
@@ -66,15 +67,40 @@
             <tr>
               <td>号码归属：</td>
               <td>
-                <el-select v-model="value" placeholder="请选择">
-                  <el-option
+                <select v-model="formData.epcode" placeholder="请选择" style="width:300px">
+                  <option
                     v-for="item in options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
-                  </el-option>
-                </el-select>
+                  </option>
+                </select>
               </td>
+            </tr>
+            <tr>
+              <td>所选套餐：</td>
+              <td>{{productName}}</td>
+            </tr>
+            <tr>
+              <td>姓名：</td>
+              <td>
+                <input v-model="formData.name" placeholder="省份证姓名"></input></td>
+            </tr>
+            <tr>
+              <td>身份证号：</td>
+              <td><input v-model="formData.psptId" placeholder="身份证姓名"></input></td>
+            </tr>
+            <tr>
+              <td>邮寄地址：</td>
+              <td><input v-model="formData.address" placeholder="请输入邮寄地址"></input></td>
+            </tr>
+            <tr>
+              <td>联系电话：</td>
+              <td><input v-model="formData.linkPhone" placeholder="请输入联系电话"></input></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><el-button type="warning" @click="openuser">确定</el-button></td>
             </tr>
           </table>
         </div>
@@ -85,44 +111,88 @@
 
 <script>
     import Mock from 'mockjs';
+    import { createUser } from '@/api/bforder'
 
+    import {  } from '@/api/bforder'
     export default {
-        props:['serialNumber','actionName'],
+        props:['serialNumber','actionName','productName'],
         name: "index",
         data() {
             return {
+                formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0},
                 msg: "vue template",
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
+                options: [{value:'020',label:'广州市'},
+                    {value:'0660',label:'汕尾市'},
+                    {value:'0662',label:'阳江市'},
+                    {value:'0663',label:'揭阳市'},
+                    {value:'0668',label:'茂名市'},
+                    {value:'0750',label:'江门市'},
+                    {value:'0751',label:'韶关市'},
+                    {value:'0752',label:'惠州市'},
+                    {value:'0753',label:'梅州市'},
+                    {value:'0754',label:'汕头市'},
+                    {value:'0755',label:'深圳市'},
+                    {value:'0756',label:'珠海市'},
+                    {value:'0757',label:'佛山市'},
+                    {value:'0758',label:'肇庆市'},
+                    {value:'0759',label:'湛江市'},
+                    {value:'0760',label:'中山市'},
+                    {value:'0762',label:'河源市'},
+                    {value:'0763',label:'清远市'},
+                    {value:'0766',label:'云浮市'},
+                    {value:'0768',label:'潮州市'},
+                    {value:'0769',label:'东莞市'}],
                 value: ''
             }
         },
-        mounted() {
-            this.serialNumber='18676060960'
+        methods:{
+            openuser(){
+                createUser(this.formData).then(res=>{
+                    this.formData.orderId=res.orderId;
+
+                    this.$notify({
+                        title: 'Success',
+                        message: 'Created Successfully',
+                        type: 'success',
+                        duration: 2000
+                    })
+                    setTimeout(()=>{
+                        this.$router.push({name:'orderdetail',params:this.formData})
+                    },2000)
+
+
+
+
+                })
+            }
         }
     }
 </script>
 
 <style scoped>
+  #price{
+    color: orange;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+  #table1{
+    width: 100%;
+  }
+  #table1 tr{
+    height: 40px;
+  }
+  .banner-right input{
+    width:300px;
+  }
   .ccmain {
-    border: 1px solid red;
     width: 100%;
     height:500px;
     margin-left: 10px;
+  }
+  .ccmain input,.ccmain select {
+    width:300px;
+    height: 30px;
+    border-radius: 5px;
   }
   .ccmain .title {
     font-size: 28px;
@@ -137,10 +207,9 @@
   }
   .content {
     width: 1200px;
-    height: 100%;
     margin: 0 auto;
     padding: 30px;
-    border: 1px solid #9aaabf;
+    border: 1px solid #c0ccda;
   }
   .cheader{
     border-bottom: 1px solid #e6e6e6;

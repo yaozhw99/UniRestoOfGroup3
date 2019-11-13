@@ -45,6 +45,12 @@ import orderRouter from "@/router/modules/order";
 export const constantRoutes = [
   orderRouter,
   {
+    path: '/orderdetail',
+    name:'orderdetail',
+    component: () => import('@/views/order/orderdetail'),
+    hidden: true
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
