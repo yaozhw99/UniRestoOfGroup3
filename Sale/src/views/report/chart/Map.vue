@@ -21,26 +21,26 @@
     mounted(){
 
       var data = [
-        {name: '云浮', value: 24},
-        {name: '梅州', value: 25},
-        {name: '汕尾', value: 26},
-        {name: '潮州', value: 26},
-        {name: '汕头', value: 32},
-        {name: '湛江', value: 33},
-        {name: '揭阳', value: 34},
-        {name: '东莞', value: 36},
-        {name: '河源', value: 36},
-        {name: '惠州', value: 37},
-        {name: '韶关', value: 38},
-        {name: '广州', value: 38},
-        {name: '清远', value: 39},
-        {name: '中山', value: 39},
-        {name: '深圳', value: 41},
-        {name: '佛山', value: 44},
-        {name: '江门', value: 45},
-        {name: '肇庆', value: 46},
-        {name: '茂名', value: 50},
-        {name: '阳江', value: 57}
+        {name: '云浮', value: 240},
+        {name: '梅州', value: 250},
+        {name: '汕尾', value: 260},
+        {name: '潮州', value: 260},
+        {name: '汕头', value: 320},
+        {name: '湛江', value: 330},
+        {name: '揭阳', value: 340},
+        {name: '东莞', value: 360},
+        {name: '河源', value: 360},
+        {name: '惠州', value: 370},
+        {name: '韶关', value: 380},
+        {name: '广州', value: 380},
+        {name: '清远', value: 390},
+        {name: '中山', value: 390},
+        {name: '深圳', value: 410},
+        {name: '佛山', value: 440},
+        {name: '江门', value: 450},
+        {name: '肇庆', value: 460},
+        {name: '茂名', value: 200},
+        {name: '阳江', value: 270}
       ];
 
       var geoCoordMap = {
@@ -76,31 +76,13 @@
             });
           }
         }
+        console.log(res)
         return res;
       };
 
       function renderItem(params, api) {
-        var coords = [
-[112.02,22.93],
-//  [116.1,24.55],
-//  [115.37,22.78],
-//  [116.63,23.68],
-//  [116.69,23.39],
-//  [110.35,21.27],
-//  [116.35,23.55],
-//  [113.75,23.04],
-//  [114.68,23.73],
-//  [114.4,23.09],
-//  [113.62,24.84],
-//  [113.23,23.16],
-//  [114.07,22.62],
-//  [113.52,22.3],
-//  [113.11,23.05],
-//  [113.06,22.61],
-//  [112.44,23.05],
-//  [110.88,21.68],
-//  [111.95,21.85]
-        ];
+
+        var coords = [];
         var points = [];
         for (var i = 0; i < coords.length; i++) {
           points.push(api.coord(coords[i]));
@@ -123,17 +105,18 @@
           })
         };
       }
+
       this.chart=echarts.init(this.$refs.chart);
       this.chart.setOption(
         {
-          backgroundColor: '#344b58',
+//          backgroundColor: '#344b58',
           title: {
-            text: '全国主要城市空气质量',
-            subtext: 'data from PM25.in',
-            sublink: 'http://www.pm25.in',
+            text: '全省用户分布',
             left: 'center',
+            top:10,
             textStyle: {
-              color: '#fff'
+              color: '#fff',
+              fontSize:22
             }
           },
           tooltip : {
@@ -141,38 +124,152 @@
           }
           ,
           bmap: {
-            center: [113.23,23.16],
-            zoom: 8,
-            roam: true,
+            center: [113.29,22.72],
+            zoom: 9,
+//            roam: true,
             mapStyle: {
               styleJson: [
                 {
                   "featureType": "water",
                   "elementType": "all",
                   "stylers": {
-                    "color": "#044161"
+                    "color": "#044161!important"
                   }
                 }
-//                ,
-//                {
-//                  "featureType": "land",
-//                  "elementType": "all",
-//                  "stylers": {
-//                    "color": "#004981"
-//                  }
-//                }
+                  ,
+                  {
+                      "featureType": "land",
+                      "elementType": "all",
+                      "stylers": {
+                          "color": "#004981"
+                      }
+                  },
+                  {
+                      "featureType": "boundary",
+                      "elementType": "geometry",
+                      "stylers": {
+                          "color": "#064f85"
+                      }
+                  },
+                  {
+                      "featureType": "railway",
+                      "elementType": "all",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "highway",
+                      "elementType": "geometry",
+                      "stylers": {
+                          "color": "#004981"
+                      }
+                  },
+                  {
+                      "featureType": "highway",
+                      "elementType": "geometry.fill",
+                      "stylers": {
+                          "color": "#005b96",
+                          "lightness": 1
+                      }
+                  },
+                  {
+                      "featureType": "highway",
+                      "elementType": "labels",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "arterial",
+                      "elementType": "geometry",
+                      "stylers": {
+                          "color": "#004981"
+                      }
+                  },
+                  {
+                      "featureType": "arterial",
+                      "elementType": "geometry.fill",
+                      "stylers": {
+                          "color": "#00508b"
+                      }
+                  },
+                  {
+                      "featureType": "poi",
+                      "elementType": "all",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "green",
+                      "elementType": "all",
+                      "stylers": {
+                          "color": "#056197",
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "subway",
+                      "elementType": "all",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "manmade",
+                      "elementType": "all",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "local",
+                      "elementType": "all",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "arterial",
+                      "elementType": "labels",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  },
+                  {
+                      "featureType": "boundary",
+                      "elementType": "geometry.fill",
+                      "stylers": {
+                          "color": "#029fd4"
+                      }
+                  },
+                  {
+                      "featureType": "building",
+                      "elementType": "all",
+                      "stylers": {
+                          "color": "#1a5787"
+                      }
+                  },
+                  {
+                      "featureType": "label",
+                      "elementType": "all",
+                      "stylers": {
+                          "visibility": "off"
+                      }
+                  }
               ]
             }
           }
           ,
           series : [
             {
-              name: 'pm2.5',
+              name: 'count',
               type: 'scatter',
               coordinateSystem: 'bmap',
-//              data: convertData(data),
+              data: convertData(data),
               symbolSize: function (val) {
-                return val[2] / 10;
+                return val[2]/10;
               },
               label: {
                 normal: {
@@ -191,14 +288,14 @@
               }
             },
             {
-              name: 'Top 5',
+              name: '当天销售',
               type: 'effectScatter',
               coordinateSystem: 'bmap',
               data: convertData(data.sort(function (a, b) {
                 return b.value - a.value;
-              }).slice(0, 6)),
+              })),
               symbolSize: function (val) {
-                return val[2] / 10;
+                return val[2]/10;
               },
               showEffectOn: 'emphasis',
               rippleEffect: {
@@ -243,8 +340,9 @@
 </script>
 <style >
   .chart-container{
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 84px);
+    /*position: relative;*/
+    width: 80%;
+    /*height: calc(100vh - 84px);*/
+    height: 200px;
   }
 </style>
