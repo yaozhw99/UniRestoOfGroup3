@@ -6,13 +6,15 @@ import role from './role'
 import article from './article'
 import search from './remote-search'
 import news from './news'
+import numpool from "./numpool";
 
 const mocks = [
   ...user,
   ...role,
   ...article,
   ...search,
-  ...news
+  ...news,
+  ...numpool
   // ...dept
 ]
 
