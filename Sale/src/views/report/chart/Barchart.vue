@@ -19,11 +19,11 @@
       },
       width: {
         type: String,
-        default: '200px'
+        default: '100%'
       },
       height: {
         type: String,
-        default: '200px'
+        default: '500px'
       }
     },
     data() {
@@ -45,21 +45,19 @@
       initChart() {
         this.chart = echarts.init(document.getElementById(this.id))
         const xData = (function() {
-          const data = []
-          for (let i = 1; i < 13; i++) {
-            data.push(i + 'month')
-          }
+          const data = ['广州市','深圳市','珠海市','汕头市','佛山市','韶关市','湛江市','肇庆市','江门市','茂名市','惠州市','梅州市','汕尾市','河源市','阳江市','清远市','东莞市','中山市','潮州市','揭阳市','云浮市']
+
           return data
         }())
         this.chart.setOption({
-          backgroundColor: '#344b58',
+          backgroundColor: '#044161',
           title: {
-            text: 'statistics',
-            x: '20',
-            top: '20',
+            text: '全省本月产品销售情况',
+            x: 'center',
+            top: '10',
             textStyle: {
               color: '#fff',
-              fontSize: '22'
+              fontSize: '20'
             },
             subtextStyle: {
               color: '#90979c',
@@ -78,19 +76,20 @@
             left: '5%',
             right: '5%',
             borderWidth: 0,
-            top: 150,
+            top: 20,
             bottom: 95,
+            containLabel: true,
             textStyle: {
               color: '#fff'
             }
           },
           legend: {
-            x: '5%',
+            x: '70%',
             top: '10%',
             textStyle: {
               color: '#90979c'
             },
-            data: ['female', 'male', 'average']
+            data: ['冰激凌','沃派','低消','流量王']
           },
           calculable: true,
           xAxis: [{
@@ -145,7 +144,7 @@
             start: 10,
             end: 80,
             handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-            handleSize: '110%',
+            handleSize: '100%',
             handleStyle: {
               color: '#d3dee5'
 
@@ -161,50 +160,38 @@
             start: 1,
             end: 35
           }],
-          series: [{
-            name: 'female',
-            type: 'bar',
-            stack: 'total',
-            barMaxWidth: 35,
-            barGap: '10%',
-            itemStyle: {
-              normal: {
-                color: 'rgba(255,144,128,1)',
-                label: {
-                  show: true,
-                  textStyle: {
-                    color: '#fff'
-                  },
-                  position: 'insideTop',
-                  formatter(p) {
-                    return p.value > 0 ? p.value : ''
+          series: [
+            {
+              name: '冰激凌',
+              type: 'bar',
+              stack: 'total',
+              barMaxWidth: 35,
+              barGap: '10%',
+              itemStyle: {
+                normal: {
+                  color: '#2EC7C9',
+                  label: {
+                    show: true,
+                    textStyle: {
+                      color: '#fff'
+                    },
+                    position: 'insideTop',
+                    formatter(p) {
+                      return p.value > 0 ? p.value : ''
+                    }
                   }
                 }
-              }
+              },
+              data:[3000,2500,2000,1000,3000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]
             },
-            data: [
-              709,
-              1917,
-              2455,
-              2610,
-              1719,
-              1433,
-              1544,
-              3285,
-              5208,
-              3372,
-              2484,
-              4078
-            ]
-          },
 
             {
-              name: 'male',
+              name: '沃派',
               type: 'bar',
               stack: 'total',
               itemStyle: {
                 normal: {
-                  color: 'rgba(0,191,183,1)',
+                  color: '#B6A2DE',
                   barBorderRadius: 0,
                   label: {
                     show: true,
@@ -215,29 +202,17 @@
                   }
                 }
               },
-              data: [
-                327,
-                1776,
-                507,
-                1200,
-                800,
-                482,
-                204,
-                1390,
-                1001,
-                951,
-                381,
-                220
-              ]
-            }, {
-              name: 'average',
-              type: 'line',
+              data: [3000,2500,1500,500,2500,500,500,500,500,500,600,500,700,601,500,701,602,500,702,603,500]
+            },
+            {
+              name: '低消',
+              type: 'bar',
               stack: 'total',
               symbolSize: 10,
               symbol: 'circle',
               itemStyle: {
                 normal: {
-                  color: 'rgba(252,230,48,1)',
+                  color: '#5AB1EF',
                   barBorderRadius: 0,
                   label: {
                     show: true,
@@ -248,20 +223,28 @@
                   }
                 }
               },
-              data: [
-                1036,
-                3693,
-                2962,
-                3810,
-                2519,
-                1915,
-                1748,
-                4675,
-                6209,
-                4323,
-                2865,
-                4298
-              ]
+              data: [3000,2500,2500,1500,3500,1500,1500,1500,1500,1500,1600,1500,1700,1601,1500,1701,1602,1500,1702,1603,1500]
+            },
+            {
+              name: '流量王',
+              type: 'bar',
+              stack: 'total',
+              symbolSize: 10,
+              symbol: 'circle',
+              itemStyle: {
+                normal: {
+                  color: '#F4CA98',
+                  barBorderRadius: 0,
+                  label: {
+                    show: true,
+                    position: 'top',
+                    formatter(p) {
+                      return p.value > 0 ? p.value : ''
+                    }
+                  }
+                }
+              },
+              data: [3000,2500,1700,700,2700,700,700,700,700,700,800,700,900,801,700,901,802,700,902,803,700]
             }
           ]
         })
@@ -269,3 +252,11 @@
     }
   }
 </script>
+<style >
+  .chart{
+    /*position: relative;*/
+    width: 80%;
+    /*height: calc(100vh - 84px);*/
+    height: 200px;
+  }
+</style>

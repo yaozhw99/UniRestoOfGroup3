@@ -18,6 +18,7 @@ import reportRouter from './modules/report';
 import rtableRouter from './modules/report-table';
 import ordersRouter from '@/router/modules/orders'
 
+import orderRouter from "@/router/modules/order";
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -46,6 +47,13 @@ import ordersRouter from '@/router/modules/orders'
  */
 
 export const constantRoutes = [
+  orderRouter,
+  {
+    path: '/orderdetail',
+    name:'orderdetail',
+    component: () => import('@/views/order/orderdetail'),
+    hidden: true
+  },
   {
     path: '/',
     component: Layout,
@@ -437,7 +445,9 @@ export const asyncRoutes = [
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
+  mode:'history',
   routes: constantRoutes
+
 })
 
 const router = createRouter()

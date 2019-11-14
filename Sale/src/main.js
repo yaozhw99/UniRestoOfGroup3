@@ -19,6 +19,10 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+  ak: 'OGKIWfmz9WOyF6mRGxHBySIzdxv6Zabl'
+})
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
