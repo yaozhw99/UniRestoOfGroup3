@@ -130,13 +130,13 @@
       </div>
     </div>
 
-
+  <Footer></Footer>
   </div>
 </template>
 
 <script>
     import Mock from 'mockjs';
-
+    import Footer from "../main/Footer/Footer";
     export default {
         data() {
             return {
@@ -191,6 +191,9 @@
                     },15000)
                 },5000)
             },5000)
+        },
+        components:{
+            Footer
         }
     }
 
