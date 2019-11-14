@@ -1,19 +1,19 @@
 <template xmlns="http://www.w3.org/1999/html">   
   <div>
     <div class="shift">
-        <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="item in shift" :key="item.id">
-            <img :src="item.src">
-          </el-carousel-item>
-        </el-carousel>
+      <el-carousel :interval="5000" arrow="always">
+        <el-carousel-item v-for="item in shift" :key="item.id">
+          <img :src="item.src">
+        </el-carousel-item>
+      </el-carousel>
     </div>
     <div class="upper">
-    <el-row :gutter="50">
-      <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'">{{item.name}}
-        <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>
-      </el-col>
-      <el-col :span="3">登陆后台管理</el-col>
-    </el-row>
+      <el-row :gutter="50">
+        <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'">{{item.name}}
+          <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>
+        </el-col>
+        <el-col :span="3">登陆后台管理</el-col>
+      </el-row>
     </div>
     <div class="middle">
       <div class="card">
@@ -22,35 +22,35 @@
           <img :src="item.src">
         </div>
       </div>
-       <NumPool ifshow="true" @sendValue="dialog"></NumPool>
+      <NumPool ifshow="true" @sendValue="dialog"></NumPool>
     </div>
 
-<!--    <el-dialog-->
-<!--      title="选择号卡"-->
-<!--      :visible="dialogVisible"-->
-<!--      width="50%"-->
-<!--      :before-close="handleClose">-->
-<!--    <div class="selectcard"><span>请选择你的卡品：</span>-->
-<!--      <el-select v-model="cardvalue" placeholder="请选择" size="medium" >-->
-<!--        <el-option-->
-<!--          v-for="(item,idx) in card"-->
-<!--          :key="item.idx"-->
-<!--          :label="item.name"-->
-<!--          :value="item.value">-->
-<!--          <span style="text-align: center; color: #8492a6; font-size: 13px">{{ item.name }}</span>-->
-<!--        </el-option>-->
-<!--      </el-select>-->
-<!--  </div>-->
-<!--      <div class="selectnum"><span>请选择你的号码： </span><el-input v-model="numvalue" placeholder="请输入内容"></el-input>-->
-<!--      <NumPool @sendValue="dialog" :v-show="numvalue"></NumPool>-->
-<!--      </div>-->
+    <el-dialog
+      title="选择号卡"
+      :visible="dialogVisible"
+      width="50%"
+      :before-close="handleClose">
+      <div class="selectcard"><span>请选择你的卡品：</span>
+        <el-select v-model="cardvalue" placeholder="请选择" size="medium" >
+          <el-option
+            v-for="(item,idx) in card"
+            :key="item.idx"
+            :label="item.name"
+            :value="item.value">
+            <span style="text-align: center; color: #8492a6; font-size: 13px">{{ item.name }}</span>
+          </el-option>
+        </el-select>
+      </div>
+      <div class="selectnum"><span>请选择你的号码： </span><el-input v-model="numvalue" placeholder="请输入内容"></el-input>
+        <NumPool @sendValue="dialog" :v-show="numvalue"></NumPool>
+      </div>
 
 
-<!--      <span slot="footer" class="dialog-footer">-->
-<!--    <el-button @click="dialogVisible = false,handlecancle">取 消</el-button>-->
-<!--    <el-button type="danger" @click="dialogVisible = false">提交订单</el-button>-->
-<!--  </span>-->
-<!--    </el-dialog>-->
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false,handlecancle">取 消</el-button>
+    <el-button type="danger" @click="dialogVisible = false">提交订单</el-button>
+  </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -58,8 +58,7 @@
 
 <script>
 
-import NumPool from './numpool'
-import numpool from "../../../../mock/numpool";
+    import NumPool from './numpool'
 
     export default {
 
@@ -135,7 +134,7 @@ import numpool from "../../../../mock/numpool";
             setcardvalue(item){
                 this.cardvalue=item;
             }
-            },
+        },
         components:{
             NumPool
         }
@@ -183,49 +182,49 @@ import numpool from "../../../../mock/numpool";
     flex-flow: row;
     justify-content:center;
   }
-.middle .card {
-  margin-top: 10px;
-  margin-right: 60px;
-  position: relative;
-  width: 580px;
-  height: 390px;
-}
-.middle .card .hot{
-  margin-top: 40px;
-  float: left;
-  width: 360px;
-  height: 360px;
-}
+  .middle .card {
+    margin-top: 10px;
+    margin-right: 60px;
+    position: relative;
+    width: 580px;
+    height: 390px;
+  }
+  .middle .card .hot{
+    margin-top: 40px;
+    float: left;
+    width: 360px;
+    height: 360px;
+  }
 
-.middle .card .normal{
-  float: right;
-  width: 200px;
-  height:200px;
-}
-.middle .card .hot:hover,.middle .card .normal:hover{
-  transform: translateY(-1px);
-  transition-duration: 1s;
-  box-shadow: 2px 2px 3px 1px #aaaaaa;
-  overflow: hidden;
-}
-.middle .card div img{
-  width: 100%;
-}
-.middle .hotdecration{
-  width: 360px;
-  padding: 5px;
-  position: absolute;
-  margin-top: 10px;
-  text-align: center;
-  letter-spacing: 5px;
-  height: 30px;
-  background-color: orangered;
-  color: white;
-  font-style: italic;
-  border-radius: 5px 5px 5px 10px/5px 5px 5px 5px;
-  display: flex;
-  justify-content: space-around;
-}
+  .middle .card .normal{
+    float: right;
+    width: 200px;
+    height:200px;
+  }
+  .middle .card .hot:hover,.middle .card .normal:hover{
+    transform: translateY(-1px);
+    transition-duration: 1s;
+    box-shadow: 2px 2px 3px 1px #aaaaaa;
+    overflow: hidden;
+  }
+  .middle .card div img{
+    width: 100%;
+  }
+  .middle .hotdecration{
+    width: 360px;
+    padding: 5px;
+    position: absolute;
+    margin-top: 10px;
+    text-align: center;
+    letter-spacing: 5px;
+    height: 30px;
+    background-color: orangered;
+    color: white;
+    font-style: italic;
+    border-radius: 5px 5px 5px 10px/5px 5px 5px 5px;
+    display: flex;
+    justify-content: space-around;
+  }
   #app .el-dialog__header{
     text-align: center;
   }
