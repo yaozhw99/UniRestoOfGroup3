@@ -194,7 +194,7 @@ export const asyncRoutes = [
   {
     path: '/orders',
     component: Layout,
-    redirect: '/orders/list',
+    redirect: '/orders/orderlist',
     name: 'Orders',
     meta: {
       title: '订单管理',
@@ -202,10 +202,10 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'list',
-        component: () => import('@/views/orders/list'),
+        path: 'orderlist',
+        component: () => import('@/views/orders/orderlist'),
         name: 'OsList',
-        meta: { title: '订单列表', icon: 'list' }
+        meta: { title: '订单列表', icon: 'orderlist' }
       },
       {
         path: 'create',

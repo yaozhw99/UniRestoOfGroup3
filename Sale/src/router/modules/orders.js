@@ -14,7 +14,7 @@ const ordersRouter = {
   children: [
     {
       path: 'list',
-      component: () => import('@/views/orders/list'),
+      component: () => import('@/views/orders/orderlist'),
     name: '订单列表',
   meta: { title: '部门列表', noCache: true }
 },
