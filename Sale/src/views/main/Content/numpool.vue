@@ -1,9 +1,9 @@
 <template>
 <div class="num">
-  <div class="numtitle" > <h v-show="ifshow">靓号任选</h> <span @click="changeNum()">换一批<i class="el-icon-refresh"></i></span> </div>
+  <div class="numtitle" > <a v-show="ifshow">靓号任选</a> <span style="cursor: pointer" @click="changeNum()">换一批<i class="el-icon-refresh"></i></span> </div>
   <div class="numpool">
     <el-row>
-      <el-col  :span="12" v-for="(item,idx) in num"  :key="idx"><div @click="dialogVisible = true" >{{item.phonenum.replace(/(.{3})(.{4})(.{4})/g, "$1 $2 $3")}}</div></el-col>
+      <el-col  :span="12" v-for="(item,idx) in num"  :key="idx"><div @click="showdialog(item.phonenum)" >{{item.phonenum.replace(/(.{3})(.{4})(.{4})/g, "$1 $2 $3")}}</div></el-col>
     </el-row>
   </div>
 </div>
@@ -29,6 +29,9 @@
                 Numpool().then(res => {
                     this.num = res.data.num;
                 }).catch(err => console.log(err));
+            },
+            showdialog(item){
+                this.$emit("sendValue",item)
             }
         },
         created() {
@@ -63,9 +66,6 @@
     position: absolute;
     right: 10px;
     bottom: 5px;
-  }
-  .middle .num .numtitle span:hover{
-    cursor: pointer;
   }
   .el-col:hover{
     cursor: pointer;
