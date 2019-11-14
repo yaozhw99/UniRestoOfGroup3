@@ -9,10 +9,10 @@
     </div>
     <div class="upper">
     <el-row :gutter="50">
-      <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'">{{item.name}}
+      <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>{{item.name}}<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i>
         <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>
       </el-col>
-      <el-col :span="3">登陆后台管理</el-col>
+      <el-col :span="3"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>登陆后台<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i></el-col>
     </el-row>
     </div>
     <div class="middle">
@@ -145,14 +145,21 @@ import NumPool from './numpool'
 </script>
 
 
-<style scope>
-
+<style scoped>
+.shift{
+  height: 265px;
+}
   .el-carousel img {
     width: 100%;
+    height: 100%;
   }
-
+  #app > div > section > div:nth-child(2) > div.upper > div >div{
+    margin-top: 45px;
+    padding: 10px 0px !important;
+    font-size: 16px;
+    border-bottom: 1px solid orange;
+  }
   .upper .el-row {
-    border-bottom:1px solid orange !important;
     margin: 0 100px !important;
     line-height: 14px;
     color: #333333;

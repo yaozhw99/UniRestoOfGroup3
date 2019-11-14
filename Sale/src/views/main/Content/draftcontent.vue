@@ -143,7 +143,7 @@
 </script>
 
 
-<style scope>
+<style scoped>
 
   .el-carousel img {
     width: 100%;
