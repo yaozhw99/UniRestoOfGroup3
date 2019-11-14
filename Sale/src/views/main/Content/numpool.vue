@@ -31,7 +31,7 @@
                 }).catch(err => console.log(err));
             },
             showdialog(item){
-                this.$emit("sendValue",item)
+                this.$emit("sendValue",[,item,])
             }
         },
         created() {
