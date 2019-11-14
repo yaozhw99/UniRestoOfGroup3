@@ -115,7 +115,7 @@
 
     import {  } from '@/api/bforder'
     export default {
-        props:['serialNumber','actionName','productName'],
+        acceptParams:{serialNumber:'',actionName:'',productName:''},
         name: "index",
         data() {
             return {
@@ -161,6 +161,11 @@
                     },2000)
                 })
             }
+        },mounted() {
+            this.acceptParams.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'13000000000';
+            this.acceptParams.actionName=this.$route.params.serialNumber?this.$route.params.actionName:'默认活动';
+            this.acceptParams.productName=this.$route.params.serialNumber?this.$route.params.productName:'默认产品';
+
         }
 
     }
