@@ -18,11 +18,11 @@
     <div class="middle">
       <div class="card">
         <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>{{HOT}}<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
-        <div  @click="dialogVisible = true,setcardvalue(item.name)" v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
+        <div  @click="linkorder(item.name)" v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
           <img :src="item.src">
         </div>
       </div>
-       <NumPool ifshow="true" @sendValue="dialog"></NumPool>
+       <NumPool ifshow="true" @sendValue="linkorder"></NumPool>
     </div>
 
 <!--    <el-dialog-->
@@ -59,7 +59,8 @@
 <script>
 
 import NumPool from './numpool'
-import numpool from "../../../../mock/numpool";
+
+
 
     export default {
 
@@ -84,7 +85,8 @@ import numpool from "../../../../mock/numpool";
                         src: require("../../../icons/MainPageImg/shift2.jpg")
                     }
                 ],
-                menu: [{
+                menu: [
+                    {
                     name: "特色号码"
                 },
                     {
@@ -121,10 +123,6 @@ import numpool from "../../../../mock/numpool";
 
         },
         methods:{
-            dialog(num){
-                this.dialogVisible=true;
-                this.numvalue=num;
-            },
             handleClose(done) {
                 this.$confirm('确认关闭？')
                     .then(()=> {
@@ -132,8 +130,8 @@ import numpool from "../../../../mock/numpool";
                     })
                     .catch(()=> {});
             },
-            setcardvalue(item){
-                this.cardvalue=item;
+            linkorder(item){
+                this.$router.push({name:'order',params:{name:item}})
             }
             },
         components:{
