@@ -159,13 +159,14 @@
                     setTimeout(()=>{
                         this.$router.push({name:'orderdetail',params:this.formData})
                     },2000)
-
-
-
-
                 })
             }
         }
+
+    }
+
+    function getHb(fenzi,fenmu) {
+        return Math.round(fenzi/fenmu*100,2)+'%';
     }
 </script>
 
