@@ -1,14 +1,20 @@
 <template>
   <div style="background: #344b58">
-    <div>
-      <e-map></e-map>
-    </div>
 
+    <div>
+      <card ></card>
+    </div>
     <div class="class-container pie-container" style="height: 300px;width: 100%">
       <pie :pdata="data1"  height="300px"></pie>
       <pie :pdata="data2"  height="300px"></pie>
       <SmallBar :pdata="data3"  height="300px"></SmallBar>
     </div>
+    <div class="map-container">
+      <e-map @getCity="showcity" ref="mapcity" style="height: 500px;width: 49%"></e-map>
+<map-table :data="Tabdata" :columns="ProColumns" :city="curCity" style="background: #044161; height: 500px;width: 50%;margin-left: 10px"></map-table>
+    </div>
+
+
     <div class="showdiv"></div>
   <div class="class-container" style="height: 500px;width: 100%">
     <Chart></Chart>
@@ -26,12 +32,39 @@
   import Map from './Map.vue'
   import SmallBar from './SmallBar.vue'
   import EMap from './EMap.vue'
+  import Card from './Card.vue'
+  import MapTable from './MapTable.vue'
+  import Mock from 'mockjs'
+
+  let Tdata=Mock.mock({
+    "result":1,
+    "data|4":[
+      {
+        "Brand|1":['冰激凌','沃派','低消','流量王'],
+        "saleBy|9600-10000":9900,
+        "saleLj|190000-250000":200000,
+        "activeBy|9000-9600":9200,
+        "activeLj|160000-190000":180000
+      }
+    ]
+  });
+
+
 
   export default {
     name: 'chart',
-    components: { Chart , Pie, Map,SmallBar,EMap},
+    components: { Chart , Pie, Map,SmallBar,EMap,Card,MapTable},
     data() {
       return {
+        curCity:'广州市',
+        ProColumns: {
+          Brand:'品牌',
+          saleBy:'销售量',
+          saleLj:'销售累计',
+          activeBy:'激活量',
+          activeLj:'激活累计'
+        },
+        Tabdata:Tdata.data,
         title1:"各类产品销售情况",
         subtitle1:"",
         title2:"当月销售进度情况",
@@ -79,7 +112,32 @@
       ]}
         ],
       }
-  }
+  },
+    methods:{
+      showcity(value){
+        this.curCity=value;
+        Tdata=Mock.mock({
+          "result":1,
+          "data|4":[
+            {
+              "Brand|1":['冰激凌','沃派','低消','流量王'],
+              "saleBy|9600-10000":9900,
+              "saleLj|190000-250000":200000,
+              "activeBy|9000-9600":9200,
+              "activeLj|160000-190000":180000
+            }
+          ]
+        });
+          this.Tabdata=Tdata.data;
+        console.log(this.curCity)
+      }
+    },
+    mounted(){
+//      this.$refs.mapcity.$on("getCity",value=>{
+//        this.curCity=value;
+//      console.log(this.curCity);
+//    })
+    }
   }
 </script>
 
@@ -90,19 +148,21 @@
   height: calc(100vh - 84px);
   }
   .pie-container{
-    margin-top: 20px;
+    margin-bottom: 10px;
     /*padding-right: 20px;*/
     display: flex;
     width: 100%;
   }
   .pie-container pie,.pie-container SmallBar{
     flex: 0 0 30% ;
+    margin-left: 10px;
   }
   .showdiv{
     height: 10px;
     background: #344b58;
   }
   .map-container{
-    margin: 20px auto;
+    margin-bottom: 10px ;
+    display: flex;
   }
 </style>
