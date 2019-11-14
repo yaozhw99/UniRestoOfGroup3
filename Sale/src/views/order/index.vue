@@ -79,13 +79,13 @@
             <tr>
               <td>所选号码：</td>
               <td>
-                {{acceptParams.serialNumber}}    <a @click="selectNumber" style="color: blue;">(重新选号)</a>
+                {{acceptParams.serialNumber}}    <a style="color: blue;" @click="selectNumber">(选号)</a>
               </td>
             </tr>
             <tr>
               <td>号码归属：</td>
               <td>
-                <select v-model="formData.epcode" placeholder="请选择" style="width:300px">
+                <select v-model="formData.epcode" placeholder="请选择" style="width:300px" required>
                   <option
                     v-for="item in options"
                     :key="item.value"
@@ -98,19 +98,19 @@
             <tr>
               <td>姓名：</td>
               <td>
-                <input v-model="formData.name" placeholder="省份证姓名"></input></td>
+                <input v-model="formData.name" placeholder="省份证姓名" required></input></td>
             </tr>
             <tr>
               <td>身份证号：</td>
-              <td><input v-model="formData.psptId" placeholder="身份证姓名"></input></td>
+              <td><input v-model="formData.psptId" placeholder="身份证姓名" required></input></td>
             </tr>
             <tr>
               <td>邮寄地址：</td>
-              <td><input v-model="formData.address" placeholder="请输入邮寄地址"></input></td>
+              <td><input v-model="formData.address" placeholder="请输入邮寄地址" required></input></td>
             </tr>
             <tr>
               <td>联系电话：</td>
-              <td><input v-model="formData.linkPhone" placeholder="请输入联系电话"></input></td>
+              <td><input v-model="formData.linkPhone" placeholder="请输入联系电话" required></input></td>
             </tr>
             <tr>
               <td></td>
@@ -120,18 +120,29 @@
         </div>
       </div>
     </div>
+
+
+    <el-dialog title="选择号码" :visible.sync="dialogVisible">
+      <Numpool :ifshow="true" @sendValue="dialog"></Numpool>
+    </el-dialog>
+
+    <Footer></Footer>
+
   </div>
 </template>
 
 <script>
     import Mock from 'mockjs';
     import { createUser } from '@/api/bforder'
+    import Numpool from "@/views/main/Content/numpool"
+    import Footer from "../main/Footer/Footer";
 
     import {  } from '@/api/bforder'
     export default {
         name: "index",
         data() {
             return {
+                dialogVisible:false,
                 acceptParams:{serialNumber:'',actionName:'',productName:''},
                 formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0},
                 msg: "vue template",
@@ -174,12 +185,29 @@
                         this.$router.push({name:'orderdetail',params:this.formData})
                     },2000)
                 })
-            }
-        },mounted() {
-            this.acceptParams.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'13000000000';
-            this.acceptParams.actionName=this.$route.params.serialNumber?this.$route.params.actionName:'默认活动';
-            this.acceptParams.productName=this.$route.params.serialNumber?this.$route.params.productName:'默认产品';
+            },
+            selectNumber(){
+                this.dialogVisible=true;
+            },
+            handleClose(){
+                this.dialogVisible=false;
+            },
+            dialog(num){
 
+                this.acceptParams.serialNumber=num;
+                this.dialogVisible=false;
+            },
+        },
+        mounted() {
+            console.log(this.$route.params);
+            this.acceptParams.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'';
+            this.acceptParams.actionName=this.$route.params.actionName?this.$route.params.actionName:'';
+            this.acceptParams.productName=this.$route.params.productName?this.$route.params.productName:'';
+
+        },
+        components:{
+            Numpool,
+            Footer
         }
 
     }
@@ -351,6 +379,11 @@
   #page-top-right{
     float: right;
   }
-
+  .selectcard>span,.selectnum>span{
+    margin-right: 10px;
+    line-height: 26px;
+    font-size:18px ;
+    margin-bottom: 20px;
+  }
 
 </style>
