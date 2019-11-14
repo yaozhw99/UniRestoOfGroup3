@@ -40,7 +40,7 @@
       <div class="ccontent">
         <div class="ccleft">
           <div class="ccleft_box">
-            <span class="ccleft_title">{{serialNumber}}</span>
+            <span class="ccleft_title">{{acceptParams.serialNumber}}</span>
             <img src="@/icons/yzw_uni_pinpai.png" alt="">
             <span><small>开通说明：</small></span>
             <span><small>按照国家实名制要求：开通号码必须提供身份证实名信息,并在接收到号卡后提供相关复印件</small></span>
@@ -64,6 +64,24 @@
                 <a style="color: blue;">(已有50人评价)</a>
               </td>
             </tr>
+            <tr v-if="acceptParams.productName">
+              <td>商品名称：</td>
+              <td>
+                {{acceptParams.productName}}
+              </td>
+            </tr>
+            <tr v-if="acceptParams.actionName">
+              <td>所选活动：</td>
+              <td>
+                {{acceptParams.actionName}}
+              </td>
+            </tr>
+            <tr>
+              <td>所选号码：</td>
+              <td>
+                {{acceptParams.serialNumber}}    <a @click="selectNumber" style="color: blue;">(重新选号)</a>
+              </td>
+            </tr>
             <tr>
               <td>号码归属：</td>
               <td>
@@ -76,10 +94,6 @@
                   </option>
                 </select>
               </td>
-            </tr>
-            <tr>
-              <td>所选套餐：</td>
-              <td>{{productName}}</td>
             </tr>
             <tr>
               <td>姓名：</td>
@@ -115,10 +129,10 @@
 
     import {  } from '@/api/bforder'
     export default {
-        acceptParams:{serialNumber:'',actionName:'',productName:''},
         name: "index",
         data() {
             return {
+                acceptParams:{serialNumber:'',actionName:'',productName:''},
                 formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0},
                 msg: "vue template",
                 options: [{value:'020',label:'广州市'},
