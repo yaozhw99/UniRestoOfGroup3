@@ -35,21 +35,7 @@
   import Card from './Card.vue'
   import MapTable from './MapTable.vue'
   import Mock from 'mockjs'
-
-  let Tdata=Mock.mock({
-    "result":1,
-    "data|4":[
-      {
-        "Brand|1":['冰激凌','沃派','低消','流量王'],
-        "saleBy|9600-10000":9900,
-        "saleLj|190000-250000":200000,
-        "activeBy|9000-9600":9200,
-        "activeLj|160000-190000":180000
-      }
-    ]
-  });
-
-
+  import {fetchList} from '@/api/report'
 
   export default {
     name: 'chart',
@@ -64,7 +50,7 @@
           activeBy:'激活量',
           activeLj:'激活累计'
         },
-        Tabdata:Tdata.data,
+        Tabdata:[],
         title1:"各类产品销售情况",
         subtitle1:"",
         title2:"当月销售进度情况",
@@ -116,27 +102,17 @@
     methods:{
       showcity(value){
         this.curCity=value;
-        Tdata=Mock.mock({
-          "result":1,
-          "data|4":[
-            {
-              "Brand|1":['冰激凌','沃派','低消','流量王'],
-              "saleBy|9600-10000":9900,
-              "saleLj|190000-250000":200000,
-              "activeBy|9000-9600":9200,
-              "activeLj|160000-190000":180000
-            }
-          ]
-        });
-          this.Tabdata=Tdata.data;
+        fetchList(value).then(res=>{
+          this.Tabdata=res.data;
+        })
         console.log(this.curCity)
       }
     },
     mounted(){
-//      this.$refs.mapcity.$on("getCity",value=>{
-//        this.curCity=value;
-//      console.log(this.curCity);
-//    })
+      fetchList().then(res=>{
+        console.log(res);
+      this.Tabdata=res.data;
+    })
     }
   }
 </script>

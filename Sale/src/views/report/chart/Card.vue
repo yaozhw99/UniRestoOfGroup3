@@ -60,6 +60,7 @@
   import CountTo from 'vue-count-to'
 
   export default {
+    prop:['Sale'],
     data(){
       return {
         data1:87
