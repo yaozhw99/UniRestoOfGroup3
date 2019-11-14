@@ -70,9 +70,9 @@
 
 <style scoped>
 #app{
-  width: 100%;
-  height: 150px;
-  background-color: white;
+  width: 100%!important;
+  height: 150px!important;
+  background-color: white!important;
   border-top: 5px solid lightgray;
   margin-top: 10px;
 }
@@ -82,7 +82,7 @@
     display: flex;
     font-size: 14px;
     color: darkgray;
-
+    justify-content: space-between;
   }
   .left{
     margin-top: 10px;
@@ -111,13 +111,11 @@
   }
   .right{
     margin-top: 10px;
-    padding: 0 10px;
+    width: 400px;
   }
   .right ul {
     display: flex;
-  }
-  .right ul li {
-    margin-right: 30px;
+    justify-content: space-around;
   }
   .right div {
     border: 1px solid lightgray;

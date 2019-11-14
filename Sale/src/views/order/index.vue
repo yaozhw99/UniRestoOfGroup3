@@ -98,7 +98,7 @@
             <tr>
               <td>姓名：</td>
               <td>
-                <input v-model="formData.name" placeholder="省份证姓名" required></input></td>
+                <input v-model="formData.name" placeholder="身份证姓名" required></input></td>
             </tr>
             <tr>
               <td>身份证号：</td>
@@ -194,7 +194,7 @@
             },
             dialog(num){
 
-                this.acceptParams.serialNumber=num;
+                this.acceptParams.serialNumber=(num[0]?num[0]:num[1]?num[1]:num[2]);
                 this.dialogVisible=false;
             },
         },
