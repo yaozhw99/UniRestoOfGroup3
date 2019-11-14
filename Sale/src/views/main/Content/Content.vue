@@ -18,7 +18,7 @@
     <div class="middle">
       <div class="card">
         <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>{{HOT}}<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
-        <div  @click="linkorder(item.name)" v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
+        <div  @click="linkorder([item.name,,])" v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
           <img :src="item.src">
         </div>
       </div>
@@ -131,7 +131,10 @@ import NumPool from './numpool'
                     .catch(()=> {});
             },
             linkorder(item){
-                this.$router.push({name:'order',params:{name:item}})
+                this.$router.push({name:'order',params:{
+                        serialNumber:'item[0]',
+                        actionName:'item[2]',
+                        productName:'item[1]'}})
             }
             },
         components:{
