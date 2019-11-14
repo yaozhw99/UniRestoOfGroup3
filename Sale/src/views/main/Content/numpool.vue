@@ -43,7 +43,11 @@
 </script>
 
 
-<style>
+<style scoped>
+  .el-row .el-col{
+    text-align: center;
+    padding:10px;
+  }
   .middle .num{
     border: orange solid 1px;
     width: 400px;

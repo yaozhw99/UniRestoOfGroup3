@@ -80,6 +80,7 @@
     width: 1200px;
     margin: 0 auto;
     display: flex;
+    justify-content: space-around;
     font-size: 14px;
     color: darkgray;
 

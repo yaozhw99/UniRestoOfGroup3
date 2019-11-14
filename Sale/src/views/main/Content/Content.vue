@@ -145,7 +145,7 @@ import NumPool from './numpool'
 </script>
 
 
-<style scope>
+<style scoped>
 .shift{
   height: 265px;
 }
