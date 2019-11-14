@@ -132,9 +132,9 @@ import NumPool from './numpool'
             },
             linkorder(item){
                 this.$router.push({name:'order',params:{
-                        serialNumber:'item[0]',
-                        actionName:'item[2]',
-                        productName:'item[1]'}})
+                        serialNumber:item[1],
+                        actionName:item[2],
+                        productName:item[0]}})
             }
             },
         components:{

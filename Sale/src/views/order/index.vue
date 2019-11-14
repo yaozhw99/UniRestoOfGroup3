@@ -126,7 +126,7 @@
       <Numpool :ifshow="true" @sendValue="dialog"></Numpool>
     </el-dialog>
 
-
+    <Footer></Footer>
 
   </div>
 </template>
@@ -135,6 +135,7 @@
     import Mock from 'mockjs';
     import { createUser } from '@/api/bforder'
     import Numpool from "@/views/main/Content/numpool"
+    import Footer from "../main/Footer/Footer";
 
     import {  } from '@/api/bforder'
     export default {
@@ -198,13 +199,15 @@
             },
         },
         mounted() {
+            console.log(this.$route.params);
             this.acceptParams.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'';
-            this.acceptParams.actionName=this.$route.params.serialNumber?this.$route.params.actionName:'';
-            this.acceptParams.productName=this.$route.params.serialNumber?this.$route.params.productName:'';
+            this.acceptParams.actionName=this.$route.params.actionName?this.$route.params.actionName:'';
+            this.acceptParams.productName=this.$route.params.productName?this.$route.params.productName:'';
 
         },
         components:{
-            Numpool:Numpool
+            Numpool,
+            Footer
         }
 
     }
