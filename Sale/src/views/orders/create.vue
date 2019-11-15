@@ -9,7 +9,7 @@ export default {
   name: 'Create',
   data() {
     return {
-      msg: 'vue news create'
+      msg: '面向用户 开户  news create'
     }
   }
 }
