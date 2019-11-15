@@ -9,7 +9,9 @@
            placeholder="请输入内容"
            prefix-icon="el-icon-search">
          </el-input>
-         <span><el-button size="small">搜索</el-button></span>
+         <span>
+           <el-button size="small">搜索</el-button>
+         </span>
        </div>
      </div>
     </el-header>
