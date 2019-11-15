@@ -32,9 +32,6 @@
 
 
 <style scope>
-.el-header{
-  margin: 20px 60px;
-}
 .el-header div{
   display: flex;
   flex-flow: row;
