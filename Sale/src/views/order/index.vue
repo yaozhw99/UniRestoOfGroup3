@@ -70,6 +70,15 @@
                 {{acceptParams.productName}}
               </td>
             </tr>
+            <tr v-if="!acceptParams.productName">
+              <td>选择产品：</td>
+              <td>
+                <i v-for="(item,idx) in productList" style="margin-right: 5px;">
+                  <el-tag size="small" effect="light"  style="cursor: pointer" :type="item.selected?'warning':'info'" @click="changeProduct(idx)">{{item.name}}</el-tag>
+                </i>
+
+              </td>
+            </tr>
             <tr v-if="acceptParams.actionName">
               <td>所选活动：</td>
               <td>
@@ -142,6 +151,7 @@
         name: "index",
         data() {
             return {
+                productList:[{name:'冰激淋',selected:false},{name:'沃派卡',selected:false},{name:'腾讯大王卡',selected:false}],
                 dialogVisible:false,
                 acceptParams:{serialNumber:'',actionName:'',productName:''},
                 formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0},
@@ -171,6 +181,12 @@
             }
         },
         methods:{
+            changeProduct(idx){
+                this.productList.forEach((item)=>{
+                    item.selected=false;
+                })
+                this.productList[idx].selected=true;
+            },
             openuser(){
                 createUser(this.formData).then(res=>{
                     this.formData.orderId=res.orderId;

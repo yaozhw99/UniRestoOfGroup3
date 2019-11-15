@@ -36,7 +36,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   p{
     font-size: 22px;
     color:#fff;

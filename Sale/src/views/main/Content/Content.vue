@@ -22,6 +22,7 @@
 import NumPool from './numpool';
 import lower from './middlelower';
 import middle from './Middle'
+import Discnt from'./Discnt.vue'
 
 
 
@@ -70,7 +71,8 @@ import middle from './Middle'
         components:{
             NumPool,
             lower,
-            middle
+            middle,
+            Discnt
         }
     }
 

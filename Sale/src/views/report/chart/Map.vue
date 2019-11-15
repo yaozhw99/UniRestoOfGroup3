@@ -125,7 +125,7 @@
           ,
           bmap: {
             center: [113.29,22.72],
-            zoom: 9,
+            zoom: 7,
 //            roam: true,
             mapStyle: {
               styleJson: [
@@ -338,7 +338,7 @@
     }
   }
 </script>
-<style >
+<style scoped>
   .chart-container{
     /*position: relative;*/
     width: 80%;

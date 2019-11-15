@@ -24,6 +24,17 @@ export default [
       data: List.data
     }
   }
+},
+{
+  url: '/report1',
+    type: 'get',
+  response: config => {
+
+  return {
+    code: 20000,
+    data: List.data
+  }
+}
 }
 ]
 

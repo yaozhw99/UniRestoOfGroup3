@@ -1,10 +1,13 @@
 <template>
     <div>
       <el-container direction="vertical" >
-      <CHeader></CHeader>
+        <CHeader></CHeader>
         <shift></shift>
-      <CContent></CContent>
-      <CFooter></CFooter>
+        <Cbanner></Cbanner>
+        <CproductZq></CproductZq>
+        <CMobileNew></CMobileNew>
+        <CContent></CContent>
+        <CFooter></CFooter>
       </el-container>
     </div>
 </template>
@@ -14,7 +17,9 @@
   import CContent from './Content/Content';
   import CFooter from './Footer/Footer';
   import shift from './Content/shift'
-
+  import CproductZq from "./Content/CproductZq";
+  import CMobileNew from "./Content/CMobileNew";
+  import Cbanner from "./Content/Cbanner";
   export default {
         name: "mainPage",
         data() {
@@ -26,7 +31,10 @@
             CHeader,
             CContent,
             CFooter,
-            shift
+            shift,
+            CproductZq,
+            CMobileNew,
+            Cbanner
         }
     }
 </script>
@@ -38,4 +46,5 @@
   /*.app{*/
   /*  background-color: #F7F7F7;*/
   /*}*/
+
 </style>
