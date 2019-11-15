@@ -24,7 +24,11 @@
       height: {
         type: String,
         default: '500px'
-      }
+      },
+      bjl:[],
+      wopai:[],
+      dixiao:[],
+      liulw:[]
     },
     data() {
       return {
@@ -252,7 +256,7 @@
     }
   }
 </script>
-<style >
+<style scoped>
   .chart{
     /*position: relative;*/
     width: 80%;

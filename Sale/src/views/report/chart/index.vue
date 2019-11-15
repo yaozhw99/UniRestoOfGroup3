@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #344b58">
+  <div>
 
     <div>
       <card ></card>
@@ -35,13 +35,19 @@
   import Card from './Card.vue'
   import MapTable from './MapTable.vue'
   import Mock from 'mockjs'
-  import {fetchList} from '@/api/report'
+  import {fetchList,getList} from '@/api/report'
+// let bjldata=Mock.mock({"data|21":["count|5000-9000":5001]})
+
 
   export default {
     name: 'chart',
     components: { Chart , Pie, Map,SmallBar,EMap,Card,MapTable},
     data() {
       return {
+//        bjl:bjldata.data(),
+//        wopai:[],
+//        dixiao:[],
+//        liulw:[],
         curCity:'广州市',
         ProColumns: {
           Brand:'品牌',
@@ -102,7 +108,7 @@
     methods:{
       showcity(value){
         this.curCity=value;
-        fetchList(value).then(res=>{
+        getList(value).then(res=>{
           this.Tabdata=res.data;
         })
         console.log(this.curCity)
@@ -125,7 +131,7 @@
   }
   .pie-container{
     margin-bottom: 10px;
-    /*padding-right: 20px;*/
+    margin-top: 10px;
     display: flex;
     width: 100%;
   }

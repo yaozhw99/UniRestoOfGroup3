@@ -9,7 +9,7 @@
           <div class="card-panel-text">
            订单量
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to  :start-val="0" :end-val="104092" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -36,6 +36,7 @@
             签收量
           </div>
           <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <!--<input type="text" v-model="data1"/>-->
         </div>
       </div>
     </el-col>
@@ -63,7 +64,7 @@
     prop:['Sale'],
     data(){
       return {
-        data1:87
+        data1:4500
       }
     },
     components: {
@@ -73,6 +74,15 @@
       handleSetLineChartData(type) {
         this.$emit('handleSetLineChartData', type)
       }
+    },
+    mounted(){
+      var count=this.data1;
+      var timer = setInterval(function(){
+        count++; // 调节速度
+        this.data1=count;
+        console.log(this.data1)
+      },2000);
+
     }
   }
 </script>
