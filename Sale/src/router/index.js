@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
 Vue.use(Router)
 
 /* Layout  @代表src目录*/
@@ -15,6 +16,8 @@ import deptRouter from "@/router/modules/dept";
 import main from "@/views/main/main";
 import reportRouter from './modules/report';
 import rtableRouter from './modules/report-table';
+import ordersRouter from '@/router/modules/orders'
+
 import orderRouter from "@/router/modules/order";
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -42,6 +45,7 @@ import orderRouter from "@/router/modules/order";
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+
 export const constantRoutes = [
   orderRouter,
   {
@@ -196,26 +200,26 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/news',
+    path: '/orders',
     component: Layout,
-    redirect: '/news/list',
-    name: 'News',
+    redirect: '/orders/orderlist',
+    name: 'Orders',
     meta: {
-      title: 'News',
-      icon: 'documentation'
+      title: '订单管理',
+      icon: 'table'
     },
     children: [
       {
-        path: 'list',
-        component: () => import('@/views/news/list'),
-        name: 'NewsList',
-        meta: { title: 'News List', icon: 'list' }
+        path: 'orderlist',
+        component: () => import('@/views/orders/orderlist'),
+        name: 'OsList',
+        meta: { title: '订单列表', icon: 'orderlist' }
       },
       {
         path: 'create',
-        component: () => import('@/views/news/create'),
-        name: 'CreateNews',
-        meta: { title: 'Create News', icon: 'edit' }
+        component: () => import('@/views/orders/create'),
+        name: 'CreateOrders',
+        meta: { title: '订单新建', icon: 'edit'}
       }
     ]
   },
@@ -441,7 +445,9 @@ export const asyncRoutes = [
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
+  mode:'history',
   routes: constantRoutes
+
 })
 
 const router = createRouter()

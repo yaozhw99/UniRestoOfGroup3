@@ -5,6 +5,7 @@ import Order from '../../views/order/index'
 
 const orderRouter = {
   path: '/order',
+  name:'order',
   component: () => import('@/views/order'),
   hidden: true
 }

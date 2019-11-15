@@ -130,13 +130,13 @@
       </div>
     </div>
 
-
+  <Footer></Footer>
   </div>
 </template>
 
 <script>
     import Mock from 'mockjs';
-
+    import Footer from "../main/Footer/Footer";
     export default {
         data() {
             return {
@@ -191,6 +191,9 @@
                     },15000)
                 },5000)
             },5000)
+        },
+        components:{
+            Footer
         }
     }
 
@@ -232,7 +235,7 @@
     border: 1px solid #c0ccda;
     border-bottom-style: dotted;
     border-bottom-width: 2px;
-    border-top: 3px solid yellowgreen;
+    border-top: 3px solid orange;
     background-color: white;
     margin-bottom: 30px;
     column-count: 3;
@@ -259,7 +262,7 @@
     border: 1px solid #c0ccda;
     border-bottom-style: dotted;
     border-bottom-width: 2px;
-    border-top: 3px solid yellowgreen;
+    border-top: 3px solid orange;
     background-color: white;
     display: flex;
     margin-bottom: 30px;
@@ -275,7 +278,7 @@
     text-align: center;
   }
   .mbody .body1 .left #orderState {
-    color: yellowgreen;
+    color: orange;
     font-size: 35px;
     text-align: center;
     margin: 30px auto;

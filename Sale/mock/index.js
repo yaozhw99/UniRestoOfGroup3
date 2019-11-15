@@ -8,6 +8,8 @@ import search from './remote-search'
 import news from './news'
 import numpool from "./numpool";
 import bforder from './bforder'
+import report from './report'
+
 
 const mocks = [
   ...user,
@@ -17,7 +19,8 @@ const mocks = [
   ...news,
   ...bforder,
   ...news,
-  ...numpool
+  ...numpool,
+  ...report
   // ...dept
 ]
 
