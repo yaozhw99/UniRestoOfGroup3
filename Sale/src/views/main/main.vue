@@ -1,6 +1,6 @@
 <template>
     <div>
-      <el-container direction="vertical" width="1200px">
+      <el-container direction="vertical">
       <CHeader></CHeader>
       <CContent></CContent>
       <CFooter></CFooter>
@@ -29,5 +29,9 @@
 </script>
 
 <style>
-
+.el-header {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
 </style>
