@@ -8,7 +8,9 @@
 <!--      <el-col :span="3"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>登陆后台<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i></el-col>-->
 <!--    </el-row>-->
 <!--    </div>-->
+    <discnt></discnt>
     <div class="middle">
+
        <middle @sendcardvalue="linkorder"></middle>
        <NumPool ifshow="true" @sendValue="linkorder"></NumPool>
     </div>
