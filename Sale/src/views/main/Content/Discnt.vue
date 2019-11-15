@@ -9,7 +9,7 @@
           <a href="">订购记录</a>
           <a href="" class="more">
             <span>更多</span>
-            <img :src="more_icon" alt="" />
+            <!--<img :src="more_icon" alt="" />-->
           </a>
         </p>
       </div>
@@ -67,7 +67,7 @@
           <a href="">特靓号卡</a>
           <a href="" class="more">
             <span>更多</span>
-            <img :src="more_icon" alt="" />
+            <!--<img :src="more_icon" alt="" />-->
           </a>
         </p>
       </div>
