@@ -4,8 +4,7 @@
       <CHeader></CHeader>
         <shift></shift>
         <CproductZq></CproductZq>
-
-
+        <CMobileNew></CMobileNew>
       <CFooter></CFooter>
       </el-container>
     </div>
@@ -17,6 +16,7 @@
   import CFooter from './Footer/Footer';
   import shift from './Content/shift'
   import CproductZq from "./Content/CproductZq";
+  import CMobileNew from "./Content/CMobileNew";
   export default {
         name: "mainPage",
         data() {
@@ -29,10 +29,14 @@
             CContent,
             CFooter,
             shift,
-            CproductZq
+            CproductZq,
+            CMobileNew
         }
     }
 </script>
 
 <style>
+  .el-carousel__item,.el-carousel__container,.el-carousel {
+    height: 100%;
+  }
 </style>
