@@ -1,8 +1,10 @@
 <template>
     <div>
+      <el-container direction="vertical" width="1200px">
       <CHeader></CHeader>
       <CContent></CContent>
       <CFooter></CFooter>
+      </el-container>
     </div>
 </template>
 
@@ -27,8 +29,5 @@
 </script>
 
 <style>
-.el-header {
-  width: 1200px;
-  margin: 0 auto;
-}
+
 </style>

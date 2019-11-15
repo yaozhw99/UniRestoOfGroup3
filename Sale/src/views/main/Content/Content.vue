@@ -114,6 +114,9 @@ import lower from './middlelower'
 
 
 <style scoped>
+  *{
+    margin:0 auto;
+  }
 .shift{
   height: 265px;
 }
@@ -159,7 +162,7 @@ import lower from './middlelower'
 
   .middle{
     display: flex;
-    min-width: 1200px;
+    width: 1200px;
     flex-flow: row;
     justify-content:center;
   }
