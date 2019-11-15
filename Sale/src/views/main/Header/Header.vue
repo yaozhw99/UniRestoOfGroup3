@@ -33,7 +33,8 @@
 
 <style scope>
 .el-header{
-  margin: 20px 60px;
+  width: 1200px;
+  margin: 20px auto;
 }
 .el-header div{
   display: flex;
