@@ -1,13 +1,13 @@
 <template>
     <div>
       <el-container direction="vertical" >
-      <CHeader></CHeader>
+        <CHeader></CHeader>
         <shift></shift>
         <Cbanner></Cbanner>
         <CproductZq></CproductZq>
         <CMobileNew></CMobileNew>
         <CContent></CContent>
-      <CFooter></CFooter>
+        <CFooter></CFooter>
       </el-container>
     </div>
 </template>
