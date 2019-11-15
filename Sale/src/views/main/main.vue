@@ -1,7 +1,8 @@
 <template>
     <div>
-      <el-container direction="vertical">
+      <el-container direction="vertical" >
       <CHeader></CHeader>
+        <shift></shift>
       <CContent></CContent>
       <CFooter></CFooter>
       </el-container>
@@ -12,6 +13,7 @@
   import CHeader from './Header/Header';
   import CContent from './Content/Content';
   import CFooter from './Footer/Footer';
+  import shift from './Content/shift'
 
   export default {
         name: "mainPage",
@@ -23,15 +25,11 @@
         components:{
             CHeader,
             CContent,
-            CFooter
+            CFooter,
+            shift
         }
     }
 </script>
 
 <style>
-.el-header {
-  width: 1200px;
-  margin: 0 auto;
-  padding: 0;
-}
 </style>

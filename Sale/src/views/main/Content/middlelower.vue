@@ -64,7 +64,9 @@
     margin: 1px;
 
   }
-
+.all{
+  width: 1200px;
+}
   .middle {
     margin: 30px 25px;
     display: flex;

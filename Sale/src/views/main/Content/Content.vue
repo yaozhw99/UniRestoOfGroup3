@@ -1,12 +1,5 @@
 <template xmlns="http://www.w3.org/1999/html">   
   <div>
-    <div class="shift">
-        <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="item in shift" :key="item.id">
-            <img :src="item.src">
-          </el-carousel-item>
-        </el-carousel>
-    </div>
     <div class="upper">
     <el-row :gutter="50">
       <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>{{item.name}}<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i>
@@ -32,7 +25,8 @@
 <script>
 
 import NumPool from './numpool';
-import lower from './middlelower'
+import lower from './middlelower';
+
 
 
 
@@ -44,20 +38,6 @@ import lower from './middlelower'
                 cardvalue:"",
                 numvalue:'',
                 HOT:"热销卡品",
-                shift: [
-                    {
-                        id: 0,
-                        src: require("../../../icons/MainPageImg/shift.jpg")
-                    },
-                    {
-                        id: 1,
-                        src: require("../../../icons/MainPageImg/shift1.jpg")
-                    },
-                    {
-                        id: 2,
-                        src: require("../../../icons/MainPageImg/shift2.jpg")
-                    }
-                ],
                 menu: [
                     {
                     name: "特色号码"
@@ -117,13 +97,7 @@ import lower from './middlelower'
   *{
     margin:0 auto;
   }
-.shift{
-  height: 265px;
-}
-.shift  .el-carousel img {
-    width: 100%;
-    height: 100%;
-  }
+
 .upper .el-col:hover{
   cursor: pointer;
   color: #ff6600;
