@@ -8,6 +8,7 @@
       <el-col :span="3"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>登陆后台<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i></el-col>
     </el-row>
     </div>
+<discnt></discnt>
     <div class="middle">
       <div class="card">
         <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>{{HOT}}<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
@@ -26,6 +27,7 @@
 
 import NumPool from './numpool';
 import lower from './middlelower';
+import Discnt from'./Discnt.vue'
 
 
 
@@ -86,7 +88,8 @@ import lower from './middlelower';
             },
         components:{
             NumPool,
-            lower
+            lower,
+          Discnt
         }
     }
 

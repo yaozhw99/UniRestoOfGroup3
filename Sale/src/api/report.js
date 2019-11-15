@@ -8,3 +8,10 @@ export function fetchList(query) {
   })
 }
 
+export function getList(query) {
+  return request({
+    url: '/report1',
+    method: 'get',
+    params: query
+  })
+}
