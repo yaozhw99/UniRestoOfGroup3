@@ -4,10 +4,10 @@
       <div class="topic">
         <p class="title">优惠专区</p>
         <p class="subtitle">
-          <a href="">上网记录</a><i>/</i>
-          <a href="">流量详单</a><i>/</i>
-          <a href="">订购记录</a>
-          <a href="" class="more">
+          <a href="#">上网记录</a><i>/</i>
+          <a href="#">流量详单</a><i>/</i>
+          <a href="#">订购记录</a>
+          <a href="#" class="more">
             <span>更多</span>
             <!--<img :src="more_icon" alt="" />-->
           </a>
@@ -18,39 +18,39 @@
           <img :src="i8fe3" alt="" class="imgBg" />
           <img :src="traffic_ul1_li_fcBg1" alt="" class="imgCover" />
           <div class="txtCover">
-            <p>全国半年流量包</p>
-            <p>定向视频包</p>
+            <p><a @click="linkorder('全国半年流量包')">全国半年流量包</a></p>
+            <p><a @click="linkorder('定向视频包')">定向视频包</a></p>
           </div>
         </li>
         <li>
           <img :src="b540" alt="" class="imgBg" />
           <img :src="traffic_ul1_li_fcBg1" alt="" class="imgCover" />
           <div class="txtCover">
-            <p>全国半年流量包</p>
-            <p>定向视频包</p>
+            <p><a  @click="linkorder('上网卡半年包100G')">上网卡半年包100G</a></p>
+            <p><a @click="linkorder('上网卡体验卡')">上网卡体验卡</a></p>
           </div>
         </li>
       </ul>
       <ul class="proList">
         <li>
-          <p class="title">全国流量半年包</p>
-          <p class="subtitle">30元1GB，半年有效</p>
+          <p class="title"><a @click="linkorder('冰激凌99元套餐')">冰激凌99元套餐</a></p>
+          <p class="subtitle"><a @click="linkorder('冰激凌99元套餐')">99元不限量，20G后限速</a></p>
           <div class="proImg">
             <img :src="llb_icon3_zhl" alt="" />
             <img :src="bn_icon_blue" alt=""  class="tagImg"/>
           </div>
         </li>
         <li>
-          <p class="title">全国流量半年包</p>
-          <p class="subtitle">30元1GB，半年有效</p>
+          <p class="title"><a @click="linkorder('冰激凌199元套餐')">冰激凌199元套餐</a></p>
+          <p class="subtitle"><a @click="linkorder('冰激凌199元套餐')">199元不限量，40G后限速</a></p>
           <div class="proImg">
             <img :src="llb_icon2_zhl" alt="" />
             <img :src="yb_icon_green" alt=""  class="tagImg"/>
           </div>
         </li>
         <li>
-          <p class="title">全国流量半年包</p>
-          <p class="subtitle">30元1GB，半年有效</p>
+          <p class="title"><a @click="linkorder('冰激凌399元套餐')">冰激凌399元套餐</a></p>
+          <p class="subtitle"><a @click="linkorder('冰激凌399元套餐')">399元1GB，100G后限速</a></p>
           <div class="proImg">
             <img :src="llb_icon2_zhl" alt="" />
             <img :src="free_icon_orange" alt=""  class="tagImg"/>
@@ -62,10 +62,10 @@
       <div class="topic">
         <p class="title">特色号卡专区</p>
         <p class="subtitle">
-          <a href="">亲情号卡</a><i>/</i>
-          <a href="">情侣号卡</a><i>/</i>
-          <a href="">特靓号卡</a>
-          <a href="" class="more">
+          <a href="#">亲情号卡</a><i>/</i>
+          <a href="#">情侣号卡</a><i>/</i>
+          <a href="#">特靓号卡</a>
+          <a href="#" class="more">
             <span>更多</span>
             <!--<img :src="more_icon" alt="" />-->
           </a>
@@ -76,25 +76,25 @@
           <img :src="kdzq_bg1" alt="" class="imgBg" />
           <img :src="kd_fc_bg" alt="" class="imgCover" />
           <div class="txtCover">
-            <p>全国半年流量包</p>
-            <p>定向视频包</p>
+            <p><a @click="linkorder('亲情在线流量卡')">亲情在线流量卡</a></p>
+            <p><a @click="linkorder('热聊语音卡')">热聊语音卡</a></p>
           </div>
         </li>
       </ul>
       <ul class="proList">
         <li>
-          <p class="title">全国流量半年包</p>
-          <p class="subtitle">30元1GB，半年有效</p>
+          <p class="title"><a @click="linkorder('智慧沃家主副卡')">智慧沃家主副卡</a></p>
+          <p class="subtitle"><a @click="linkorder('智慧沃家主副卡')">一人缴费，全家共用</a></p>
           <img :src="kdzq_pic1" alt="" />
         </li>
         <li>
-          <p class="title">全国流量半年包</p>
-          <p class="subtitle">30元1GB，半年有效</p>
+          <p class="title"><a @click="linkorder('智慧沃家智能家居卡')">智慧沃家智能家居卡</a></p>
+          <p class="subtitle"><a @click="linkorder('智慧沃家智能家居卡')">一号在手，随享智能家居</a></p>
           <img :src="kdzq_pic2" alt="" />
         </li>
         <li>
-          <p class="title">全国流量半年包</p>
-          <p class="subtitle">30元1GB，半年有效</p>
+          <p class="title"><a @click="linkorder('沃派流量卡')">沃派流量卡</a></p>
+          <p class="subtitle"><a @click="linkorder('沃派流量卡')">学生专用，流量任信用</a></p>
           <img :src="kdzq_pic3" alt="" />
         </li>
       </ul>
@@ -150,6 +150,14 @@
         wo_icon_zhl:wo_icon_zhl,
         yb_icon_green:yb_icon_green
       }
+    },
+    methods:{
+      linkorder(item){
+        this.$router.push({name:'order',params:{
+          serialNumber:'',
+          actionName:'',
+          productName:item}})
+      }
     }
   }
 </script>
@@ -158,7 +166,7 @@
     margin: 0;
     padding: 0;
     font-family: "微软雅黑";
-    background-color: #F5F5F5;
+    /*background-color: #F5F5F5;*/
     color: #333;
     text-align: center;
   }
