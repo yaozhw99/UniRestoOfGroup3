@@ -90,7 +90,7 @@
     background-color: #e5e9f2;
   }
   .numpool .el-row .el-col{
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: 1px;
     line-height: 22px;
   }
