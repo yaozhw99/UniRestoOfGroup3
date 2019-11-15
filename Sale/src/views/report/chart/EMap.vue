@@ -17,12 +17,18 @@
     data() {
       return {
         chart: null,
-        option:{}
+        option:{},
+        city:''
+      }
+
+    },
+    methods:{
+      emitMapClick(){
+        this.$emit("getCity",this.city);
       }
     },
     mounted(){
       this.chart = echarts.init(this.$refs.chart)
-
       let dataSet =[
         {
           "name": "广州市",
@@ -90,27 +96,28 @@
         },
         {
           "name": "东莞市",
-          "value": 150000
+          "value": 15000
         },
         {
           "name": "中山市",
-          "value": 200000
+          "value": 20000
         },
         {
           "name": "潮州市",
-          "value": 50000
+          "value": 5000
         },
         {
           "name": "揭阳市",
-          "value": 120000
+          "value": 12000
         },
         {
           "name": "云浮市",
-          "value": 150000
+          "value": 15000
         }
       ]
 
       this.option={
+        backgroundColor: '#044161',
         title: {
           text: '销售情况分布地图',
 //          subtext: 'from United Nations, Total population, both sexes combined, as of 1 July (thousands)',
@@ -130,19 +137,19 @@
           calculable: true,
           //拖拽时，是否实时更新,如果为false则拖拽结束时，才更新视图
           realtime: false,
-          text: ['High', 'Low'],
+          text: ['高', '低'],
           left: 'left',
           top: 'center',
           inRange: {
-            color: ['rgba(255,144,128,1)', 'rgba(0,191,183,1)', '#5AB1EF','#F4CA98']
+            color: ['#F4CA98', '#5AB1EF', 'rgba(0,191,183,1)','rgba(255,144,128,1)']
           }
         },
         tooltip: {
           trigger: 'item',
           formatter(params) {
             var value = (params.value + '').split('.');
-            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,') +
-              '.' + value[1];
+            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
+
             return params.seriesName + '<br/>' + params.name + ' : ' + value;
           }
         },
@@ -185,13 +192,16 @@
       this.chart.setOption(this.option);
 
       this.chart.on('click',(params)=>{
-        console.log(params)
-      switch(params.name){
-        case '广州市':{
-          this.$router.push("./table/SaleTable");
-          break;
-        }
-      }
+
+      this.city=params.name;
+      console.log(this.city)
+      this.emitMapClick();
+//      switch(params.name){
+//        case '广州市':{
+//          this.$router.push("./table/SaleTable");
+//          break;
+//        }
+//      }
     });
 
 //      setInterval(() => {
