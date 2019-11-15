@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #344b58">
+  <div>
 
     <div>
       <card ></card>
