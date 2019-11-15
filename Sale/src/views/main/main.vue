@@ -3,6 +3,7 @@
       <el-container direction="vertical" >
         <CHeader></CHeader>
         <shift></shift>
+        <Discnt></Discnt>
         <CContent></CContent>
 
         <CproductZq></CproductZq>
@@ -20,6 +21,8 @@
   import CproductZq from "./Content/CproductZq";
   import CMobileNew from "./Content/CMobileNew";
   import Cbanner from "./Content/Cbanner";
+  import Discnt from "./Content/Discnt";
+
   export default {
         name: "mainPage",
         data() {
@@ -34,7 +37,8 @@
             shift,
             CproductZq,
             CMobileNew,
-            Cbanner
+            Cbanner,
+            Discnt
         }
     }
 </script>

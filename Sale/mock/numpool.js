@@ -7,7 +7,7 @@ export default [{
     return {
       code: 20000,
       data: Mock.mock({
-        'num|16': [
+        'num|24': [
           {
             'id|+1': 0,
             'phonenum': /[1][8][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/

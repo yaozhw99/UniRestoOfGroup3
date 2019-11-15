@@ -178,7 +178,7 @@
   }
   .ltzq{
     width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto 0;
     display: flex;
   }
   .ltzq .llzq,.ltzq .kdzq{
@@ -306,7 +306,7 @@
   }
   .proList li{
     flex: 1;
-    margin-top: 10x;
+    margin-top: 10px;
     padding-right: 10px;
     background-color: white;
     position: relative;

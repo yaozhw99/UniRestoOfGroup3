@@ -1,16 +1,6 @@
 <template xmlns="http://www.w3.org/1999/html">   
   <div class="content">
-<!--    <div class="upper" style="margin-top: 20px">-->
-<!--    <el-row >-->
-<!--      <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>{{item.name}}<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i>-->
-<!--        <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>-->
-<!--      </el-col>-->
-<!--      <el-col :span="3"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>登陆后台<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i></el-col>-->
-<!--    </el-row>-->
-<!--    </div>-->
-    <discnt></discnt>
     <div class="middle">
-
        <middle @sendcardvalue="linkorder"></middle>
        <NumPool ifshow="true" @sendValue="linkorder"></NumPool>
     </div>
@@ -24,7 +14,6 @@
 import NumPool from './numpool';
 import lower from './middlelower';
 import middle from './Middle'
-import Discnt from'./Discnt.vue'
 
 
 
@@ -73,8 +62,7 @@ import Discnt from'./Discnt.vue'
         components:{
             NumPool,
             lower,
-            middle,
-            Discnt
+            middle
         }
     }
 
