@@ -1,20 +1,15 @@
 <template xmlns="http://www.w3.org/1999/html">   
-  <div>
-    <div class="upper">
-    <el-row :gutter="50">
-      <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>{{item.name}}<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i>
-        <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>
-      </el-col>
-      <el-col :span="3"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>登陆后台<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i></el-col>
-    </el-row>
-    </div>
+  <div class="content">
+<!--    <div class="upper" style="margin-top: 20px">-->
+<!--    <el-row >-->
+<!--      <el-col :span="3" v-for="(item,idx) in menu" :key="idx" :class="item.property?'complex':'normal'"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>{{item.name}}<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i>-->
+<!--        <div class="submenu" v-if="item.property"><span  v-for="p in item.subMenu" >{{p.name}}</span></div>-->
+<!--      </el-col>-->
+<!--      <el-col :span="3"><i class="el-icon-star-on" style="color: orange;margin-right: 10px"></i>登陆后台<i class="el-icon-star-on" style="color: orange;margin-left: 10px"></i></el-col>-->
+<!--    </el-row>-->
+<!--    </div>-->
     <div class="middle">
-      <div class="card">
-        <div class="hotdecration"><i class="el-icon-star-off"></i><i class="el-icon-star-off"></i>{{HOT}}<i class="el-icon-star-off"></i><i class="el-icon-star-off"></i></div>
-        <div  @click="linkorder([item.name,,])" v-for="(item,idx) in card" :key="idx" :class="item.ifhot?'hot':'normal'">
-          <img :src="item.src">
-        </div>
-      </div>
+       <middle @sendcardvalue="linkorder"></middle>
        <NumPool ifshow="true" @sendValue="linkorder"></NumPool>
     </div>
 <lower></lower>
@@ -26,6 +21,7 @@
 
 import NumPool from './numpool';
 import lower from './middlelower';
+import middle from './Middle'
 
 
 
@@ -38,40 +34,27 @@ import lower from './middlelower';
                 cardvalue:"",
                 numvalue:'',
                 HOT:"热销卡品",
-                menu: [
-                    {
-                    name: "特色号码"
-                },
-                    {
-                        name: "热销推荐"
-                    }, {
-                        name: "业务链接"
-                    }, {
-                        name: "特惠活动"
-                    }, {
-                        name: "手机专场"
-                    },
-                    {
-                        name: "5G体验"
-                    },
-                    {
-                        name: '火爆卡品',
-                        // property: 1,
-                        // subMenu: [{name: "腾讯王卡"}, {name: "冰淇淋卡"}, {name: "流量王卡"}]
-                    }],
-                card:[
-                    {ifhot:1,
-                    name:"腾讯王卡",
-                    value:"txwk",
-                    src:require("../../../icons/MainPageImg/card_txwk.png")
-                },{name:"阿里宝卡",
-                    value:"albk",
-                    src:require("../../../icons/MainPageImg/card_ali.jpg")
-                },{name:"冰淇淋卡",
-                    value:"bqlk",
-                    src:require("../../../icons/MainPageImg/card_bql.png")
-                },
-                ],
+                // menu: [
+                //     {
+                //     name: "特色号码"
+                // },
+                //     {
+                //         name: "热销推荐"
+                //     }, {
+                //         name: "业务链接"
+                //     }, {
+                //         name: "特惠活动"
+                //     }, {
+                //         name: "手机专场"
+                //     },
+                //     {
+                //         name: "5G体验"
+                //     },
+                //     {
+                //         name: '火爆卡品',
+                //         // property: 1,
+                //         // subMenu: [{name: "腾讯王卡"}, {name: "冰淇淋卡"}, {name: "流量王卡"}]
+                //     }],
                 num:[]
             }
 
@@ -86,7 +69,8 @@ import lower from './middlelower';
             },
         components:{
             NumPool,
-            lower
+            lower,
+            middle
         }
     }
 
@@ -97,11 +81,16 @@ import lower from './middlelower';
   *{
     margin:0 auto;
   }
-
+  div.content{
+    background-color:#F7F7F7 ;
+  }
+  .upper .el-col{
+    border-bottom:1px solid #ff6600;
+  }
 .upper .el-col:hover{
-  cursor: pointer;
-  color: #ff6600;
-}
+   cursor: pointer;
+   color: #ff6600;
+ }
   #app > div > section > div:nth-child(2) > div.upper > div >div{
     margin-top: 45px;
     padding: 10px 0px !important;
@@ -133,56 +122,13 @@ import lower from './middlelower';
     text-align: center;
     padding:10px;
   }
-
   .middle{
     display: flex;
     width: 1200px;
     flex-flow: row;
     justify-content:center;
+    border-top: 20px solid white;
   }
-.middle .card {
-  margin-top: 10px;
-  margin-right: 60px;
-  position: relative;
-  width: 580px;
-  height: 390px;
-}
-.middle .card .hot{
-  margin-top: 40px;
-  float: left;
-  width: 360px;
-  height: 360px;
-}
-
-.middle .card .normal{
-  float: right;
-  width: 200px;
-  height:200px;
-}
-.middle .card .hot:hover,.middle .card .normal:hover{
-  transform: translateY(-1px);
-  transition-duration: 1s;
-  box-shadow: 2px 2px 3px 1px #aaaaaa;
-  overflow: hidden;
-}
-.middle .card div img{
-  width: 100%;
-}
-.middle .hotdecration{
-  width: 360px;
-  padding: 5px;
-  position: absolute;
-  margin-top: 10px;
-  text-align: center;
-  letter-spacing: 5px;
-  height: 30px;
-  background-color: orangered;
-  color: white;
-  font-style: italic;
-  border-radius: 5px 5px 5px 10px/5px 5px 5px 5px;
-  display: flex;
-  justify-content: space-around;
-}
   #app .el-dialog__header{
     text-align: center;
   }

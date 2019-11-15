@@ -48,28 +48,32 @@
     text-align: center;
     padding:10px;
   }
-  .middle .num{
-    border: orange solid 1px;
+   .num{
+    border: #F7F7F7 solid 1px;
     width: 400px;
     height: 389px;
     margin-top: 20px;
     padding: 0;
   }
-  .middle .num .numtitle{
+   .num .numtitle{
     padding: 10px 40px;
     text-align: center;
-    background-color: orange;
-    color: white;
-    font-weight: 300;
+    background-color: #F7F7F7;
+    color: #333333;
+    font-weight: 500;
     line-height: 30px;
     font-size: 30px;
     position: relative;
   }
-  .middle .num .numtitle span{
+   .num .numtitle span{
     font-size: 13px;
     position: absolute;
     right: 10px;
     bottom: 5px;
+  }
+  .num .numpool{
+    border: 1px solid #333333;
+    background-color: white;
   }
   .num .numpool .el-col:hover{
     cursor: pointer;

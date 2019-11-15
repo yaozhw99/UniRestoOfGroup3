@@ -32,4 +32,10 @@
 </script>
 
 <style>
+  .el-carousel-item,.el-carousel__container,.el-carousel {
+    height: 100%;
+  }
+  /*.app{*/
+  /*  background-color: #F7F7F7;*/
+  /*}*/
 </style>

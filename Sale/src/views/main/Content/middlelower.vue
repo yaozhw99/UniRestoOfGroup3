@@ -62,10 +62,12 @@
 <style scoped>
   .middleright div {
     margin: 1px;
-
   }
 .all{
   width: 1200px;
+  border-top: 20px solid white;
+  border-bottom: 20px solid white;
+
 }
   .middle {
     margin: 30px 25px;
@@ -75,8 +77,10 @@
   }
   .all header {
     width: 1200px;
-  text-align: center;
-    margin:10px auto;
+    text-align: center;
+    margin:20px auto;
+    font-size: 30px;
+    color: #333333;
 }
   .middle .middleright {
     margin-top: 10px;
