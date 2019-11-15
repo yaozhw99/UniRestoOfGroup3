@@ -24,41 +24,15 @@
       </div>
        <NumPool ifshow="true" @sendValue="linkorder"></NumPool>
     </div>
-
-<!--    <el-dialog-->
-<!--      title="选择号卡"-->
-<!--      :visible="dialogVisible"-->
-<!--      width="50%"-->
-<!--      :before-close="handleClose">-->
-<!--    <div class="selectcard"><span>请选择你的卡品：</span>-->
-<!--      <el-select v-model="cardvalue" placeholder="请选择" size="medium" >-->
-<!--        <el-option-->
-<!--          v-for="(item,idx) in card"-->
-<!--          :key="item.idx"-->
-<!--          :label="item.name"-->
-<!--          :value="item.value">-->
-<!--          <span style="text-align: center; color: #8492a6; font-size: 13px">{{ item.name }}</span>-->
-<!--        </el-option>-->
-<!--      </el-select>-->
-<!--  </div>-->
-<!--      <div class="selectnum"><span>请选择你的号码： </span><el-input v-model="numvalue" placeholder="请输入内容"></el-input>-->
-<!--      <NumPool @sendValue="dialog" :v-show="numvalue"></NumPool>-->
-<!--      </div>-->
-
-
-<!--      <span slot="footer" class="dialog-footer">-->
-<!--    <el-button @click="dialogVisible = false,handlecancle">取 消</el-button>-->
-<!--    <el-button type="danger" @click="dialogVisible = false">提交订单</el-button>-->
-<!--  </span>-->
-<!--    </el-dialog>-->
-
+<lower></lower>
   </div>
 </template>
 
 
 <script>
 
-import NumPool from './numpool'
+import NumPool from './numpool';
+import lower from './middlelower'
 
 
 
@@ -70,7 +44,6 @@ import NumPool from './numpool'
                 cardvalue:"",
                 numvalue:'',
                 HOT:"热销卡品",
-                dialogVisible:false,
                 shift: [
                     {
                         id: 0,
@@ -106,7 +79,8 @@ import NumPool from './numpool'
                         // property: 1,
                         // subMenu: [{name: "腾讯王卡"}, {name: "冰淇淋卡"}, {name: "流量王卡"}]
                     }],
-                card:[{ifhot:1,
+                card:[
+                    {ifhot:1,
                     name:"腾讯王卡",
                     value:"txwk",
                     src:require("../../../icons/MainPageImg/card_txwk.png")
@@ -123,13 +97,6 @@ import NumPool from './numpool'
 
         },
         methods:{
-            handleClose(done) {
-                this.$confirm('确认关闭？')
-                    .then(()=> {
-                        this.dialogVisible=false;
-                    })
-                    .catch(()=> {});
-            },
             linkorder(item){
                 this.$router.push({name:'order',params:{
                         serialNumber:item[1],
@@ -138,7 +105,8 @@ import NumPool from './numpool'
             }
             },
         components:{
-            NumPool
+            NumPool,
+            lower
         }
     }
 
@@ -149,10 +117,14 @@ import NumPool from './numpool'
 .shift{
   height: 265px;
 }
-  .el-carousel img {
+.shift  .el-carousel img {
     width: 100%;
     height: 100%;
   }
+.upper .el-col:hover{
+  cursor: pointer;
+  color: #ff6600;
+}
   #app > div > section > div:nth-child(2) > div.upper > div >div{
     margin-top: 45px;
     padding: 10px 0px !important;

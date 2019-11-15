@@ -71,7 +71,7 @@
     right: 10px;
     bottom: 5px;
   }
-  .el-col:hover{
+  .num .numpool .el-col:hover{
     cursor: pointer;
     color: #ff6600;
   }
