@@ -24,7 +24,11 @@
       height: {
         type: String,
         default: '500px'
-      }
+      },
+      bjl:[],
+      wopai:[],
+      dixiao:[],
+      liulw:[]
     },
     data() {
       return {
