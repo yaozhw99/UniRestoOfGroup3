@@ -166,7 +166,7 @@
     margin: 0;
     padding: 0;
     font-family: "微软雅黑";
-    /*background-color: #F5F5F5;*/
+    background-color: #F7F7F7;
     color: #333;
     text-align: center;
   }
