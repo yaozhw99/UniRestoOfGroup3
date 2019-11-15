@@ -3,7 +3,9 @@
       <el-container direction="vertical" >
       <CHeader></CHeader>
         <shift></shift>
-      <CContent></CContent>
+        <CproductZq></CproductZq>
+
+
       <CFooter></CFooter>
       </el-container>
     </div>
@@ -14,7 +16,7 @@
   import CContent from './Content/Content';
   import CFooter from './Footer/Footer';
   import shift from './Content/shift'
-
+  import CproductZq from "./Content/CproductZq";
   export default {
         name: "mainPage",
         data() {
@@ -26,7 +28,8 @@
             CHeader,
             CContent,
             CFooter,
-            shift
+            shift,
+            CproductZq
         }
     }
 </script>
