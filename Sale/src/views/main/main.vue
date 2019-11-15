@@ -3,10 +3,10 @@
       <el-container direction="vertical" >
         <CHeader></CHeader>
         <shift></shift>
-        <Cbanner></Cbanner>
+        <CContent></CContent>
+
         <CproductZq></CproductZq>
         <CMobileNew></CMobileNew>
-        <CContent></CContent>
         <CFooter></CFooter>
       </el-container>
     </div>
