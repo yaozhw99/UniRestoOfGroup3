@@ -17,7 +17,7 @@
     <div id="banner">
       <div class="banner-content">
         <ul>
-          <li><a href="#">首页</a></li>
+          <li><a @click="goback">首页</a></li>
           <li><a href="#">靓号专区</a></li>
           <li><a href="#">热销推荐</a></li>
           <li><a href="#">特惠活动</a></li>
@@ -181,6 +181,9 @@
             }
         },
         methods:{
+            goback(){
+                this.$router.push({path:'/index'})
+            },
             changeProduct(idx){
                 this.productList.forEach((item)=>{
                     item.selected=false;
