@@ -200,7 +200,7 @@
 </script>
 
 
-<style>
+<style scoped>
   .el-table
   {
     border:2px solid darkorange;

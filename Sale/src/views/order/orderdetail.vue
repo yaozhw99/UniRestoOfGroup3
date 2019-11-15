@@ -207,6 +207,8 @@
   #app{
     background-color: #f2f2f2;
     height: 1111px;
+    display: flex!important;
+    flex-direction: column!important;
   }
   .main{
     /*height: 100%;*/
