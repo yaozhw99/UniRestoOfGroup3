@@ -8,6 +8,7 @@
           <div class="text1" >
             <h1>{{item.p1}}</h1>
             <p>{{item.p2}}</p>
+            <span>立即购买</span>
           </div>
         </div>
 
@@ -47,12 +48,12 @@
                     {
                         src: require("../../../icons/MainPageImg/4G_top_bg1.jpg"),
                         p1: "300分钟国内语音",
-                        p2: "1000G无限流量"
+                        p2: "40G国内流量"
                     },
                     {
                         src: require("../../../icons/MainPageImg/4G2.jpg"),
-                        p1: "300分钟国内语音",
-                        p2: "1000G无限流量"
+                        p1: "1000分钟国内语音",
+                        p2: "20GB国内流量"
                     }
                 ]
             }
@@ -114,12 +115,15 @@
   height: 100%;
 }
   .tu1:hover img{
-    transition: 2s ease-in-out;
-    transform: scale(1.1);
-    cursor: pointer;
-  }
+      transform: scale(1.1);
+      cursor: pointer;
+    }
 
+  .tu1 img{
+    transition: 2s;
+  }
 .tu1 .text1{
+  cursor: pointer;
   width: 234px;
   height: 100px;
   background-image: url('../../../icons/MainPageImg/4G.png');
@@ -139,12 +143,17 @@
   }
 
   .tu1 .text1 p {
-    height: 25px;
-    line-height: 5px;
+    line-height: 0px;
     font-size: 12px;
-    color: red;
   }
 
+  .tu1 .text1 span{
+    font-size: 12px;
+    border: 1px solid #ff6600;
+    padding: 1px 5px;
+    border-radius: 5px;
+    color: #ff6600;
+  }
 
   .card .cardlower {
     display: flex;
