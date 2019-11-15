@@ -68,13 +68,13 @@
   .middle {
     margin: 30px 25px;
     display: flex;
-    min-width: 1200px;
     flex-flow: row;
     justify-content: space-around;
   }
   .all header {
+    width: 1200px;
   text-align: center;
-    margin:10px;
+    margin:10px auto;
 }
   .middle .middleright {
     margin-top: 10px;

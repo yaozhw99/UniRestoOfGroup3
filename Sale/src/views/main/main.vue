@@ -1,6 +1,6 @@
 <template>
     <div>
-      <el-container direction="vertical">
+      <el-container direction="vertical" width="1200px">
       <CHeader></CHeader>
       <CContent></CContent>
       <CFooter></CFooter>
