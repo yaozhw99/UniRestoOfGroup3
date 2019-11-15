@@ -256,7 +256,7 @@
     }
   }
 </script>
-<style >
+<style scoped>
   .chart{
     /*position: relative;*/
     width: 80%;
