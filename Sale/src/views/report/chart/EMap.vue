@@ -123,7 +123,7 @@
 //          subtext: 'from United Nations, Total population, both sexes combined, as of 1 July (thousands)',
 //          sublink: 'http://esa.un.org/wpp/Excel-Data/population.htm',
           left: 'center',
-          top: 'top',
+          top: '20',
           textStyle: {
             color: '#fff',
             fontSize: '20'
@@ -194,7 +194,7 @@
       this.chart.on('click',(params)=>{
 
       this.city=params.name;
-      console.log(this.city)
+//      console.log(this.city)
       this.emitMapClick();
 //      switch(params.name){
 //        case '广州市':{
