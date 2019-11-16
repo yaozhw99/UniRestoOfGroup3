@@ -32,9 +32,9 @@
   export default {
     data() {
       return {
-        selectMonth: '',
+//        selectMonth: '',
         nomths: [
-          {key: '<-请选择月份->'},
+          {key: '',value:"<-选择全部->"},
           {key: '201911', value: "201911"},
           {key: '201910', value: "201910"},
           {key: '201909', value: "201909"},
@@ -48,7 +48,7 @@
           {key: '201901', value: "201901"}
         ],
         city: [
-          {key: '<-请选择地市->'},
+          {key: '',value:"<-选择全部->"},
           {key: '广州市', value: "广州市"},
           {key: '深圳市', value: "深圳市"},
           {key: '东莞市', value: "东莞市"},
