@@ -5,11 +5,16 @@
          <img src="@/icons/MainPageImg/logo.png"/>
        </div>
        <div class="search">
-         <el-input
-           placeholder="请输入内容"
-           prefix-icon="el-icon-search">
-         </el-input>
-         <span><el-button size="small">搜索</el-button></span>
+         <div>
+           <el-input
+             placeholder="请输入内容"
+             prefix-icon="el-icon-search">
+           </el-input>
+           <span><el-button size="small">搜索</el-button></span>
+         </div>
+         <div class="linkback"><a @click="goback">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录后台管理</a></div>
+
+
        </div>
      </div>
     </el-header>
@@ -24,6 +29,11 @@
 
             return {msg: '头部'}
 
+        },
+        methods:{
+            goback(){
+                this.$router.push({path:'/'})
+            }
         }
 
     }
@@ -35,6 +45,17 @@
 .el-header{
   width: 1200px;
   margin: 20px auto;
+}
+.search{
+  display: flex;
+  flex-direction: column!important;
+
+}
+.linkback{
+  font-size: 14px;
+  color: #7d7d7f;
+  margin-top: 15px;
+  text-align: right;
 }
 .el-header div{
   display: flex;

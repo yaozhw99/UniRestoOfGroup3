@@ -38,7 +38,7 @@
 </script>
 
 
-<style>
+<style scoped>
 
   .shift{
     margin:0px;
@@ -46,6 +46,10 @@
   }
   .shift  .el-carousel img {
     width: 100%;
+    height: 100%;
+  }
+
+  .el-carousel__item,.el-carousel__container,.el-carousel {
     height: 100%;
   }
 </style>

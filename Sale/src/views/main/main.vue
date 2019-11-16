@@ -1,10 +1,14 @@
 <template>
     <div>
       <el-container direction="vertical" >
-      <CHeader></CHeader>
+        <CHeader></CHeader>
         <shift></shift>
-      <CContent></CContent>
-      <CFooter></CFooter>
+        <Discnt></Discnt>
+        <CContent></CContent>
+
+        <CproductZq></CproductZq>
+        <CMobileNew></CMobileNew>
+        <CFooter></CFooter>
       </el-container>
     </div>
 </template>
@@ -14,6 +18,10 @@
   import CContent from './Content/Content';
   import CFooter from './Footer/Footer';
   import shift from './Content/shift'
+  import CproductZq from "./Content/CproductZq";
+  import CMobileNew from "./Content/CMobileNew";
+  import Cbanner from "./Content/Cbanner";
+  import Discnt from "./Content/Discnt";
 
   export default {
         name: "mainPage",
@@ -26,10 +34,21 @@
             CHeader,
             CContent,
             CFooter,
-            shift
+            shift,
+            CproductZq,
+            CMobileNew,
+            Cbanner,
+            Discnt
         }
     }
 </script>
 
 <style>
+  .el-carousel-item,.el-carousel__container,.el-carousel {
+    height: 100%;
+  }
+  /*.app{*/
+  /*  background-color: #F7F7F7;*/
+  /*}*/
+
 </style>
