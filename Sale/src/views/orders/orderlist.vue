@@ -12,7 +12,8 @@
       :fixed="items.fixed"
       :sortable="items.sortable"
       :filters="filterData"
-      :filter-method="filterHandler">
+      :filter-method="filterHandler"
+      :width="width">
     </el-table-column>
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
@@ -159,7 +160,7 @@
           orderColumn: [
             {idd: "OrderID", value: '订单号', fixed: "left", sortable: true, 'sort-by': "OrderID"},
             {idd: 'OrderDate', value: '订单日期', sortable: true},
-            {idd: 'OrderFlag', value: '订单状态'},
+            {idd: 'OrderFlag', value: '订单状态',width:120},
             {idd: 'UserName', value: '用户姓名'},
             {idd: 'Userid', value: '用户id'},
             {idd: 'Idtype', value: '证件类型'},
