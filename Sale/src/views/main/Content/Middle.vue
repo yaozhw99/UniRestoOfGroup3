@@ -31,17 +31,15 @@
                 cardtitle: "热销推荐",
                 card: [
                     {
-                        name: "腾讯王卡",
-                        value: "txwk",
-                        src: require("../../../icons/MainPageImg/card_txwk.png")
-                    }, {
                         name: "冰淇淋卡",
-                        value: "bqlk",
                         src: require("../../../icons/MainPageImg/card_bql.png")
-                    }, {
-                        name: "阿里宝卡",
-                        value: "albk",
-                        src: require("../../../icons/MainPageImg/card_ali.jpg")
+                    },
+                    {
+                        name: "腾讯王卡",
+                        src: require("../../../icons/MainPageImg/card_txwk.jpg")
+                    },{
+                    name:'冰神卡',
+                    src: require("../../../icons/MainPageImg/card_bs.jpg")
                     }
                 ],
                 cardupper: [
@@ -81,6 +79,7 @@
   .card {
     margin-top: 10px;
     margin-right: 60px;
+    padding-left: 10px;
     position: relative;
     width: 580px;
     height: 390px;
@@ -167,15 +166,19 @@
   }
 
   .card .cardlower .normal {
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    margin:20px 5px;
+  }
+  .card .cardlower .normal img{
+    bordder: 1px solid #aaaaaa;
   }
 
-  .card .hot:hover, .card .normal:hover {
-    transform: translateY(-1px);
+  .card .cardlower .normal img:hover {
+    transform: translateY(-3px);
     transition-duration: 1s;
-    box-shadow: 2px 2px 3px 1px #aaaaaa;
+    box-shadow: 1px 1px 7px 1px #aaaaaa;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .card div img {
