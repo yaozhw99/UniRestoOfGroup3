@@ -4,7 +4,7 @@
     <!--查询项-->
 
     <el-select v-model="saleQuery.months">
-      <el-option v-for="item in nomths" :key="item.key" :value="item.key" :label="item.value"></el-option>
+      <el-option v-for="item in months" :key="item.key" :value="item.key" :label="item.value"></el-option>
     </el-select>
     <el-select v-model="saleQuery.city">
       <el-option v-for="item in city" :key="item.key" :value="item.key" :label="item.value"></el-option>
@@ -32,9 +32,9 @@
   export default {
     data() {
       return {
-        selectMonth: '',
-        nomths: [
-          {key: '<-请选择月份->'},
+//        selectMonth: '',
+        months: [
+          {key: '',value:"<-选择全部->"},
           {key: '201911', value: "201911"},
           {key: '201910', value: "201910"},
           {key: '201909', value: "201909"},
@@ -48,7 +48,7 @@
           {key: '201901', value: "201901"}
         ],
         city: [
-          {key: '<-请选择地市->'},
+          {key: '',value:"<-选择全部->"},
           {key: '广州市', value: "广州市"},
           {key: '深圳市', value: "深圳市"},
           {key: '东莞市', value: "东莞市"},
@@ -73,8 +73,8 @@
         ],
         //查询条件
         saleQuery: {
-          nomths: '',
-          city: '广州市'
+          months: '201911',
+          city: ''
         },
         //当前页的部门数据
         pageData: [],
@@ -124,6 +124,10 @@
               return true
             if  (item.epname == this.saleQuery.city)
               return true
+          }
+          else  if ((this.saleQuery.months&&this.saleQuery.city)==0)
+          {
+            return true
           }
         })
         this.pageData = filterData
