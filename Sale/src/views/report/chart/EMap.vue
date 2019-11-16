@@ -194,7 +194,7 @@
       this.chart.on('click',(params)=>{
 
       this.city=params.name;
-      console.log(this.city)
+//      console.log(this.city)
       this.emitMapClick();
 //      switch(params.name){
 //        case '广州市':{

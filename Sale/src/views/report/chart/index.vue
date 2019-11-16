@@ -57,6 +57,7 @@
           activeLj:'激活累计'
         },
         Tabdata:[],
+        resdata:[],
         title1:"各类产品销售情况",
         subtitle1:"",
         title2:"当月销售进度情况",
@@ -108,16 +109,29 @@
     methods:{
       showcity(value){
         this.curCity=value;
-        getList(value).then(res=>{
-          this.Tabdata=res.data;
-        })
-        console.log(this.curCity)
+//        console.log(this.curCity)
+        console.log(this.resdata);
+          for(let i=0;i<this.resdata.length;i++)
+        {
+
+          if (this.resdata[i].city==value){
+            this.Tabdata=this.resdata[i].sale;
+          }
+        }
+        console.log(this.Tabdata)
       }
     },
     mounted(){
       fetchList().then(res=>{
-        console.log(res);
-      this.Tabdata=res.data;
+//        console.log(res);
+
+      for(let i=0;i<res.data.length;i++)
+      {
+        if (res.data[i].city=="广州市"){
+          this.Tabdata=res.data[i].data;
+          this.resdata=res.data;
+        }
+      }
     })
     }
   }
