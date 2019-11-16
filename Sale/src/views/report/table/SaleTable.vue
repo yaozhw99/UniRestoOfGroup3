@@ -125,6 +125,10 @@
             if  (item.epname == this.saleQuery.city)
               return true
           }
+          else  if ((this.saleQuery.months&&this.saleQuery.city)==0)
+          {
+            return true
+          }
         })
         this.pageData = filterData
       }

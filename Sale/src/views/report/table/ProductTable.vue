@@ -116,12 +116,15 @@
           if (item.cycleid == this.saleQuery.months&&item.epname == this.saleQuery.city)
             return true
           }
-          else if(this.saleQuery.months||this.saleQuery.city)
-          {
+          else if(this.saleQuery.months||this.saleQuery.city) {
             if (item.cycleid == this.saleQuery.months)
-            return true
-          if  (item.epname == this.saleQuery.city)
-            return true
+              return true
+            if (item.epname == this.saleQuery.city)
+              return true
+          }
+            else  if ((this.saleQuery.months&&this.saleQuery.city)==0)
+          {
+              return true
           }
         })
         this.pageData = filterData
