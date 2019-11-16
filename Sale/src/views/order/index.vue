@@ -108,11 +108,11 @@
               <tr>
                 <td>姓名：</td>
                 <td>
-                  <input v-model="formData.name" placeholder="身份证姓名" required></input></td>
+                  <input v-model="formData.name" placeholder="请输入身份证姓名" required></input></td>
               </tr>
               <tr>
                 <td>身份证号：</td>
-                <td><input v-model="formData.psptId" placeholder="身份证姓名" required></input></td>
+                <td><input v-model="formData.psptId" placeholder="请输入身份证号码" required></input></td>
               </tr>
               <tr>
                 <td>邮寄地址：</td>
