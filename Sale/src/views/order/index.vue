@@ -193,20 +193,28 @@
                 this.productList[idx].selected=true;
             },
             openuser(){
-                
-                createUser(this.formData).then(res=>{
-                    this.formData.orderId=res.orderId;
+                let form=this.formData;
+                if (form.name==''){this.$notify({title: '表单验证提示', message: '姓名不能为空！',type: 'error',duration: 2000})}
+                else if (form.epcode==''){this.$notify({title: '表单验证提示', message: '号码归属不能为空！',type: 'error',duration: 2000})}
+                else if (form.linkPhone==''){this.$notify({title: '表单验证提示', message: '联系电话不能为空！',type: 'error',duration: 2000})}
+                else if (form.address==''){this.$notify({title: '表单验证提示', message: '邮寄地址不能为空！',type: 'error',duration: 2000})}
+                else if (form.psptId==''){this.$notify({title: '表单验证提示', message: '证件号码不能为空！',type: 'error',duration: 2000})}
+                else {
+                    createUser(this.formData).then(res=>{
+                        this.formData.orderId=res.orderId;
 
-                    this.$notify({
-                        title: 'Success',
-                        message: 'Created Successfully',
-                        type: 'success',
-                        duration: 2000
+                        this.$notify({
+                            title: 'Success',
+                            message: 'Created Successfully',
+                            type: 'success',
+                            duration: 2000
+                        })
+                        setTimeout(()=>{
+                            this.$router.push({name:'orderdetail',params:this.formData})
+                        },2000)
                     })
-                    setTimeout(()=>{
-                        this.$router.push({name:'orderdetail',params:this.formData})
-                    },2000)
-                })
+                }
+
             },
             selectNumber(){
                 this.dialogVisible=true;
