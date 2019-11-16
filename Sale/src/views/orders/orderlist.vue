@@ -2,10 +2,9 @@
 <div>
   <el-table
     :data="orderList"
-    style="width: 100%"
+    style="width: 100%; height: 100%;"
     :row-class-name="tableRowClassName"
-
-    max-height="350">
+    >
 
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd=='OrderFlag'"
@@ -14,7 +13,7 @@
       :sortable="items.sortable"
       :filters="filterData"
       :filter-method="filterHandler"
-      width="100">
+      :width="width">
     </el-table-column>
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
@@ -63,17 +62,20 @@
   </el-dialog>
   <!-- Table -->
   <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
-    <el-table :data="fData">
-      <el-radio :label="3">
-      <el-table-column property="phone" label="联系电话" width="150"></el-table-column>
-      <el-table-column property="name" label="姓名" width="200"></el-table-column>
+    <el-table :data="fData"
+              ref="singleTable"
+              :row-class-name="RowClassName"
+              @current-change="handleCurrentChange"
+              highlight-current-row="true">
+      <el-table-column property="name" label="姓名"></el-table-column>
+      <el-table-column property="region" label="城市"></el-table-column>
       <el-table-column property="address" label="地址"></el-table-column>
-      </el-radio>
-    </el-table>
-    <div slot="footer" class="dialog-footer">
+      <el-table-column property="phone" label="联系电话" ></el-table-column>
+      </el-table>
+    <span slot="footer" class="dialog-footer">
       <el-button @click="dialogTableVisible = false">取 消</el-button>
-      <el-button type="primary" @click="dialogTableVisible = false">确 定</el-button>
-    </div>
+      <el-button type="primary" @click="setCurrent()">确 定</el-button>
+    </span>
   </el-dialog>
 
 </div>
@@ -112,6 +114,7 @@
           //控制模态对话框显示与否
           dialogVisible: false,
           dialogTableVisible: false,
+          RowClassName:'',
 
           //控制等待画面的显示与否
           msg: '',
@@ -157,7 +160,7 @@
           orderColumn: [
             {idd: "OrderID", value: '订单号', fixed: "left", sortable: true, 'sort-by': "OrderID"},
             {idd: 'OrderDate', value: '订单日期', sortable: true},
-            {idd: 'OrderFlag', value: '订单状态'},
+            {idd: 'OrderFlag', value: '订单状态',width:120},
             {idd: 'UserName', value: '用户姓名'},
             {idd: 'Userid', value: '用户id'},
             {idd: 'Idtype', value: '证件类型'},
@@ -194,13 +197,13 @@
         this.orderList = data.data;
 //        console.log(data.data);
         let wldata = Mock.mock({
-            "data|20-30": [{
+            "data|3-6": [{
           'name': "@cname",
           'region': '@city',
               'date': '@date',
-          'adress': '@adress',
+          'address':'@ctitle',
           'delivery': 'false',
-          'phone': '@phone',
+          'phone|13002000000-18920199999':13088888888,
           'wlId':'@id'}]
         });
           this.fData=wldata.data;
@@ -267,7 +270,7 @@
             this.dialogVisible = true;
             this.msg = '用户已签收，等待激活';
           }
-          if (this.orderList[this.rowid].OrderFlag == "订单订单已签收") {
+          if (this.orderList[this.rowid].OrderFlag == "订单已签收") {
             this.dialogVisible = true;
             this.msg = '用户已签收，等待激活';
           }
@@ -289,11 +292,12 @@
           console.log(this.orderList[this.rowid].OrderFlag);
           this.msg='你好，开户成功，准备配送';
             console.log(this.msg);
-            this.dialogVisible = true;
+            this.dialogTableVisible = true;
         }
             },
         commitRowEnd(){
               this.dialogVisible=false;
+              this.dialogTableVisible=false;
         },
         handleClose(done) {
           this.$confirm('确认关闭？')
@@ -302,7 +306,19 @@
             })
             .catch(_ => {
             });
-        }
+        },
+        setCurrent(row) {
+          this.$refs.singleTable.setCurrentRow(row);
+          this.dialogVisible = true;
+          this.msg = '地址已选好，开户后派送';
+          console.log(dialogTableVisible);
+          this.RowClassName='info-row';
+          this.dialogTableVisible = false;
+        },
+        handleCurrentChange(val) {
+          this.currentRow = val;
+        },
+
       }
     }
 
@@ -316,7 +332,9 @@
     border-collapse: collapse;
     background-color: #F7F7F7;
   }
-
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
   .el-table .warning-row {
     background: oldlace;
 
