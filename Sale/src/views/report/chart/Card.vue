@@ -77,11 +77,10 @@
     },
     mounted(){
       var count=this.data1;
-      var timer = setInterval(function(){
-        count++; // 调节速度
-        this.data1=count;
-//        console.log(this.data1)
-      },2000);
+      // var timer = setInterval(function(){
+      //
+      //   console.log(this.data1)
+      // },2000);
 
     }
   }
