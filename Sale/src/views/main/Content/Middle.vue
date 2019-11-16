@@ -5,7 +5,7 @@
     <div class="hotdecration">
       <div class="tu1" v-for="(item,idx) in cardupper" :key="idx">
         <img :src="item.src">
-          <div class="text1" >
+          <div class="text1" @click="linkorder(item.p1)">
             <h1>{{item.p1}}</h1>
             <p>{{item.p2}}</p>
             <span>立即购买</span>
@@ -61,6 +61,12 @@
         }, methods: {
             sendcardvalue(item) {
                 this.$emit("sendcardvalue", item)
+            },
+            linkorder(item){
+               this.$router.push({name:'order',params:{
+                       serialNumber:'',
+                       actionName:item,
+                       productName:'冰淇淋套餐'}})
             }
         }
 
