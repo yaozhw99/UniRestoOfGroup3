@@ -2,7 +2,7 @@
     <el-header>
      <div>
        <div class="logo">
-         <img src="@/icons/MainPageImg/logo.png"/>
+         <img src="@/icons/MainPageImg/logo2.jpg"/>
        </div>
        <div class="search">
          <div>
@@ -42,6 +42,10 @@
 
 
 <style scope>
+  .logo img{
+    width: 200px;
+    height: 58px;
+  }
 .el-header{
   width: 1200px;
   margin: 20px auto;

@@ -32,23 +32,23 @@
   export default {
     data() {
       return {
-        selectMonth: '',
+//        selectMonth: '',
         nomths: [
-          {key: '<-请选择月份->'},
-          {key: 201911, value: "201911"},
-          {key: 201910, value: "201910"},
-          {key: 201909, value: "201909"},
-          {key: 201908, value: "201908"},
-          {key: 201907, value: "201907"},
-          {key: 201906, value: "201906"},
-          {key: 201905, value: "201905"},
-          {key: 201904, value: "201904"},
-          {key: 201903, value: "201903"},
-          {key: 201902, value: "201902"},
-          {key: 201901, value: "201901"}
+          {key: '',value:"<-选择全部->"},
+          {key: '201911', value: "201911"},
+          {key: '201910', value: "201910"},
+          {key: '201909', value: "201909"},
+          {key: '201908', value: "201908"},
+          {key: '201907', value: "201907"},
+          {key: '201906', value: "201906"},
+          {key: '201905', value: "201905"},
+          {key: '201904', value: "201904"},
+          {key: '201903', value: "201903"},
+          {key: '201902', value: "201902"},
+          {key: '201901', value: "201901"}
         ],
         city: [
-          {key: '<-请选择地市->'},
+          {key: '',value:"<-选择全部->"},
           {key: '广州市', value: "广州市"},
           {key: '深圳市', value: "深圳市"},
           {key: '东莞市', value: "东莞市"},
@@ -74,7 +74,7 @@
         //查询条件
         saleQuery: {
           nomths: '',
-          city: ''
+          city: '广州市'
         },
         //当前页的部门数据
         pageData: [],
@@ -105,7 +105,6 @@
           this.saleData1.push(mdata)
         }
       }
-//      this.saleData1.cycleid = '201911';
 //      this.saleQuery.months='201911';
       this.getPageData();
     },
@@ -114,21 +113,20 @@
         let {cycleid, epname} = this.saleData1;
         let filterData = [];
         filterData = this.saleData1.filter((item) => {
-          if (item.cycleid == this.saleQuery.months)
-            return true
-          if  (item.epname == this.saleQuery.city)
-            return true
+          if ((this.saleQuery.months&&this.saleQuery.city))
+          {
+            if (item.cycleid == this.saleQuery.months&&item.epname == this.saleQuery.city)
+              return true
+          }
+          else if(this.saleQuery.months||this.saleQuery.city)
+          {
+            if (item.cycleid == this.saleQuery.months)
+              return true
+            if  (item.epname == this.saleQuery.city)
+              return true
+          }
         })
-//        filterData = this.saleData1.filter((item) => {
-//          if (item.cycleid == this.saleQuery.months)
-//            return true;
-//          if (item.epname == this.saleQuery.city)
-//            return true;
-//          if (item.cycleid == this.saleQuery.months && item.epname == this.saleQuery.city)
-//            return true;
-//        })
         this.pageData = filterData
-
       }
     }
   }
