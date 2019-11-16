@@ -13,14 +13,14 @@
       :sortable="items.sortable"
       :filters="filterData"
       :filter-method="filterHandler"
-      :width="width">
+      >
     </el-table-column>
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
       :label="items.value"
       :fixed="items.fixed"
       :sortable="items.sortable"
-      width="100">
+      >
 
     </el-table-column>
     <el-table-column
@@ -139,7 +139,8 @@
             wlId:0
           },
           rowid: 0,
-          rowFlag: '',
+          count:0,
+          rowFlag:'',
           //全部部门数据
           orderList: [],
           orderColumns: {
@@ -207,6 +208,12 @@
           'wlId':'@id'}]
         });
           this.fData=wldata.data;
+//        setInterval(function(){
+////          count++; // 调节速度
+//          if (this.orderList[].OrderFlag == "订单配送中")
+//            this.orderList[this.rowid].OrderFlag = "订单已签收";
+//
+//                },5000);
         },
 
       computed: {
@@ -266,7 +273,7 @@
             this.dialogVisible = true;
             this.msg = '用户已激活';
           }
-          if (this.orderList[this.rowid].OrderFlag == "订单订单已签收") {
+          if (this.orderList[this.rowid].OrderFlag == "订单已签收") {
             this.dialogVisible = true;
             this.msg = '用户已签收，等待激活';
           }
