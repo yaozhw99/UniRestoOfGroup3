@@ -4,7 +4,7 @@
     <!--查询项-->
 
     <el-select v-model="saleQuery.months">
-      <el-option v-for="item in nomths" :key="item.key" :value="item.key" :label="item.value"></el-option>
+      <el-option v-for="item in months" :key="item.key" :value="item.key" :label="item.value"></el-option>
     </el-select>
     <el-select v-model="saleQuery.city">
       <el-option v-for="item in city" :key="item.key" :value="item.key" :label="item.value"></el-option>
@@ -28,12 +28,12 @@
 <script>
   import mock from 'mockjs'
 
+
   export default {
     data() {
       return {
 //        selectMonth: '',
-
-        nomths: [
+        months: [
           {key: '',value:"<-选择全部->"},
           {key: '201911', value: "201911"},
           {key: '201910', value: "201910"},
@@ -73,8 +73,8 @@
         ],
         //查询条件
         saleQuery: {
-          nomths: '',
-          city: '广州市'
+          months: '201911',
+          city: ''
         },
         //当前页的部门数据
         pageData: [],
