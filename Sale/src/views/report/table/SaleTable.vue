@@ -29,12 +29,13 @@
 <script>
   import mock from 'mockjs'
 
-
   export default {
     data() {
       return {
-        selectMonth:'',
+        selectMonth: '',
         nomths: [
+          {key: '<-请选择月份->'},
+          {key: 201911, value: "201911"},
           {key: 201910, value: "201910"},
           {key: 201909, value: "201909"},
           {key: 201908, value: "201908"},
@@ -44,11 +45,10 @@
           {key: 201904, value: "201904"},
           {key: 201903, value: "201903"},
           {key: 201902, value: "201902"},
-          {key: 201901, value: "201901"},
-          {key: 201812, value: "201812"},
-          {key: 201811, value: "201811"}
+          {key: 201901, value: "201901"}
         ],
         city: [
+          {key: '<-请选择地市->'},
           {key: '广州市', value: "广州市"},
           {key: '深圳市', value: "深圳市"},
           {key: '东莞市', value: "东莞市"},
@@ -73,52 +73,65 @@
         ],
         //查询条件
         saleQuery: {
-          nomths: 201910,
+          nomths: '',
           city: ''
         },
         //当前页的部门数据
         pageData: [],
         //全部部门数据
-        saleData: []
+        saleData: [],
+        saleData1: []
       }
     },
     mounted() {
-      let mdata = mock.mock({
-        "result": 1,
-        "data|21": [{
-          "cycleid|+1": ['201811', '201812', '201901', '201902', '201903', '201904', '201905', '201906', '201907', '201908', '201909', '201910'],
-          "epname|+1": ["广州市", "深圳市", "东莞市", "佛山市", "珠海市", "中山市", "江门市", "惠州市", "揭阳市", "汕头市", "湛江市", "清远市", "肇庆市", "云浮市", "韶关市", "梅州市", "河源市", "茂名市", "阳江市", "汕尾市", "潮州市"],
-          "saleBy|9600-10000": 9900,
-          "saleLj|190000-250000": 200000,
-          "activeBy|9000-9600": 9200,
-          "activeSy|8000-12000": 9000,
-          "activeLj|160000-190000": 180000
+//      let rs = [];
+      let citys = ["广州市", "深圳市", "东莞市", "佛山市", "珠海市", "中山市", "江门市", "惠州市", "揭阳市", "汕头市", "湛江市", "清远市", "肇庆市", "云浮市", "韶关市", "梅州市", "河源市", "茂名市", "阳江市", "汕尾市", "潮州市"];
+      for (let i = 1; i < 12; i++) {
+        for (let j = 0; j < citys.length; j++) {
+          let mdata = mock.mock({
+            "epname": citys[j],
+            "saleBy|9600-10000": 9900,
+            "saleLj|190000-250000": 200000,
+            "activeBy|9000-9600": 9200,
+            "activeSy|8000-12000": 9000,
+            "activeLj|160000-190000": 180000
+          });
+          if (i <= 9)
+            mdata.cycleid = "20190" + i;
+          else
+            mdata.cycleid = "2019" + i;
+          mdata.activeHb = Math.round((mdata.activeBy - mdata.activeSy) / mdata.activeSy * 100, 2) + '%';
+          mdata.activeZb = Math.round(mdata.activeBy / mdata.saleBy * 100, 2) + '%';
+          this.saleData1.push(mdata)
         }
-        ]
-      });
-      for (let i = 0; i < mdata.data.length; i++) {
-        let res = mdata.data[i];
-        res.activeHb = Math.round((res.activeBy - res.activeSy) / res.activeSy * 100, 2) + '%';
-        res.activeZb = Math.round(res.activeBy / res.saleBy * 100, 2) + '%';
       }
-      this.saleData = mdata.data;
+//      this.saleData1.cycleid = '201911';
+//      this.saleQuery.months='201911';
       this.getPageData();
     },
-
     methods: {
       getPageData: function () {
-        let {cycleid} = this.saleData;
+        let {cycleid, epname} = this.saleData1;
         let filterData = [];
-        filterData = this.saleData.filter((item )=> {
-          if(item.cycleid = this.saleQuery.months )
-            return true;
+        filterData = this.saleData1.filter((item) => {
+          if (item.cycleid == this.saleQuery.months)
+            return true
+          if  (item.epname == this.saleQuery.city)
+            return true
         })
+//        filterData = this.saleData1.filter((item) => {
+//          if (item.cycleid == this.saleQuery.months)
+//            return true;
+//          if (item.epname == this.saleQuery.city)
+//            return true;
+//          if (item.cycleid == this.saleQuery.months && item.epname == this.saleQuery.city)
+//            return true;
+//        })
         this.pageData = filterData
-      }
 
+      }
     }
   }
-
 </script>
 <style>
 
