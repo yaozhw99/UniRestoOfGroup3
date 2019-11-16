@@ -17,7 +17,7 @@
     <div id="banner">
       <div class="banner-content">
         <ul>
-          <li><a href="#">首页</a></li>
+          <li><a @click="goback">首页</a></li>
           <li><a href="#">靓号专区</a></li>
           <li><a href="#">热销推荐</a></li>
           <li><a href="#">特惠活动</a></li>
@@ -181,6 +181,9 @@
             }
         },
         methods:{
+            goback(){
+                this.$router.push({path:'/index'})
+            },
             changeProduct(idx){
                 this.productList.forEach((item)=>{
                     item.selected=false;
@@ -234,172 +237,176 @@
 </script>
 
 <style scoped>
+  #app{
+    display: flex!important;
+    flex-direction: column!important;
+  }
   #price{
-    color: orange;
-    font-size: 30px;
-    font-weight: bolder;
+    color: orange!important;
+    font-size: 30px!important;
+    font-weight: bolder!important;
   }
   #table1{
-    width: 100%;
+    width: 100%!important;
   }
   #table1 tr{
-    height: 40px;
+    height: 40px!important;
   }
   .banner-right input{
-    width:300px;
+    width:300px!important;
   }
   .ccmain {
-    width: 100%;
-    height:500px;
-    margin-left: 10px;
+    width: 100%!important;
+    height:500px!important;
+    margin-left: 10px!important;
   }
   .ccmain input,.ccmain select {
-    width:300px;
-    height: 30px;
-    border-radius: 5px;
+    width:300px!important;
+    height: 30px!important;
+    border-radius: 5px!important;
   }
   .ccmain .title {
-    font-size: 28px;
-    font-family: 隶书;
-    font-weight: bold;
-    color: #7d7d7f;
-    margin:10px 0 0 10px;
+    font-size: 28px!important;
+    font-family: 隶书!important;
+    font-weight: bold!important;
+    color: #7d7d7f!important;
+    margin:10px 0 0 10px!important;
   }
   .ccmain img {
-    width: 18px;
+    width: 18px!important;
 
   }
   .content {
-    width: 1200px;
-    margin: 0 auto;
+    width: 1200px!important;
+    margin: 0 auto!important;
     padding: 30px;
-    border: 1px solid #c0ccda;
+    border: 1px solid #c0ccda!important;
   }
   .cheader{
-    border-bottom: 1px solid #e6e6e6;
-    height: 30px;
-    width: 100%;
+    border-bottom: 1px solid #e6e6e6!important;
+    height: 30px!important;
+    width: 100%!important;
   }
   .cheader-left {
-    font-family: 黑体;
-    font-size: 20px;
-    font-weight: bolder;
+    font-family: 黑体!important;
+    font-size: 20px!important;
+    font-weight: bolder!important;
   }
   .ccontent{
-    width: 100%;
-    margin-top: 10px;
-    display: flex;
+    width: 100%!important;
+    margin-top: 10px!important;
+    display: flex!important;
   }
   .ccleft{
-    width: 330px;
-    height: 500px;
+    width: 330px!important;
+    height: 500px!important;
   }
   .ccleft_box {
-    margin:10px auto;
-    border: 1px solid #f2f2f2;
-    height: 400px;
-    border-top: 3px solid orange;
-    width: 280px;
-    border-radius: 10px;
-    box-shadow: 1px 5px 5px #8c939d;
+    margin:10px auto!important;
+    border: 1px solid #f2f2f2!important;
+    height: 400px!important;
+    border-top: 3px solid orange!important;
+    width: 280px!important;
+    border-radius: 10px!important;
+    box-shadow: 1px 5px 5px #8c939d!important;
   }
   .ccleft_box img {
-    width: 95%;
-    margin-left: 6px;
-    margin-top: 10px;
+    width: 95%!important;
+    margin-left: 6px!important;
+    margin-top: 10px!important;
 
   }
   .ccleft_title {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 25px;
-    font-weight: bold;
-    color: #8c939d;
-    text-align: center;
-    width: 100%;
-    display: block;
-    margin-top: 5px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif!important;
+    font-size: 25px!important;
+    font-weight: bold!important;
+    color: #8c939d!important;
+    text-align: center!important;
+    width: 100%!important;
+    display: block!important;
+    margin-top: 5px!important;
   }
   .banner2 {
-    width: 100%;
-    height: 40px;
-    background-color: #f2f2f2;
+    width: 100%!important;
+    height: 40px!important;
+    background-color: #f2f2f2!important;
   }
   #banner{
-    width: 100%;
-    height: 60px;
-    border-bottom: 1px solid #7d7d7f;
-    background-color: white;
+    width: 100%!important;
+    height: 60px!important;
+    border-bottom: 1px solid #7d7d7f!important;
+    background-color: white!important;
   }
   #banner .banner-content {
-    width: 1200px;
-    height: 60px;
-    display: flex;
-    margin: 0 auto;
+    width: 1200px!important;
+    height: 60px!important;
+    display: flex!important;
+    margin: 0 auto!important;
   }
   #banner ul{
-    display: flex;
-    width: 1200px;
-    height: 100%;
-    line-height: 60px;
-    margin:0 auto;
-    padding: 0;
+    display: flex!important;
+    width: 1200px!important;
+    height: 100%!important;
+    line-height: 60px!important;
+    margin:0 auto!important;
+    padding: 0!important;
 
   }
   #banner ul li{
-    text-decoration: none;
-    list-style: none;
-    margin-right: 50px;
-    font-size: 18px;
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    text-decoration: none!important;
+    list-style: none!important;
+    margin-right: 50px!important;
+    font-size: 18px!important;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif!important;
   }
   #banner .banner-right {
-    float: right;
-    width: 520px;
+    float: right!important;
+    width: 520px!important;
   }
   #banner .banner-right .el-input {
-    margin-top:10px;
+    margin-top:10px!important;
   }
   #page-top{
-    background-color: #666666;
-    color: #f2f2f2;
-    line-height: 40px;
-    width: 100%;
-    height: 40px;
+    background-color: #666666!important;
+    color: #f2f2f2!important;
+    line-height: 40px!important;
+    width: 100%!important;
+    height: 40px!important;
 
   }
   #page-top>div{
-    width: 1200px;
-    margin: 0 auto;
+    width: 1200px!important;
+    margin: 0 auto!important;
   }
   #page-top2{
-    width:1200px;
-    height: 60px;
-    margin: 30px auto 10px;
+    width:1200px!important;
+    height: 60px!important;
+    margin: 30px auto 10px!important;
   }
 
   #page-top-left{
-    float: left;
+    float: left!important;
   }
   #page-top img{
-    height: 30px;
-    width: 30px;
-    margin-top: 5px;
+    height: 30px!important;
+    width: 30px!important;
+    margin-top: 5px!important;
 
   }
   .wangt{
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    margin-top: 0;
+    display: inline-block!important;
+    height: 40px!important;
+    line-height: 40px!important;
+    margin-top: 0!important;
   }
   #page-top-right{
-    float: right;
+    float: right!important;
   }
   .selectcard>span,.selectnum>span{
-    margin-right: 10px;
-    line-height: 26px;
-    font-size:18px ;
-    margin-bottom: 20px;
+    margin-right: 10px!important;
+    line-height: 26px!important;
+    font-size:18px !important;
+    margin-bottom: 20px!important;
   }
 
 </style>
