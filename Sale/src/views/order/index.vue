@@ -48,84 +48,86 @@
         </div>
         <div class="ccmain">
           <div class="title">填写开户资料</div>
-          <table id="table1">
-            <tr>
-              <td>价格：</td>
-              <td><span id="price">￥50.00</span></td>
-            </tr>
-            <tr>
-              <td>商品评价：</td>
-              <td>
-                <img src="@/icons/start.png" alt="">
-                <img src="@/icons/start.png" alt="">
-                <img src="@/icons/start.png" alt="">
-                <img src="@/icons/start.png" alt="">
-                <img src="@/icons/start.png" alt="">
-                <a style="color: blue;">(已有50人评价)</a>
-              </td>
-            </tr>
-            <tr v-if="acceptParams.productName">
-              <td>商品名称：</td>
-              <td>
-                {{acceptParams.productName}}
-              </td>
-            </tr>
-            <tr v-if="!acceptParams.productName">
-              <td>选择产品：</td>
-              <td>
-                <i v-for="(item,idx) in productList" style="margin-right: 5px;">
-                  <el-tag size="small" effect="light"  style="cursor: pointer" :type="item.selected?'warning':'info'" @click="changeProduct(idx)">{{item.name}}</el-tag>
-                </i>
+          <form>
+            <table id="table1">
+              <tr>
+                <td>价格：</td>
+                <td><span id="price">￥50.00</span></td>
+              </tr>
+              <tr>
+                <td>商品评价：</td>
+                <td>
+                  <img src="@/icons/start.png" alt="">
+                  <img src="@/icons/start.png" alt="">
+                  <img src="@/icons/start.png" alt="">
+                  <img src="@/icons/start.png" alt="">
+                  <img src="@/icons/start.png" alt="">
+                  <a style="color: blue;">(已有50人评价)</a>
+                </td>
+              </tr>
+              <tr v-if="acceptParams.productName">
+                <td>商品名称：</td>
+                <td>
+                  {{acceptParams.productName}}
+                </td>
+              </tr>
+              <tr v-if="!acceptParams.productName">
+                <td>选择产品：</td>
+                <td>
+                  <i v-for="(item,idx) in productList" style="margin-right: 5px;">
+                    <el-tag size="small" effect="light"  style="cursor: pointer" :type="item.selected?'warning':'info'" @click="changeProduct(idx)">{{item.name}}</el-tag>
+                  </i>
 
-              </td>
-            </tr>
-            <tr v-if="acceptParams.actionName">
-              <td>所选活动：</td>
-              <td>
-                {{acceptParams.actionName}}
-              </td>
-            </tr>
-            <tr>
-              <td>所选号码：</td>
-              <td>
-                {{acceptParams.serialNumber}}    <a style="color: blue;" @click="selectNumber">(选号)</a>
-              </td>
-            </tr>
-            <tr>
-              <td>号码归属：</td>
-              <td>
-                <select v-model="formData.epcode" placeholder="请选择" style="width:300px" required>
-                  <option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>姓名：</td>
-              <td>
-                <input v-model="formData.name" placeholder="身份证姓名" required></input></td>
-            </tr>
-            <tr>
-              <td>身份证号：</td>
-              <td><input v-model="formData.psptId" placeholder="身份证姓名" required></input></td>
-            </tr>
-            <tr>
-              <td>邮寄地址：</td>
-              <td><input v-model="formData.address" placeholder="请输入邮寄地址" required></input></td>
-            </tr>
-            <tr>
-              <td>联系电话：</td>
-              <td><input v-model="formData.linkPhone" placeholder="请输入联系电话" required></input></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td><el-button type="warning" @click="openuser">确定</el-button></td>
-            </tr>
-          </table>
+                </td>
+              </tr>
+              <tr v-if="acceptParams.actionName">
+                <td>所选活动：</td>
+                <td>
+                  {{acceptParams.actionName}}
+                </td>
+              </tr>
+              <tr>
+                <td>所选号码：</td>
+                <td>
+                  {{acceptParams.serialNumber}}    <a style="color: blue;" @click="selectNumber">(选号)</a>
+                </td>
+              </tr>
+              <tr>
+                <td>号码归属：</td>
+                <td>
+                  <select v-model="formData.epcode" placeholder="请选择" style="width:300px" required>
+                    <option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>姓名：</td>
+                <td>
+                  <input v-model="formData.name" placeholder="身份证姓名" required></input></td>
+              </tr>
+              <tr>
+                <td>身份证号：</td>
+                <td><input v-model="formData.psptId" placeholder="身份证姓名" required></input></td>
+              </tr>
+              <tr>
+                <td>邮寄地址：</td>
+                <td><input v-model="formData.address" placeholder="请输入邮寄地址" required></input></td>
+              </tr>
+              <tr>
+                <td>联系电话：</td>
+                <td><input v-model="formData.linkPhone" type="tel" placeholder="请输入联系电话" required="required"></input></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><el-button type="warning" @click="openuser">确定</el-button></td>
+              </tr>
+            </table>
+          </form>
         </div>
       </div>
     </div>
@@ -191,6 +193,7 @@
                 this.productList[idx].selected=true;
             },
             openuser(){
+                
                 createUser(this.formData).then(res=>{
                     this.formData.orderId=res.orderId;
 
@@ -255,6 +258,7 @@
   .banner-right input{
     width:300px!important;
   }
+  .error-message{color:red; font-size:12px;text-indent:108px;}
   .ccmain {
     width: 100%!important;
     height:500px!important;
