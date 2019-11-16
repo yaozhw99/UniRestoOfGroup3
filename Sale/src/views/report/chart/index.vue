@@ -128,7 +128,7 @@
       for(let i=0;i<res.data.length;i++)
       {
         if (res.data[i].city=="广州市"){
-          this.Tabdata=res.data[i].data;
+          this.Tabdata=res.data[i].sale;
           this.resdata=res.data;
         }
       }
