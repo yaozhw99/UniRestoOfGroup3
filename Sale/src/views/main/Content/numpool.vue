@@ -82,6 +82,7 @@
   .numpool .el-row{
     margin:  0  !important;
     padding: 0;
+
   }
   /*.numpool .el-row .el-col:nth-child(2n+1){*/
   /*  border-right: 1px solid gray;*/
@@ -95,7 +96,7 @@
   .numpool .el-row .el-col{
     font-size: 14px;
     letter-spacing: 1px;
-    line-height: 22px;
+    height: 39px;
   }
   .el-col:hover{
     cursor: pointer;

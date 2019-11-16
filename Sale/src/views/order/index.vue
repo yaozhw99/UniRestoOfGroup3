@@ -10,7 +10,7 @@
     </div>
     <div id="page-top2">
       <div><a href="#">
-        <img src="@/icons/uni-logo.png">
+        <img src="@/icons/MainPageImg/logo2.jpg" style="width: 200px;height: 58px;"/>
       </a>
       </div>
     </div>

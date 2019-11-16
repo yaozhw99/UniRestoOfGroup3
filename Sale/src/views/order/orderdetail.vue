@@ -12,7 +12,7 @@
 
       <div id="page-top2">
         <div><a href="#">
-          <img src="@/icons/uni-logo.png">
+          <img src="@/icons/MainPageImg/logo2.jpg" style="width: 200px;height: 58px;"/>
         </a>
         </div>
       </div>
@@ -47,7 +47,7 @@
 
           </ul>
         </div>
-        <div class="body1">
+        <div class="body1" @click="nextVal">
           <div class="left">
             <div id="orderNo">订单号:{{formData.orderId}}</div>
             <div id="orderState">{{state[realState]}}</div>
@@ -179,24 +179,32 @@
             this.formData.orderId=this.$route.params.orderId;
             this.realState=this.formData.orderState;
             this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
-            setTimeout(()=>{
-                this.realState=2;
-                this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})
-                setTimeout(()=>{
-                    this.realState=3;
-                    this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});
-                    setTimeout(()=>{
-                        this.realState=4;
-                        this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});
-                    },15000)
-                },5000)
-            },5000)
+            // setTimeout(()=>{
+            //     this.realState=2;
+            //     this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})
+            //     setTimeout(()=>{
+            //         this.realState=3;
+            //         this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});
+            //         setTimeout(()=>{
+            //             this.realState=4;
+            //             this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});
+            //         },15000)
+            //     },5000)
+            // },5000)
         },
         components:{
             Footer
         },methods:{
             goback(){
                 this.$router.push({path:'/index'})
+            },
+            nextVal(){
+                if(this.realState<4) {
+                    this.realState++;
+                    if(this.realState==2) {this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})}
+                    else if (this.realState==3) {this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});}
+                    else if (this.realState==4) {this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});}
+                }
             }
         }
     }
