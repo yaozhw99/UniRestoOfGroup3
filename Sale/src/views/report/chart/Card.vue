@@ -80,7 +80,7 @@
       var timer = setInterval(function(){
         count++; // 调节速度
         this.data1=count;
-        console.log(this.data1)
+//        console.log(this.data1)
       },2000);
 
     }
