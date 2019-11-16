@@ -117,6 +117,7 @@ import middle from './Middle'
   .middle{
     display: flex;
     width: 1200px;
+    height: 430px;
     flex-flow: row;
     justify-content:center;
     border-top: 20px solid white;

@@ -13,14 +13,14 @@
       :sortable="items.sortable"
       :filters="filterData"
       :filter-method="filterHandler"
-      >
+      width="100">
     </el-table-column>
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
       :label="items.value"
       :fixed="items.fixed"
       :sortable="items.sortable"
-      >
+      :width="items.width">
 
     </el-table-column>
     <el-table-column
@@ -61,20 +61,20 @@
   </span>
   </el-dialog>
   <!-- Table -->
-  <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+  <el-dialog title="开户已成功，请选择收货地址" :visible.sync="dialogTableVisible">
     <el-table :data="fData"
               ref="singleTable"
               :row-class-name="RowClassName"
               @current-change="handleCurrentChange"
-              highlight-current-row="true">
+              highlight-current-row>
       <el-table-column property="name" label="姓名"></el-table-column>
       <el-table-column property="region" label="城市"></el-table-column>
       <el-table-column property="address" label="地址"></el-table-column>
       <el-table-column property="phone" label="联系电话" ></el-table-column>
       </el-table>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="dialogTableVisible = false">取 消</el-button>
-      <el-button type="primary" @click="setCurrent()">确 定</el-button>
+      <el-button @click="dialogTableVisible=false">取 消</el-button>
+      <el-button type="primary" @click="commitRowEnd()">确 定</el-button>
     </span>
   </el-dialog>
 
@@ -113,7 +113,7 @@
 
           //控制模态对话框显示与否
           dialogVisible: false,
-          dialogTableVisible: false,
+          dialogTableVisible:false,
           RowClassName:'',
 
           //控制等待画面的显示与否
@@ -139,8 +139,7 @@
             wlId:0
           },
           rowid: 0,
-          count:0,
-          rowFlag:'',
+          rowFlag: true,
           //全部部门数据
           orderList: [],
           orderColumns: {
@@ -159,16 +158,16 @@
             detail: '订单备注'
           },
           orderColumn: [
-            {idd: "OrderID", value: '订单号', fixed: "left", sortable: true, 'sort-by': "OrderID"},
-            {idd: 'OrderDate', value: '订单日期', sortable: true},
+            {idd: "OrderID", value: '订单号', fixed: "left", sortable: true},
+            {idd: 'OrderDate', value: '订单日期', sortable: true,width:120},
             {idd: 'OrderFlag', value: '订单状态',width:120},
             {idd: 'UserName', value: '用户姓名'},
             {idd: 'Userid', value: '用户id'},
             {idd: 'Idtype', value: '证件类型'},
-            {idd: 'Idnumber', value: '证件号码', resizable: "true"},
+            {idd: 'Idnumber', value: '证件号码', resizable: true},
             {idd: 'ProductId', value: '产品id'},
             {idd: 'ProductName', value: '产品名称'},
-            {idd: 'FirstMonthfeetype', value: '首月费用模式'},
+            {idd: 'FirstMonthfeetype', value: '首月费用'},
             {idd: 'fee', value: '应收费用'},
             {idd: 'UserFlag', value: '用户状态'},
             {idd: 'detail', value: '订单备注'}
@@ -208,12 +207,6 @@
           'wlId':'@id'}]
         });
           this.fData=wldata.data;
-//        setInterval(function(){
-////          count++; // 调节速度
-//          if (this.orderList[].OrderFlag == "订单配送中")
-//            this.orderList[this.rowid].OrderFlag = "订单已签收";
-//
-//                },5000);
         },
 
       computed: {
@@ -289,22 +282,41 @@
           if (this.orderList[this.rowid].OrderFlag == "订单已开户")
           {
             this.dialogVisible = true;
-            this.orderList[this.rowid].OrderFlag = "订单配送中";
-            console.log(this.orderList[this.rowid].OrderFlag);
+
             this.msg='物流公司已经取单，配送';
           }
           if (this.orderList[this.rowid].OrderFlag == "订单预订")
           {
-            this.orderList[this.rowid].OrderFlag = "订单已开户";
-          console.log(this.orderList[this.rowid].OrderFlag);
+
           this.msg='你好，开户成功，准备配送';
-            console.log(this.msg);
+
             this.dialogTableVisible = true;
         }
             },
         commitRowEnd(){
+
+          if (this.orderList[this.rowid].OrderFlag == "订单已开户")
+          {
+            this.orderList[this.rowid].OrderFlag = "订单配送中";
+          }
+          else
+          if (this.orderList[this.rowid].OrderFlag == "订单预订")
+          {
+            this.orderList[this.rowid].OrderFlag = "订单已开户";
+          }
               this.dialogVisible=false;
               this.dialogTableVisible=false;
+//          setTimeout(()=>{
+//            this.count++; // 调节速度
+//
+//            for (let i = 0; i < this.orderList.length; i++) {
+//
+//              if (this.rowFlag && this.orderList[i].OrderFlag == "订单配送中")
+//              {this.orderList[i].OrderFlag = "订单已签收";
+//                this.rowFlag=false;
+//                console.log(i);}
+//            }
+//          },1000);
         },
         handleClose(done) {
           this.$confirm('确认关闭？')
@@ -318,14 +330,14 @@
           this.$refs.singleTable.setCurrentRow(row);
           this.dialogVisible = true;
           this.msg = '地址已选好，开户后派送';
-          console.log(dialogTableVisible);
+
           this.RowClassName='info-row';
           this.dialogTableVisible = false;
         },
         handleCurrentChange(val) {
           this.currentRow = val;
-        },
 
+        }
       }
     }
 

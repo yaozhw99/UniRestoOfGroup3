@@ -9,7 +9,8 @@
           <div class="card-panel-text">
            订单量
           </div>
-          <count-to  :start-val="0" :end-val="104092" :duration="2600" class="card-panel-num" />
+          <!--<count-to  :start-val="0" :end-val="totaldata" :duration="2600" class="card-panel-num" />-->
+          <p style="color: white;font-size: 20px">{{totaldata}}</p>
         </div>
       </div>
     </el-col>
@@ -22,7 +23,8 @@
           <div class="card-panel-text">
             发货量
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <!--<count-to :start-val="0" :end-val="datafahuo" :duration="3000" class="card-panel-num" />-->
+          <p style="color: white;font-size: 20px">{{datafahuo}}</p>
         </div>
       </div>
     </el-col>
@@ -35,8 +37,8 @@
           <div class="card-panel-text">
             签收量
           </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
-          <!--<input type="text" v-model="data1"/>-->
+          <!--<count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />-->
+          <p style="color: white;font-size: 20px">{{dataqianshou}}</p>
         </div>
       </div>
     </el-col>
@@ -50,7 +52,8 @@
           <div class="card-panel-text">
             激活量
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <!--<count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />-->
+          <p style="color: white;font-size: 20px">{{dataactive}}</p>
         </div>
       </div>
     </el-col>
@@ -64,7 +67,10 @@
     prop:['Sale'],
     data(){
       return {
-        data1:4500
+//        datatotal:4500,
+        datafahuo:81212,
+        dataqianshou:9280,
+        dataactive:13600
       }
     },
     components: {
@@ -76,12 +82,26 @@
       }
     },
     mounted(){
-      var count=this.data1;
-      // var timer = setInterval(function(){
-      //
-      //   console.log(this.data1)
-      // },2000);
 
+      var flag=81212;
+      var timer = setInterval(()=>{
+        flag++;
+        this.datafahuo=flag;
+        console.log(this.datafahuo)
+      },2000);
+
+      var timer_qianshou = setInterval(()=>{
+      this.datafahuo=this.datafahuo-1;
+      this.dataqianshou+=1;
+    },3000);
+      var timer_active = setInterval(()=>{
+        this.dataactive=this.dataactive+1;
+    },4000);
+    },
+    computed:{
+      totaldata(){
+        return this.datafahuo+this.dataqianshou;
+      }
     }
   }
 </script>

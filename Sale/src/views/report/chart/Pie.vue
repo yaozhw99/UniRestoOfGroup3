@@ -58,7 +58,7 @@
             formatter: '{a} <br/>{b} : {c} ({d}%)'
           },
           title: {
-            text: '全省Top4销售量',
+            text: this.title,
             x: 'center',
             top: '0',
             textStyle: {

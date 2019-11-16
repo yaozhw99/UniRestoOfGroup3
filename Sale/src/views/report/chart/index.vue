@@ -5,8 +5,8 @@
       <card ></card>
     </div>
     <div class="class-container pie-container" style="height: 300px;width: 100%">
-      <pie :pdata="data1"  height="300px"></pie>
-      <pie :pdata="data2"  height="300px"></pie>
+      <pie :pdata="data1" :title="title1" height="300px"></pie>
+      <pie :pdata="data2" :title="title2" height="300px"></pie>
       <SmallBar :pdata="data3"  height="300px"></SmallBar>
     </div>
     <div class="map-container">
