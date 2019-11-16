@@ -12,8 +12,7 @@
       :fixed="items.fixed"
       :sortable="items.sortable"
       :filters="filterData"
-      :filter-method="filterHandler"
-      width="100">
+      :filter-method="filterHandler">
     </el-table-column>
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
@@ -201,7 +200,7 @@
           'name': "@cname",
           'region': '@city',
               'date': '@date',
-          'address10-20':'@ctitle',
+          'address':'@ctitle',
           'delivery': 'false',
           'phone|13002000000-18920199999':13088888888,
           'wlId':'@id'}]
@@ -317,8 +316,8 @@
         },
         handleCurrentChange(val) {
           this.currentRow = val;
+        },
 
-        }
       }
     }
 

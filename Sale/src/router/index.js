@@ -18,6 +18,7 @@ import reportRouter from './modules/report';
 import rtableRouter from './modules/report-table';
 import ordersRouter from '@/router/modules/orders'
 
+
 import orderRouter from "@/router/modules/order";
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -213,11 +214,11 @@ export const asyncRoutes = [
         path: 'orderlist',
         component: () => import('@/views/orders/orderlist'),
         name: 'OsList',
-        meta: { title: '订单列表', icon: 'orderlist' }
+        meta: { title: '订单列表', icon: 'list' }
       },
       {
         path: 'create',
-        component: () => import('@/views/orders/create'),
+        component: () => import('@/views/orders/list'),
         name: 'CreateOrders',
         meta: { title: '订单新建', icon: 'edit'}
       }
