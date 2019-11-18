@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Header :if-banner="true"></Header>
     <div class="content">
       <div class="cheader">
         <span class="cheader-left">靓号订单</span>
@@ -173,14 +173,15 @@
                         this.formData.orderId=res.orderId;
                         console.log(this.formData);
                         this.$notify({
-                            title: 'Success',
-                            message: 'Created Successfully',
+                            title: '成功提示！',
+                            message: '订单提交成功！',
                             type: 'success',
-                            duration: 2000
+                            duration: 500
                         })
                         setTimeout(()=>{
+                            sessionStorage.formData=JSON.stringify(this.formData);
                             this.$router.push({name:'orderdetail',params:this.formData})
-                        },2000)
+                        },500)
                     })
                 }
 

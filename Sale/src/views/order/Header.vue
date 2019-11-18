@@ -28,19 +28,30 @@
           placeholder="请输入内容" style="width:200px">
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
+        <a class="back" @click="goback">管理后台</a>
       </div>
     </div>
   </div>
-  <div class="banner2"></div>
+  <div v-if="ifBanner" class="banner2"></div>
 </div>
 </template>
 
 <script>
     export default {
+        props:{ifBanner:Boolean},
         name: "Header",
         data() {
             return {
+                operNo:'',
+                password:'',
+                activeName: 'first',
+                dialogFormVisible:true,
                 msg: "vue template"
+            }
+        },
+        methods:{
+            goback(){
+                this.$router.push({path:'/'})
             }
         }
     }
@@ -51,6 +62,15 @@
     display: flex!important;
     flex-direction: column!important;
     background-color: white!important;
+  }
+
+  .el-dialog__body{
+    padding:0 10px!important;
+  }
+
+  .back{
+    color: darkgray;
+    font-size: 14px;
   }
 
   .banner-right input{

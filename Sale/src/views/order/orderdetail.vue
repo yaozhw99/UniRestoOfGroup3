@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <Header></Header>
+      <Header :if-banner="false"></Header>
 
     <div class="main">
       <div class="mbody">
@@ -140,13 +140,13 @@
             }
         },
         mounted() {
-            console.log(sessionStorage.getItem("operNo"));
-            this.formData.epcode=this.$route.params.epcode;
-            this.formData.userName=this.$route.params.userName;
-            this.formData.psptId=this.$route.params.psptId;
-            this.formData.postAddress=this.$route.params.postAddress;
-            this.formData.linkPhone=this.$route.params.linkPhone;
-            this.formData.orderId=this.$route.params.orderId;
+            this.formData=JSON.parse(sessionStorage.getItem("formData"));
+            // this.formData.epcode=this.$route.params.epcode;
+            // this.formData.userName=this.$route.params.userName;
+            // this.formData.psptId=this.$route.params.psptId;
+            // this.formData.postAddress=this.$route.params.postAddress;
+            // this.formData.linkPhone=this.$route.params.linkPhone;
+            // this.formData.orderId=this.$route.params.orderId;
             this.realState=this.formData.orderState;
             //this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
             setInterval(()=>{
