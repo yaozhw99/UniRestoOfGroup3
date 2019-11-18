@@ -56,7 +56,7 @@
             <a class="print"><i class="el-icon-printer"></i> 打印订单</a>
           </div>
           <div class="right">
-            <div class="title">订单{{formData.orderState}},感谢您在联通商城购买商品</div>
+            <div class="title">订单{{formData.orderId}},感谢您在联通商城购买商品</div>
             <div class="body">
               <div class="item">
                 <img :src="realState>=1?diconcomp.start:dicon.start" alt="">
@@ -137,12 +137,14 @@
 <script>
     import Mock from 'mockjs';
     import Footer from "../main/Footer/Footer";
+    import {getOrderInfo,getOrderdealLog} from '@/api/bforder'
+
     export default {
         data() {
             return {
                 realState:1,
                 state:{1:"已提交",2:"商品出库",3:"等待收货",4:"完成"},
-                formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0,orderState:1},
+                formData:{epcode:'',userName:'',psptId:'',postAddress:'',linkPhone:'',orderId:0,productName:'',actionName:'',orderState:0},
                 msg: this.$route.params.epcode,
                 dicon:{start:require('@/icons/dstart.png'),go:require('@/icons/dgo.png'),sto:require('@/icons/dsto.png'),car:require('@/icons/dcar.png'),complete:require('@/icons/dcomp.png')},
                 diconcomp:{start:require('@/icons/dstartComplete.png'),go:require('@/icons/dgoComplete.png'),sto:require('@/icons/dstoComplete.png'),car:require('@/icons/dcarComplete.png'),complete:require('@/icons/dcompComplete.png')},
@@ -172,13 +174,41 @@
         },
         mounted() {
             this.formData.epcode=this.$route.params.epcode;
-            this.formData.name=this.$route.params.name;
+            this.formData.userName=this.$route.params.userName;
             this.formData.psptId=this.$route.params.psptId;
-            this.formData.address=this.$route.params.address;
+            this.formData.postAddress=this.$route.params.postAddress;
             this.formData.linkPhone=this.$route.params.linkPhone;
             this.formData.orderId=this.$route.params.orderId;
             this.realState=this.formData.orderState;
-            this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
+            //this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
+            setInterval(()=>{
+                getOrderInfo(this.formData.orderId).then((res)=>{
+                    console.log(res.data)
+                    this.realState=res.data.state+1;
+                    // if(this.realState<4) {
+                    //     this.realState++;
+                    //     if(this.realState==2) {this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})}
+                    //     else if (this.realState==3) {this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});}
+                    //     else if (this.realState==4) {this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});}
+                    // }
+                })
+                // getOrderdealLog(this.formData.orderId).then((res)=>{
+                //     res.data.items.foreach((item)=>{
+                //         this.activities=[];
+                //         this.activities.push({content:item.orderState==1?"订单已提交！":item.orderState==2?"商品已出库":item.orderState==3?"商品正在配送中！":item.orderState==4?"商品配送完毕，感谢你的光临，欢迎下次光临！":"",icon: 'el-icon-more',timestamp:item.insertTime})
+                //     })
+                // })
+
+                getOrderdealLog(this.formData.orderId).then((res)=>{
+                    let arr=res.data.items;
+                    this.activities=[];
+                    for (let i=0;i<arr.length;i++) {
+                        let item=arr[i];
+                        this.activities.push({content:item.orderState==0?"订单已提交！":item.orderState==1?"商品已出库":item.orderState==2?"商品正在配送中！":item.orderState==3?"商品配送完毕，感谢你的光临，欢迎下次光临！":"",icon: 'el-icon-more',timestamp:getNow()})
+                    }
+                })
+
+            },5000)
             // setTimeout(()=>{
             //     this.realState=2;
             //     this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})
@@ -199,12 +229,7 @@
                 this.$router.push({path:'/index'})
             },
             nextVal(){
-                if(this.realState<4) {
-                    this.realState++;
-                    if(this.realState==2) {this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})}
-                    else if (this.realState==3) {this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});}
-                    else if (this.realState==4) {this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});}
-                }
+
             }
         }
     }

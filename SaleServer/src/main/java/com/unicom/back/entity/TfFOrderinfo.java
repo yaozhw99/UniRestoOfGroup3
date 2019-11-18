@@ -1,11 +1,15 @@
 package com.unicom.back.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TfFOrderinfo {
     private int orderId;
     private int userId;
     private int state;
+    //输入参数格式化
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public int getOrderId() {
@@ -38,5 +42,15 @@ public class TfFOrderinfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "orderId:" + orderId +
+                ", userId:" + userId +
+                ", state:" + state +
+                ", updateTime:" + updateTime +
+                '}';
     }
 }
