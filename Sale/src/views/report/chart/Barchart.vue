@@ -48,7 +48,7 @@
       }
     },
     mounted() {
-      console.log(databjl.data)
+//      console.log(databjl.data)
       this.initChart()
     },
     beforeDestroy() {
