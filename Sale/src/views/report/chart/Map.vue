@@ -46,7 +46,7 @@
     },
     mounted() {
 //          console.log(MapdataArr);
-          console.log(this.chartData);
+//          console.log(this.chartData);
       this.chart = echarts.init(this.$refs.chart)
       var points = [].concat.apply([], this.chartData.map(function (track) {
         return track.map(function (seg) {
