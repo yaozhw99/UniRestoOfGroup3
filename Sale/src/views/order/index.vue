@@ -1,37 +1,6 @@
 <template>
   <div id="app">
-    <div id="page-top">
-      <div>
-        <div id="page-top-left">
-          <i class="el-icon-loading"></i> <span class="wangt">网上营业厅</span>
-        </div>
-        <div id="page-top-right"><a><i class="el-icon-star-off"></i>个人中心</a></div>
-      </div>
-    </div>
-    <div id="page-top2">
-      <div><a href="#">
-        <img src="@/icons/MainPageImg/logo2.jpg" style="width: 200px;height: 58px;"/>
-      </a>
-      </div>
-    </div>
-    <div id="banner">
-      <div class="banner-content">
-        <ul>
-          <li><a @click="goback">首页</a></li>
-          <li><a href="#">靓号专区</a></li>
-          <li><a href="#">热销推荐</a></li>
-          <li><a href="#">特惠活动</a></li>
-          <li><a href="#">终端专区</a></li>
-        </ul>
-        <div class="banner-right">
-          <el-input
-            placeholder="请输入内容" style="width:200px">
-            <i slot="prefix" class="el-input__icon el-icon-search"></i>
-          </el-input>
-        </div>
-      </div>
-    </div>
-    <div class="banner2"></div>
+    <Header></Header>
     <div class="content">
       <div class="cheader">
         <span class="cheader-left">靓号订单</span>
@@ -147,6 +116,7 @@
     import { createUser } from '@/api/bforder'
     import Numpool from "@/views/main/Content/numpool"
     import Footer from "../main/Footer/Footer";
+    import Header from "./Header";
 
     import {  } from '@/api/bforder'
     export default {
@@ -228,7 +198,8 @@
             },
         },
         mounted() {
-            console.log(this.$route.params);
+            sessionStorage.setItem("operNo","admin");
+
             this.formData.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'';
             this.formData.actionName=this.$route.params.actionName?this.$route.params.actionName:'';
             this.formData.productName=this.$route.params.productName?this.$route.params.productName:'';
@@ -236,7 +207,8 @@
         },
         components:{
             Numpool,
-            Footer
+            Footer,
+            Header
         }
 
     }

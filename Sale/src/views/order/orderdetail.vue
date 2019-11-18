@@ -1,40 +1,7 @@
 <template>
   <div id="app">
-    <div style="background-color: white">
-      <div id="page-top">
-        <div>
-          <div id="page-top-left">
-            <i class="el-icon-loading"></i> <span class="wangt">网上营业厅</span>
-          </div>
-          <div id="page-top-right"><a><i class="el-icon-star-off"></i>个人中心</a></div>
-        </div>
-      </div>
+      <Header></Header>
 
-      <div id="page-top2">
-        <div><a href="#">
-          <img src="@/icons/MainPageImg/logo2.jpg" style="width: 200px;height: 58px;"/>
-        </a>
-        </div>
-      </div>
-
-      <div id="banner">
-        <div class="banner-content">
-          <ul>
-            <li><a @click="goback">首页</a></li>
-            <li><a href="#">靓号专区</a></li>
-            <li><a href="#">热销推荐</a></li>
-            <li><a href="#">特惠活动</a></li>
-            <li><a href="#">终端专区</a></li>
-          </ul>
-          <div class="banner-right">
-            <el-input
-              placeholder="请输入内容" style="width:200px">
-              <i slot="prefix" class="el-input__icon el-icon-search"></i>
-            </el-input>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="main">
       <div class="mbody">
         <div class="title">
@@ -138,7 +105,7 @@
     import Mock from 'mockjs';
     import Footer from "../main/Footer/Footer";
     import {getOrderInfo,getOrderdealLog} from '@/api/bforder'
-
+    import Header from "./Header";
     export default {
         data() {
             return {
@@ -173,6 +140,7 @@
             }
         },
         mounted() {
+            console.log(sessionStorage.getItem("operNo"));
             this.formData.epcode=this.$route.params.epcode;
             this.formData.userName=this.$route.params.userName;
             this.formData.psptId=this.$route.params.psptId;
@@ -183,22 +151,8 @@
             //this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
             setInterval(()=>{
                 getOrderInfo(this.formData.orderId).then((res)=>{
-                    console.log(res.data)
                     this.realState=res.data.state+1;
-                    // if(this.realState<4) {
-                    //     this.realState++;
-                    //     if(this.realState==2) {this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})}
-                    //     else if (this.realState==3) {this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});}
-                    //     else if (this.realState==4) {this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});}
-                    // }
                 })
-                // getOrderdealLog(this.formData.orderId).then((res)=>{
-                //     res.data.items.foreach((item)=>{
-                //         this.activities=[];
-                //         this.activities.push({content:item.orderState==1?"订单已提交！":item.orderState==2?"商品已出库":item.orderState==3?"商品正在配送中！":item.orderState==4?"商品配送完毕，感谢你的光临，欢迎下次光临！":"",icon: 'el-icon-more',timestamp:item.insertTime})
-                //     })
-                // })
-
                 getOrderdealLog(this.formData.orderId).then((res)=>{
                     let arr=res.data.items;
                     this.activities=[];
@@ -208,22 +162,11 @@
                     }
                 })
 
-            },5000)
-            // setTimeout(()=>{
-            //     this.realState=2;
-            //     this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})
-            //     setTimeout(()=>{
-            //         this.realState=3;
-            //         this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});
-            //         setTimeout(()=>{
-            //             this.realState=4;
-            //             this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});
-            //         },15000)
-            //     },5000)
-            // },5000)
+            },2000)
         },
         components:{
-            Footer
+            Footer,
+            Header
         },methods:{
             goback(){
                 this.$router.push({path:'/index'})
@@ -243,14 +186,12 @@
 <style scoped>
   #app{
     background-color: #f2f2f2;
-    height: 1111px;
+    height: 1211px;
     display: flex!important;
     flex-direction: column!important;
   }
-  .main{
-    /*height: 100%;*/
-  }
   .mbody {
+    margin-top: 0;
     width: 1200px;
     height: 100%;
     margin: 0 auto;
