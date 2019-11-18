@@ -10,7 +10,7 @@
       <el-option v-for="item in city" :key="item.key" :value="item.key" :label="item.value"></el-option>
     </el-select>
     <el-button @click="getPageData">
-      Search
+      查询
     </el-button>
 
     <!--表数据-->
