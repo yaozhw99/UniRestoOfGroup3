@@ -5,22 +5,25 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.unicom.back.entity.Dept;
 import com.unicom.back.service.DeptService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "dept")
+@Api(tags = "部门管理模块")
 public class DeptController {
 
     @Autowired
     private DeptService deptService;
 
-    @RequestMapping(value = "list1")
+    @ApiOperation(value = "部门列表")
+    @RequestMapping(value = "list1",method = RequestMethod.GET)
     public JSONObject getList() {
         JSONObject rs=new JSONObject();
         //String jsonstr="{\"code\":20000,\"data\":{\"items\":"+ JSONArray.toJSONString(getDeptList()) +",\"total\":\"+getDeptList().size()+\"},\"message\":\"生成成功\"}";
@@ -33,6 +36,10 @@ public class DeptController {
 //    public JSONObject delDept(@PathVariable(name="delid") int id) {
 
     @PostMapping(value="delete")
+    @ApiOperation(value="删除一个部门信息")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="json",value="json字符串",required = true,dataType = "JSONObject")
+    )
     public JSONObject delDept(@RequestBody JSONObject json) {
         int result=deptService.delDept(json.getIntValue("id"));
         if (result>0) {
