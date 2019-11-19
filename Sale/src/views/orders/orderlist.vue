@@ -4,7 +4,7 @@
     :data="orderList"
     style="width: 100%; height: 100%;"
     :row-class-name="tableRowClassName"
-    >
+    border>
 
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd=='OrderFlag'"
@@ -13,36 +13,34 @@
       :sortable="items.sortable"
       :filters="filterData"
       :filter-method="filterHandler"
-      width="100">
+      width="100"
+    :formatter="formatFlag">
     </el-table-column>
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
       :label="items.value"
       :fixed="items.fixed"
       :sortable="items.sortable"
-      :width="items.width">
-
+      :width="items.width"
+    >
     </el-table-column>
     <el-table-column
       fixed="right"
       label="操作"
       width="70">
       <template slot-scope="scope">
-
-
           <el-button type="primary" size="mini"
                      v-if="scope.row.OrderFlag=='订单预订'"
-
-                     @click="commitRow(scope.row.OrderID)">
+                     @click="commitRow(scope.row.orderId)">
             <i class="fa fa-ban"></i> 开户
           </el-button>
           <el-button v-else-if="scope.row.OrderFlag=='订单已开户'"
                      type="primary" size="mini"
-                     @click="commitRow(scope.row.OrderID)">
+                     @click="commitRow(scope.row.orderId)">
             <i class="fa fa-link"></i> 发货
           </el-button>
         <el-button v-else type="primary" size="mini"
-                   @click="commitRow(scope.row.OrderID)">
+                   @click="commitRow(scope.row.orderId)">
           <i class="fa fa-link"></i> 查询
         </el-button>
 
@@ -94,9 +92,9 @@
         return {
           //form表单数据绑定
           newOrder: {
-            Orderid: 0,
+            orderId: 0,
             OrderDate: '',
-            UserName: '',
+            name: '',
             Userid: '',
             Idtype: '',
             Idnumber: 0,
@@ -107,7 +105,7 @@
           },
           //form验证规则
           rules: {
-            Orderid: [{required: true, message: '必填项', trigger: 'blur'}],
+            orderId: [{required: true, message: '必填项', trigger: 'blur'}],
             ProductId: [{required: true, message: '必填项', trigger: 'blur'}],
           },
 
@@ -124,44 +122,51 @@
             page: 1,
             limit: 10,
             OrderDate: '',
-            Orderid: 0,
+            orderId: 0,
             ProductId: ''
           },
           //当前页的部门数据
           fData:[],
-          form:{
-            name: '',
-            region: '',
-            date: '',
-            adress:'',
-            delivery: false,
-            phone:'',
-            wlId:0
-          },
+          epcode:[{value:'020',label:'广州市'},
+            {value:'0660',label:'汕尾市'},
+            {value:'0662',label:'阳江市'},
+            {value:'0663',label:'揭阳市'},
+            {value:'0668',label:'茂名市'},
+            {value:'0750',label:'江门市'},
+            {value:'0751',label:'韶关市'},
+            {value:'0752',label:'惠州市'},
+            {value:'0753',label:'梅州市'},
+            {value:'0754',label:'汕头市'},
+            {value:'0755',label:'深圳市'},
+            {value:'0756',label:'珠海市'},
+            {value:'0757',label:'佛山市'},
+            {value:'0758',label:'肇庆市'},
+            {value:'0759',label:'湛江市'},
+            {value:'0760',label:'中山市'},
+            {value:'0762',label:'河源市'},
+            {value:'0763',label:'清远市'},
+            {value:'0766',label:'云浮市'},
+            {value:'0768',label:'潮州市'},
+            {value:'0769',label:'东莞市'}],
+          OrderFlag:
+            [{value:'0',label:'订单预订'},
+            {value:'1',label:'订单已开户'},
+            {value:'2',label:'订单配送中'},
+            {value:'3',label:'订单已签收'},
+            {value:'4',label:'订单完成'}],
           rowid: 0,
           rowFlag: true,
           //全部部门数据
           orderList: [],
-          orderColumns: {
-            OrderID: '订单号',
-            OrderDate: '订单日期',
-            OrderFlag: '订单状态',
-            UserName: '用户姓名',
-            Userid: '用户id',
-            Idtype: '证件类型',
-            Idnumber: '证件号码',
-            ProductId: '产品id',
-            ProductName: '产品名称',
-            FirstMonthfeetype: '首月费用模式',
-            fee: '应收费用',
-            UserFlag: '用户状态',
-            detail: '订单备注'
-          },
           orderColumn: [
-            {idd: "OrderID", value: '订单号', fixed: "left", sortable: true},
+            {idd: "orderId", value: '订单号', fixed: "left", sortable: true,width:120},
+            {idd:'epcode',value:'区号', sortable: true},
             {idd: 'OrderDate', value: '订单日期', sortable: true,width:120},
             {idd: 'OrderFlag', value: '订单状态',width:120},
-            {idd: 'UserName', value: '用户姓名'},
+            {idd: 'name', value: '用户姓名'},
+            {idd: 'psptId', value: '邮政编码'},
+            {idd: 'address', value: '用户地址'},
+            {idd: 'linkPhone', value: '联系电话'},
             {idd: 'Userid', value: '用户id'},
             {idd: 'Idtype', value: '证件类型'},
             {idd: 'Idnumber', value: '证件号码', resizable: true},
@@ -178,10 +183,14 @@
       mounted() {
         let data = Mock.mock({
           "data|20-50": [{
-            "OrderID|+1": 20190001,
-            "OrderFlag|1": ["订单预订", "订单已开户", "订单配送中", "订单已签收", "订单完成"],
+            "orderId|+1": 20190001,
+            "OrderFlag|0-4":0,
             'OrderDate': '@date',
-            'UserName': "@cname",
+            'epcode|1':['020','0660','0662','0663','0668','0750','0751','0752','0753','0754','0755','0756','0757','0758','0759','0760','0762','0763','0766','0768','0769'],
+            'name': "@cname",
+            'psptId|+1':510000,
+            'address': '@ctitle',
+            'linkPhone|13002000000-18920199999':13088888888,
             "Userid|20190000-20199999": 20191001,
             "Idtype|1": ["身份证", "护照港澳通行证", "军人证", "居留证"],
             'Idnumber': '@id',
@@ -218,15 +227,15 @@
                   text: "订单预订", value: "订单预订"
                 },
                 {
-                  text: "订单开户", value: "订单已开户"
+                  text: "订单已开户", value: "订单已开户"
                 }
                 ,
                 {
-                  text: "订单配送", value: "订单配送中"
+                  text: "订单配送中", value: "订单配送中"
                 }
                 ,
                 {
-                  text: "订单签收", value: "订单已签收"
+                  text: "订单已签收", value: "订单已签收"
                 }
                 ,
                 {
@@ -240,7 +249,17 @@
         }
       },
       methods: {
-        tableRowClassName({row, rowIndex}) {
+          //格式转换
+          formatFlag(row, column)
+          {
+           if (row.OrderFlag == 0)  {row.OrderFlag= "订单预订"};
+            if (row.OrderFlag == 1)  {row.OrderFlag= "订单已开户"};
+            if (row.OrderFlag == 2)  {row.OrderFlag= "订单配送中"};
+            if (row.OrderFlag == 3)  {row.OrderFlag= "订单已签收"};
+            if (row.OrderFlag == 4)  {row.OrderFlag= "订单完成"};
+            return row.OrderFlag;
+           },
+       tableRowClassName(row, rowIndex) {
           if (rowIndex === 1) {
             return 'warning-row';
           } else if (rowIndex === 3) {
@@ -257,7 +276,7 @@
           this.msg='';
 //
           for (let i = 0; i < this.orderList.length; i++) {
-            if (this.orderList[i].OrderID == index)
+            if (this.orderList[i].orderId == index)
               this.rowid = i;
           }
           console.log("----")
@@ -265,10 +284,6 @@
           if (this.orderList[this.rowid].OrderFlag == "订单完成") {
             this.dialogVisible = true;
             this.msg = '用户已激活';
-          }
-          if (this.orderList[this.rowid].OrderFlag == "订单已签收") {
-            this.dialogVisible = true;
-            this.msg = '用户已签收，等待激活';
           }
           if (this.orderList[this.rowid].OrderFlag == "订单已签收") {
             this.dialogVisible = true;
@@ -300,7 +315,7 @@
             this.orderList[this.rowid].OrderFlag = "订单配送中";
           }
           else
-          if (this.orderList[this.rowid].OrderFlag == "订单预订")
+          if (this.orderList[this.rowid].OrderFlag =="订单预订")
           {
             this.orderList[this.rowid].OrderFlag = "订单已开户";
           }
@@ -355,11 +370,13 @@
     background: #c9e5f5;
   }
   .el-table .warning-row {
-    background: oldlace;
-
+    background: lightseagreen;
   }
 
   .el-table .success-row {
     background: #f0f9eb;
+  }
+  .el-table td,.building-top .el-table th.is-leaf {
+    border-bottom:  1px solid #f00;
   }
 </style>
