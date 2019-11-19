@@ -59,6 +59,12 @@ public class OrderController {
 
     }
 
+    @RequestMapping(value="getOrderReport")
+    public JSONObject getOrderReport() {
+        return Util.getJsonObject(orderService.getOrderReport());
+
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 package com.unicom.back.service;
 
 import com.unicom.back.dao.OrderDao;
+import com.unicom.back.entity.OrderReport;
 import com.unicom.back.entity.TbLogOrder;
 import com.unicom.back.entity.TbLogOrderDeal;
 import com.unicom.back.entity.TfFOrderinfo;
@@ -65,6 +66,11 @@ public class OrderService {
 
     public List<TbLogOrderDeal> getOrderdeal(int orderId) {
         return oo.getOrderDeal(orderId);
+    }
+
+
+    public List<OrderReport> getOrderReport() {
+        return oo.getOrderReport();
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package com.unicom.back.dao;
 
+import com.unicom.back.entity.OrderReport;
 import com.unicom.back.entity.TbLogOrder;
 import com.unicom.back.entity.TbLogOrderDeal;
 import com.unicom.back.entity.TfFOrderinfo;
@@ -40,5 +41,8 @@ public interface OrderDao {
 
     @Select("select * from tb_log_orderdeal where orderid=#{orderid} order by insertTime desc")
     List<TbLogOrderDeal> getOrderDeal(int orderId);
+
+    @Select("SELECT b.id,b.serialNumber,b.postAddress,b.linkPhone,a.state,CASE WHEN a.state=0 THEN '已提交' WHEN a.state=1 THEN '已开户' WHEN a.state=2 THEN '物流派送' WHEN a.state=3 THEN '已签收' WHEN a.state=4 THEN '已激活' END stateName,a.update_time orderTime,b.userName,b.userid,b.psptid FROM tf_f_orderinfo a,tb_log_order b WHERE a.orderid=b.id ORDER BY b.id DESC LIMIT 0,20")
+    List<OrderReport> getOrderReport();
 
 }

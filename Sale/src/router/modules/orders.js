@@ -24,6 +24,12 @@ const ordersRouter = {
         component: () => import('@/views/orders/newOrder'),
       name: 'CreateOrder',
       meta: { title: '订单新建',icon: 'edit' }
+    },
+    {
+      path: 'orderlist2',
+      component: () => import('@/views/orders/OrderList2'),
+      name: 'OrderList2',
+      meta: { title: '订单处理', icon: 'edit'}
     }
     ]
 }

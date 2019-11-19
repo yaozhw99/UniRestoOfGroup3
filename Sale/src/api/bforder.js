@@ -24,3 +24,20 @@ export function getOrderdealLog(orderId) {
     params: { orderId }
   })
 }
+
+export function getOrderReport() {
+  return request({
+    url: 'http://localhost:8080/order/getOrderReport',
+    method: 'get'
+  })
+}
+
+//updateOrder
+export function updateOrder(orderId,orderState) {
+  return request({
+    url: 'http://localhost:8080/order/updateOrder',
+    method: 'post',
+    params:{orderId,orderState}
+  })
+}
+
