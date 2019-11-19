@@ -77,14 +77,8 @@
       </el-dialog>
 
     </div>
-    <div class="cright">
-      <ul>
-        <li>{{kaicount}}
-        </li>
-      </ul>
-      <ul>
-        <p>{{facount}}</p>
-      </ul>
+    <div class="cright" style="width: 50%">
+      <orderlist flag="1" className="aa"></orderlist>
     </div>
   </div>
 </template>
@@ -92,13 +86,18 @@
 <script>
   import Numpool from "@/views/main/Content/numpool";
   import Mock from 'mockjs'
+  import Orderlist from './orderlist.vue'
 
 export default {
-  name: 'Create',
+
+  components:{
+    Orderlist,
+    Numpool
+  },
   data() {
     return {
-      kaicount:0,
-      facount:0,
+//      kaicount:0,
+//      facount:0,
       ndata:[],
       productList:[{name:'冰激淋',selected:false},{name:'沃派卡',selected:false},{name:'腾讯大王卡',selected:false}],
       dialogVisible:false,
@@ -153,18 +152,17 @@ export default {
     });
 
     this.ndata = data.data;
-  },
-  methods:{
-    count(){
-      console.log(this.ndata);
-      for (let i = 0; i < this.ndata.length; i++) {
-        if (this.ndata[i].OrderFlag==0) {this.kaicount+=1;}
-        if (this.ndata[i].OrderFlag==1) {this.facount+=1;}
-            }
-      console.log(this.kaicount);
+//    console.log(this.ndata);
+//    for (let i = 0; i < this.ndata.length; i++) {
+//      if (this.ndata[i].OrderFlag==0) {this.kaicount+=1;}
+//      if (this.ndata[i].OrderFlag==1) {this.facount+=1;}
+//    }
+//    console.log(this.kaicount);
     },
+  methods:{
+
     goback(){
-      this.$router.push({path:'/orders/orderlist'})
+      this.$router.push({path:'/orders/orderslist'})
     },
     changeProduct(idx){
       this.productList.forEach((item)=>{
@@ -212,14 +210,12 @@ export default {
       this.acceptParams.serialNumber=(num[0]?num[0]:num[1]?num[1]:num[2]);
       this.dialogVisible=false;
     },
-  },
-  components:{
-    Numpool,
-   }
+  }
 }
 </script>
 
 <style scoped>
+
   #price{
     color: orange!important;
     font-size: 30px!important;
@@ -271,14 +267,16 @@ export default {
   }
  .cright
  {
-   padding: 10px, 0;
+   margin: 20px;
+   padding-bottom: 20px;
    flex:1;
    /*border:2px solid orange;*/
-   height: 100%;
+   height: 80%;
    text-align: center;
    justify-content: center;
    height:500px!important;
    margin-left: 10px!important;
+   /*background-color: #f5f5f5;*/
  }
 ul{
   display:flex;

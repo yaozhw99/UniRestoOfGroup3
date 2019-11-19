@@ -1,21 +1,26 @@
 <template>
 <div>
+  <div class="title">
+    当前还有{{kaicount}}个订单待开户，{{facount}}单待发货。
+  </div>
   <el-table
+    :class="className"
     :data="orderList"
-    style="width: 100%; height: 100%;"
+    style="width: 100%"
     :row-class-name="tableRowClassName"
     border>
 
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd=='OrderFlag'"
+      width="100px"
       :label="items.value"
       :fixed="items.fixed"
       :sortable="items.sortable"
       :filters="filterData"
       :filter-method="filterHandler"
-      width="100"
     :formatter="formatFlag">
     </el-table-column>
+
     <el-table-column
       v-for="(items,idx) in orderColumn" :key="idx" :prop="items.idd" v-if="items.idd!='OrderFlag'"
       :label="items.value"
@@ -87,8 +92,9 @@
   import bmap from 'echarts/extension/bmap/bmap';
 
     export default {
-
+props:["flag",'className'],
       data() {
+
         return {
           //form表单数据绑定
           newOrder: {
@@ -103,6 +109,8 @@
             FirstMonthfeetype: '',
             fee: 0
           },
+          kaicount:0,
+          facount:0,
           //form验证规则
           rules: {
             orderId: [{required: true, message: '必填项', trigger: 'blur'}],
@@ -203,7 +211,33 @@
           }]
         });
 
-        this.orderList = data.data;
+        console.log(this.kaicount);
+      if(this.flag==1)
+      {
+        let newlist=data.data;
+
+        this.orderList = newlist.filter(item=>item.OrderFlag==0||item.OrderFlag==1);
+
+        newlist=this.orderColumn;
+//        this.orderColumn=newlist.filter(item=>item.value=="订单号"||item.value=="订单状态"||item.value=="用户姓名"||item.value=="订单日期");
+//      }
+        this.orderColumn=newlist.filter(item=>{
+          item.value=="订单号";
+          return true;
+          item.value=="订单状态"
+        return true;
+          item.value=="用户姓名"
+        return true;
+          item.value=="订单日期"
+        return true;
+        });
+      }
+      else{
+        this.orderList = data.data;}
+        for (let i = 0; i < this.orderList.length; i++) {
+          if (this.orderList[i].OrderFlag==0) {this.kaicount+=1;}
+          if (this.orderList[i].OrderFlag==1) {this.facount+=1;}
+        }
 //        console.log(data.data);
         let wldata = Mock.mock({
             "data|3-6": [{
@@ -360,6 +394,21 @@
 
 
 <style scoped>
+
+  .aa{
+    max-height: 500px;
+    margin: 20px;
+    width: 600px !important;
+  }
+
+  .title {
+    font-size: 25px!important;
+    font-family: 宋体!important;
+    font-weight: bold!important;
+    color: #7d7d7f!important;
+    margin:10px 0 0 10px!important;
+    text-align:center;
+  }
   .el-table
   {
     border:2px solid darkorange;
