@@ -1,6 +1,8 @@
 package com.unicom.back.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TbLogOrder {
@@ -9,7 +11,9 @@ public class TbLogOrder {
     private int userId;
     private int orderProductId;
     private int orderActionId;
-    private Date orderTime;
+    //输入参数格式化
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String orderTime;
     private String epcode;
     private String userName;
     private String psptId;
@@ -56,11 +60,11 @@ public class TbLogOrder {
         this.orderActionId = orderActionId;
     }
 
-    public Date getOrderTime() {
+    public String getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 

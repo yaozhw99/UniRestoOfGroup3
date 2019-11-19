@@ -6,8 +6,8 @@ import role from './role'
 import article from './article'
 import search from './remote-search'
 import news from './news'
-import numpool from "./numpool";
-import bforder from './bforder'
+import numpool from './numpool'
+// import bforder from './bforder'
 import report from './report'
 
 
@@ -17,7 +17,7 @@ const mocks = [
   ...article,
   ...search,
   ...news,
-  ...bforder,
+  // ...bforder,
   ...news,
   ...numpool,
   ...report

@@ -1,5 +1,8 @@
 package com.unicom.back.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TbLogOrderDeal {
@@ -7,6 +10,9 @@ public class TbLogOrderDeal {
     private int orderId;
     private int orderState;
     private String insertUser;
+    //输入参数格式化
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date insertTime;
 
     public int getId() {

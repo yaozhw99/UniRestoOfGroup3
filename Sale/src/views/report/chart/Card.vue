@@ -87,7 +87,7 @@
       var timer = setInterval(()=>{
         flag++;
         this.datafahuo=flag;
-        console.log(this.datafahuo)
+//        console.log(this.datafahuo)
       },2000);
 
       var timer_qianshou = setInterval(()=>{

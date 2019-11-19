@@ -1,37 +1,6 @@
 <template>
   <div id="app">
-    <div id="page-top">
-      <div>
-        <div id="page-top-left">
-          <i class="el-icon-loading"></i> <span class="wangt">网上营业厅</span>
-        </div>
-        <div id="page-top-right"><a><i class="el-icon-star-off"></i>个人中心</a></div>
-      </div>
-    </div>
-    <div id="page-top2">
-      <div><a href="#">
-        <img src="@/icons/MainPageImg/logo2.jpg" style="width: 200px;height: 58px;"/>
-      </a>
-      </div>
-    </div>
-    <div id="banner">
-      <div class="banner-content">
-        <ul>
-          <li><a @click="goback">首页</a></li>
-          <li><a href="#">靓号专区</a></li>
-          <li><a href="#">热销推荐</a></li>
-          <li><a href="#">特惠活动</a></li>
-          <li><a href="#">终端专区</a></li>
-        </ul>
-        <div class="banner-right">
-          <el-input
-            placeholder="请输入内容" style="width:200px">
-            <i slot="prefix" class="el-input__icon el-icon-search"></i>
-          </el-input>
-        </div>
-      </div>
-    </div>
-    <div class="banner2"></div>
+    <Header :if-banner="true"></Header>
     <div class="content">
       <div class="cheader">
         <span class="cheader-left">靓号订单</span>
@@ -40,7 +9,7 @@
       <div class="ccontent">
         <div class="ccleft">
           <div class="ccleft_box">
-            <span class="ccleft_title">{{acceptParams.serialNumber}}</span>
+            <span class="ccleft_title">{{formData.serialNumber}}</span>
             <img src="@/icons/yzw_uni_pinpai.png" alt="">
             <span><small>开通说明：</small></span>
             <span><small>按照国家实名制要求：开通号码必须提供身份证实名信息,并在接收到号卡后提供相关复印件</small></span>
@@ -65,13 +34,13 @@
                   <a style="color: blue;">(已有50人评价)</a>
                 </td>
               </tr>
-              <tr v-if="acceptParams.productName">
+              <tr v-if="formData.productName">
                 <td>商品名称：</td>
                 <td>
-                  {{acceptParams.productName}}
+                  {{formData.productName}}
                 </td>
               </tr>
-              <tr v-if="!acceptParams.productName">
+              <tr v-if="!formData.productName">
                 <td>选择产品：</td>
                 <td>
                   <i v-for="(item,idx) in productList" style="margin-right: 5px;">
@@ -80,16 +49,16 @@
 
                 </td>
               </tr>
-              <tr v-if="acceptParams.actionName">
+              <tr v-if="formData.actionName">
                 <td>所选活动：</td>
                 <td>
-                  {{acceptParams.actionName}}
+                  {{formData.actionName}}
                 </td>
               </tr>
               <tr>
                 <td>所选号码：</td>
                 <td>
-                  {{acceptParams.serialNumber}}    <a style="color: blue;" @click="selectNumber">(选号)</a>
+                  {{formData.serialNumber}}    <a style="color: blue;" @click="selectNumber">(选号)</a>
                 </td>
               </tr>
               <tr>
@@ -108,7 +77,7 @@
               <tr>
                 <td>姓名：</td>
                 <td>
-                  <input v-model="formData.name" placeholder="请输入身份证姓名" required></input></td>
+                  <input v-model="formData.userName" placeholder="请输入身份证姓名" required></input></td>
               </tr>
               <tr>
                 <td>身份证号：</td>
@@ -116,7 +85,7 @@
               </tr>
               <tr>
                 <td>邮寄地址：</td>
-                <td><input v-model="formData.address" placeholder="请输入邮寄地址" required></input></td>
+                <td><input v-model="formData.postAddress" placeholder="请输入邮寄地址" required></input></td>
               </tr>
               <tr>
                 <td>联系电话：</td>
@@ -147,6 +116,7 @@
     import { createUser } from '@/api/bforder'
     import Numpool from "@/views/main/Content/numpool"
     import Footer from "../main/Footer/Footer";
+    import Header from "./Header";
 
     import {  } from '@/api/bforder'
     export default {
@@ -155,8 +125,7 @@
             return {
                 productList:[{name:'冰激淋',selected:false},{name:'沃派卡',selected:false},{name:'腾讯大王卡',selected:false}],
                 dialogVisible:false,
-                acceptParams:{serialNumber:'',actionName:'',productName:''},
-                formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0},
+                formData:{epcode:'',userName:'',psptId:'',postAddress:'',linkPhone:'',orderId:0,productName:'',actionName:'',serialNumber:''},
                 msg: "vue template",
                 options: [{value:'020',label:'广州市'},
                     {value:'0660',label:'汕尾市'},
@@ -202,16 +171,17 @@
                 else {
                     createUser(this.formData).then(res=>{
                         this.formData.orderId=res.orderId;
-
+                        console.log(this.formData);
                         this.$notify({
-                            title: 'Success',
-                            message: 'Created Successfully',
+                            title: '成功提示！',
+                            message: '订单提交成功！',
                             type: 'success',
-                            duration: 2000
+                            duration: 500
                         })
                         setTimeout(()=>{
+                            sessionStorage.formData=JSON.stringify(this.formData);
                             this.$router.push({name:'orderdetail',params:this.formData})
-                        },2000)
+                        },500)
                     })
                 }
 
@@ -224,20 +194,22 @@
             },
             dialog(num){
 
-                this.acceptParams.serialNumber=(num[0]?num[0]:num[1]?num[1]:num[2]);
+                this.formData.serialNumber=(num[0]?num[0]:num[1]?num[1]:num[2]);
                 this.dialogVisible=false;
             },
         },
         mounted() {
-            console.log(this.$route.params);
-            this.acceptParams.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'';
-            this.acceptParams.actionName=this.$route.params.actionName?this.$route.params.actionName:'';
-            this.acceptParams.productName=this.$route.params.productName?this.$route.params.productName:'';
+            sessionStorage.setItem("operNo","admin");
 
+            this.formData.serialNumber=this.$route.params.serialNumber?this.$route.params.serialNumber:'';
+            this.formData.actionName=this.$route.params.actionName?this.$route.params.actionName:'';
+            this.formData.productName=this.$route.params.productName?this.$route.params.productName:'';
+            console.log(this.formData)
         },
         components:{
             Numpool,
-            Footer
+            Footer,
+            Header
         }
 
     }

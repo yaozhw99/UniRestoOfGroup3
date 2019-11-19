@@ -1,40 +1,7 @@
 <template>
   <div id="app">
-    <div style="background-color: white">
-      <div id="page-top">
-        <div>
-          <div id="page-top-left">
-            <i class="el-icon-loading"></i> <span class="wangt">网上营业厅</span>
-          </div>
-          <div id="page-top-right"><a><i class="el-icon-star-off"></i>个人中心</a></div>
-        </div>
-      </div>
+      <Header :if-banner="false"></Header>
 
-      <div id="page-top2">
-        <div><a href="#">
-          <img src="@/icons/MainPageImg/logo2.jpg" style="width: 200px;height: 58px;"/>
-        </a>
-        </div>
-      </div>
-
-      <div id="banner">
-        <div class="banner-content">
-          <ul>
-            <li><a @click="goback">首页</a></li>
-            <li><a href="#">靓号专区</a></li>
-            <li><a href="#">热销推荐</a></li>
-            <li><a href="#">特惠活动</a></li>
-            <li><a href="#">终端专区</a></li>
-          </ul>
-          <div class="banner-right">
-            <el-input
-              placeholder="请输入内容" style="width:200px">
-              <i slot="prefix" class="el-input__icon el-icon-search"></i>
-            </el-input>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="main">
       <div class="mbody">
         <div class="title">
@@ -56,7 +23,7 @@
             <a class="print"><i class="el-icon-printer"></i> 打印订单</a>
           </div>
           <div class="right">
-            <div class="title">订单{{formData.orderState}},感谢您在联通商城购买商品</div>
+            <div class="title">订单{{formData.orderId}},感谢您在联通商城购买商品</div>
             <div class="body">
               <div class="item">
                 <img :src="realState>=1?diconcomp.start:dicon.start" alt="">
@@ -137,12 +104,14 @@
 <script>
     import Mock from 'mockjs';
     import Footer from "../main/Footer/Footer";
+    import {getOrderInfo,getOrderdealLog} from '@/api/bforder'
+    import Header from "./Header";
     export default {
         data() {
             return {
                 realState:1,
                 state:{1:"已提交",2:"商品出库",3:"等待收货",4:"完成"},
-                formData:{epcode:'',name:'',psptId:'',address:'',linkPhone:'',orderId:0,orderState:1},
+                formData:{epcode:'',userName:'',psptId:'',postAddress:'',linkPhone:'',orderId:0,productName:'',actionName:'',orderState:0},
                 msg: this.$route.params.epcode,
                 dicon:{start:require('@/icons/dstart.png'),go:require('@/icons/dgo.png'),sto:require('@/icons/dsto.png'),car:require('@/icons/dcar.png'),complete:require('@/icons/dcomp.png')},
                 diconcomp:{start:require('@/icons/dstartComplete.png'),go:require('@/icons/dgoComplete.png'),sto:require('@/icons/dstoComplete.png'),car:require('@/icons/dcarComplete.png'),complete:require('@/icons/dcompComplete.png')},
@@ -171,40 +140,39 @@
             }
         },
         mounted() {
-            this.formData.epcode=this.$route.params.epcode;
-            this.formData.name=this.$route.params.name;
-            this.formData.psptId=this.$route.params.psptId;
-            this.formData.address=this.$route.params.address;
-            this.formData.linkPhone=this.$route.params.linkPhone;
-            this.formData.orderId=this.$route.params.orderId;
+            this.formData=JSON.parse(sessionStorage.getItem("formData"));
+            // this.formData.epcode=this.$route.params.epcode;
+            // this.formData.userName=this.$route.params.userName;
+            // this.formData.psptId=this.$route.params.psptId;
+            // this.formData.postAddress=this.$route.params.postAddress;
+            // this.formData.linkPhone=this.$route.params.linkPhone;
+            // this.formData.orderId=this.$route.params.orderId;
             this.realState=this.formData.orderState;
-            this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
-            // setTimeout(()=>{
-            //     this.realState=2;
-            //     this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})
-            //     setTimeout(()=>{
-            //         this.realState=3;
-            //         this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});
-            //         setTimeout(()=>{
-            //             this.realState=4;
-            //             this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});
-            //         },15000)
-            //     },5000)
-            // },5000)
+            //this.activities.push({content:"您的订单已提交，请等候出库",icon: 'el-icon-more',timestamp:getNow()})
+            setInterval(()=>{
+                getOrderInfo(this.formData.orderId).then((res)=>{
+                    this.realState=res.data.state+1;
+                })
+                getOrderdealLog(this.formData.orderId).then((res)=>{
+                    let arr=res.data.items;
+                    this.activities=[];
+                    for (let i=0;i<arr.length;i++) {
+                        let item=arr[i];
+                        this.activities.push({content:item.orderState==0?"订单已提交！":item.orderState==1?"商品已出库":item.orderState==2?"商品正在配送中！":item.orderState==3?"商品配送完毕，感谢你的光临，欢迎下次光临！":"",icon: 'el-icon-more',timestamp:getNow()})
+                    }
+                })
+
+            },2000)
         },
         components:{
-            Footer
+            Footer,
+            Header
         },methods:{
             goback(){
                 this.$router.push({path:'/index'})
             },
             nextVal(){
-                if(this.realState<4) {
-                    this.realState++;
-                    if(this.realState==2) {this.activities.push({content:"商品已出库！",icon: 'el-icon-more',timestamp:getNow()})}
-                    else if (this.realState==3) {this.activities.push({content:"商品正在配送中！",icon: 'el-icon-more',timestamp:getNow()});}
-                    else if (this.realState==4) {this.activities.push({content:"商品配送完毕，感谢你的光临，欢迎下次光临！",icon: 'el-icon-more',timestamp:getNow()});}
-                }
+
             }
         }
     }
@@ -218,14 +186,12 @@
 <style scoped>
   #app{
     background-color: #f2f2f2;
-    height: 1111px;
+    height: 1211px;
     display: flex!important;
     flex-direction: column!important;
   }
-  .main{
-    /*height: 100%;*/
-  }
   .mbody {
+    margin-top: 0;
     width: 1200px;
     height: 100%;
     margin: 0 auto;
