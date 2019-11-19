@@ -9,22 +9,23 @@ const ordersRouter = {
   name: 'orders',
   meta: {
     title: '订单管理',
-    icon: 'chart'
+    icon: 'table'
   },
   children: [
     {
-      path: 'list',
+      path: 'orderslist',
+      name:'orderslist',
       component: () => import('@/views/orders/orderlist'),
-    name: '订单列表',
-  meta: { title: '部门列表', noCache: true }
-},
-{
-  path: 'chart',
-    component: () => import('@/views/orders/create'),
-  name: 'DeptChart',
-  meta: { title: '图标展示', noCache: true }
-}
-]
+    // name: '订单列表',
+      meta: { title: '订单列表', icon: 'list'}
+    },
+    {
+      path: 'newOrder',
+        component: () => import('@/views/orders/newOrder'),
+      name: 'CreateOrder',
+      meta: { title: '订单新建',icon: 'edit' }
+    }
+    ]
 }
 
 export default ordersRouter

@@ -49,6 +49,7 @@ import orderRouter from "@/router/modules/order";
 
 export const constantRoutes = [
   orderRouter,
+  ordersRouter,
   {
     path: '/orderdetail',
     name:'orderdetail',
@@ -207,30 +208,31 @@ export const asyncRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: '/orders',
-    component: Layout,
-    redirect: '/orders/orderlist',
-    name: 'Orders',
-    meta: {
-      title: '订单管理',
-      icon: 'table'
-    },
-    children: [
-      {
-        path: 'orderlist',
-        component: () => import('@/views/orders/orderlist'),
-        name: 'OsList',
-        meta: { title: '订单列表', icon: 'list' }
-      },
-      {
-        path: 'create',
-        component: () => import('@/views/orders/list'),
-        name: 'CreateOrders',
-        meta: { title: '订单新建', icon: 'edit'}
-      }
-    ]
-  },
+  // {
+  //   path: '/orders',
+  //   component: Layout,
+  //   redirect: '/orders/orderlist',
+  //   name: 'Orders',
+  //   meta: {
+  //     title: '订单管理',
+  //     icon: 'table'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'orderlist',
+  //
+  //       component: () => import('@/views/orders/orderlist'),
+  //       name: 'OsList',
+  //       meta: { title: '订单列表', icon: 'list' }
+  //     },
+  //     {
+  //       path: 'newOrder',
+  //       component: () => import('@/views/orders/newOrder'),
+  //       name: 'CreateOrders',
+  //       meta: { title: '订单新建', icon: 'edit'}
+  //     }
+  //   ]
+  // },
 
 
 
