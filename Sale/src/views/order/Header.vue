@@ -51,7 +51,7 @@
         },
         methods:{
             goback(){
-                this.$router.push({path:'/'})
+                this.$router.push({path:'/index'})
             }
         }
     }
