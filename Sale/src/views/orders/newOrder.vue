@@ -77,7 +77,7 @@
       </el-dialog>
 
     </div>
-    <div class="cright" style="width: 50%">
+    <div class="cright" style="width: 40%">
       <orderlist flag="1" className="aa"></orderlist>
     </div>
   </div>
